@@ -66,6 +66,16 @@
             background-color: #b20710;
         }
 
+        .action-btn-group button {
+            margin: 5px;
+            width: 45%;
+        }
+
+        .btn-green { background-color: #4bb543; }
+        .btn-green:hover { background-color: #3e9935; }
+        .btn-blue { background-color: #007bff; }
+        .btn-blue:hover { background-color: #0069d9; }
+
         .switch-btn {
             background: transparent;
             color: #aaa;
@@ -139,12 +149,12 @@
 
     <!-- Игрови панел -->
     <div id="game-panel" class="hidden" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
-        <div style="margin-bottom: 25px; font-size: 1.2rem; background: #1e1e1e; padding: 10px 20px; border-radius: 8px; border: 1px solid #333;">
-            Добре дошъл, <span id="logged-user" style="color: #e50914; font-weight: bold;"></span>! | 
-            💰 Пари: <span id="logged-money" style="color: #4bb543; font-weight: bold;"></span> лв.
+        <div style="margin-bottom: 25px; font-size: 1.2rem; background: #1e1e1e; padding: 10px 20px; border-radius: 8px; border: 1px solid #333; text-align: center;">
+            Пилот: <span id="logged-user" style="color: #e50914; font-weight: bold;"></span> | 
+            💰 <span id="logged-money" style="color: #4bb543; font-weight: bold;"></span> лв.
         </div>
         
-        <h3 style="margin-bottom: 20px;" id="section-title">Избери своята първа безплатна кола:</h3>
+        <h3 style="margin-bottom: 20px;" id="section-title">Зареждане...</h3>
         <div class="cars-container" id="cars-list"></div>
         <div id="action-msg" class="msg" style="margin-top: 20px; font-weight: bold;"></div>
     </div>
@@ -208,7 +218,9 @@
                             
                             document.getElementById('logged-user').innerText = currentUser.username;
                             document.getElementById('logged-money').innerText = currentUser.money;
-                            loadFreeCars();
+                            
+                            // Проверяваме дали потребителят има кола
+                            checkUserCar();
                         }, 1000);
                     } else {
                         setTimeout(() => { toggleMode(); }, 1500);
@@ -217,6 +229,25 @@
             } catch (err) {
                 msgDiv.className = 'msg error';
                 msgDiv.innerText = 'Грешка при връзка със сървъра!';
+            }
+        }
+
+        // Проверка дали потребителят вече има записана кола
+        async function checkUserCar() {
+            try {
+                const response = await fetch(`http://localhost:3000/api/my-car/${currentUser.id}`);
+                const data = await response.json();
+
+                if (data.hasCar) {
+                    // Ако има кола, показваме гаража
+                    showGarage(data.car.car_name, data.car.hp, data.car.weight);
+                } else {
+                    // Ако няма, зареждаме списъка с безплатни
+                    document.getElementById('section-title').innerText = 'Избери своята първа безплатна кола:';
+                    loadFreeCars();
+                }
+            } catch (err) {
+                console.error('Грешка при проверка на гаража:', err);
             }
         }
 
@@ -269,23 +300,33 @@
                     actionMsg.innerText = data.message;
                     
                     setTimeout(() => {
-                        document.getElementById('section-title').innerText = 'Твоят гараж';
-                        document.getElementById('cars-list').innerHTML = `
-                            <div class="car-card" style="border-color: #4bb543; width: 100%;">
-                                <div style="font-size: 1.3rem; font-weight: bold; color: #4bb543; margin-bottom: 10px;">🚗 ${carName} (Активна кола)</div>
-                                <div class="car-stats">
-                                    <div>🐎 Мощност: ${hp} к.с.</div>
-                                    <div>⚖️ Тегло: ${weight} кг</div>
-                                </div>
-                                <p style="color: #aaa; font-style: italic;">Колата е в твоя гараж и е готова за тунинг и състезания!</p>
-                            </div>
-                        `;
+                        actionMsg.innerText = '';
+                        showGarage(carName, hp, weight);
                     }, 1500);
                 }
             } catch (err) {
                 actionMsg.className = 'msg error';
                 actionMsg.innerText = 'Грешка при връзка със сървъра!';
             }
+        }
+
+        // Функция за визуализиране на Гаража
+        function showGarage(carName, hp, weight) {
+            document.getElementById('section-title').innerText = 'Твоят гараж';
+            document.getElementById('cars-list').innerHTML = `
+                <div class="car-card" style="border-color: #007bff; width: 100%; max-width: 500px; margin: 0 auto;">
+                    <div style="font-size: 1.4rem; font-weight: bold; color: #007bff; margin-bottom: 15px;">🚗 ${carName}</div>
+                    <div class="car-stats" style="font-size: 1.1rem; text-align: center;">
+                        <div>🐎 Мощност: <strong>${hp} к.с.</strong></div>
+                        <div>⚖️ Тегло: <strong>${weight} кг</strong></div>
+                    </div>
+                    
+                    <div class="action-btn-group" style="margin-top: 20px;">
+                        <button class="btn-blue" onclick="alert('Тунинг магазинът скоро ще бъде отворен!')">🔧 Тунинг</button>
+                        <button class="btn-green" onclick="alert('Състезанията скоро ще бъдат активни!')">🏁 Състезавай се</button>
+                    </div>
+                </div>
+            `;
         }
     </script>
 </body>
