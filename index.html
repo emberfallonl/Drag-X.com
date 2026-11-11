@@ -3,330 +3,346 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DragX - Гараж и Избор на кола</title>
+    <title>DragX - Улични Драг Състезания</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121212;
-            color: #ffffff;
+        * {
+            box-sizing: border-box;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.85)), 
+                        url('https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
+        }
+
+        /* ---------------- НАВБАР / НАВЕРИЕ ---------------- */
+        header {
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            min-height: 90vh;
+            padding: 15px 30px;
+            background: rgba(15, 15, 15, 0.9);
+            border-bottom: 2px solid #ff3300;
         }
 
-        h1 {
-            color: #e50914;
-            text-transform: uppercase;
+        .logo {
+            font-size: 28px;
+            font-weight: 900;
             letter-spacing: 2px;
-            margin-bottom: 5px;
+            color: #fff;
+            text-transform: uppercase;
         }
 
-        .card {
-            background-color: #1e1e1e;
-            border: 2px solid #333;
-            border-radius: 12px;
-            padding: 30px;
-            width: 100%;
-            max-width: 400px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
-            text-align: center;
+        .logo span {
+            color: #ff3300;
         }
 
-        input {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            background: #2a2a2a;
+        /* Форми за вход / регистрация най-горе вдясно */
+        .auth-top-right {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .auth-top-right input {
+            padding: 8px 12px;
+            background: #222;
             border: 1px solid #444;
-            border-radius: 6px;
-            color: white;
-            font-size: 1rem;
-            box-sizing: border-box;
+            color: #fff;
+            border-radius: 4px;
+            outline: none;
         }
 
-        button {
-            background-color: #e50914;
-            color: white;
+        .auth-top-right input:focus {
+            border-color: #ff3300;
+        }
+
+        .btn {
+            padding: 8px 16px;
             border: none;
-            padding: 12px;
-            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
             font-weight: bold;
-            border-radius: 6px;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 10px;
-            transition: background 0.2s;
+            transition: 0.2s;
         }
 
-        button:hover {
-            background-color: #b20710;
+        .btn-danger {
+            background: #ff3300;
+            color: #fff;
         }
 
-        .action-btn-group button {
-            margin: 5px;
-            width: 45%;
+        .btn-danger:hover {
+            background: #cc2900;
         }
 
-        .btn-green { background-color: #4bb543; }
-        .btn-green:hover { background-color: #3e9935; }
-        .btn-blue { background-color: #007bff; }
-        .btn-blue:hover { background-color: #0069d9; }
-
-        .switch-btn {
-            background: transparent;
-            color: #aaa;
-            border: none;
-            margin-top: 15px;
-            cursor: pointer;
-            font-size: 0.9rem;
+        .btn-secondary {
+            background: #444;
+            color: #fff;
         }
 
-        .switch-btn:hover {
-            color: white;
-            text-decoration: underline;
+        .btn-secondary:hover {
+            background: #555;
         }
 
-        .hidden {
-            display: none !important;
-        }
-
-        .msg {
-            margin-top: 15px;
-            font-size: 0.9rem;
-        }
-        .error { color: #ff4d4d; }
-        .success { color: #4bb543; }
-
-        .cars-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        /* Статус бар при влезнал профил */
+        .user-stats-bar {
+            display: none; /* Показва се след вход */
             gap: 20px;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 6px 15px;
+            border-radius: 20px;
+            border: 1px solid #ff3300;
+        }
+
+        .stat-item {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .stat-item span {
+            color: #ff3300;
+        }
+
+        /* ---------------- ОСНОВЕН ИНТЕРФЕЙС (СЛЕД ВХОД) ---------------- */
+        .main-dashboard {
+            display: none; /* Отваря се след успешно логване */
+            flex: 1;
+            display: flex;
+            height: calc(100vh - 65px);
+        }
+
+        /* Ляво Странично Меню */
+        .sidebar {
+            width: 260px;
+            background: rgba(10, 10, 10, 0.95);
+            border-right: 1px solid #333;
+            padding: 20px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .menu-btn {
             width: 100%;
-            max-width: 1000px;
-        }
-        .car-card {
-            background-color: #1e1e1e;
-            border: 2px solid #333;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-        }
-        .car-stats {
-            background: #2a2a2a;
-            padding: 10px;
-            border-radius: 8px;
-            margin: 15px 0;
+            padding: 14px 20px;
+            background: #1a1a1a;
+            color: #bbb;
+            border: 1px solid #2a2a2a;
+            border-radius: 6px;
             text-align: left;
-            font-size: 0.95rem;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
         }
-        .car-stats div {
-            margin: 5px 0;
+
+        .menu-btn:hover, .menu-btn.active {
+            background: #ff3300;
+            color: #fff;
+            border-color: #ff3300;
+            padding-left: 25px;
+        }
+
+        /* Дясна Зона за Съдържание */
+        .content-area {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .tab-content {
+            display: none;
+            background: rgba(20, 20, 20, 0.85);
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        h2 {
+            border-bottom: 2px solid #ff3300;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            color: #fff;
+            font-size: 24px;
+        }
+
+        /* Начален екран за НЕлогнати потребители */
+        #welcome-hero {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        #welcome-hero h1 {
+            font-size: 50px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(255, 51, 0, 0.8);
         }
     </style>
 </head>
 <body>
 
-    <h1>DragX Drag Racing</h1>
-    <p id="subtitle" style="color: #aaa; margin-bottom: 25px;">Влез в профила си, за да започнеш</p>
+    <!-- НАВБАР -->
+    <header>
+        <div class="logo">DRAG<span>X</span></div>
 
-    <!-- Форма за Вход / Регистрация -->
-    <div class="card" id="auth-card">
-        <h2 id="form-title" style="margin-top: 0;">Вход в играта</h2>
-        
-        <input type="text" id="username" placeholder="Потребителско име">
-        <input type="email" id="email" class="hidden" placeholder="Имейл адрес">
-        <input type="password" id="password" placeholder="Парола">
-        
-        <button id="action-btn" onclick="handleAuth()">Вход</button>
-        <button class="switch-btn" onclick="toggleMode()" id="switch-mode-btn">Нямаш акаунт? Регистрирай се</button>
-        
-        <div class="msg" id="form-msg"></div>
-    </div>
-
-    <!-- Игрови панел -->
-    <div id="game-panel" class="hidden" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
-        <div style="margin-bottom: 25px; font-size: 1.2rem; background: #1e1e1e; padding: 10px 20px; border-radius: 8px; border: 1px solid #333; text-align: center;">
-            Пилот: <span id="logged-user" style="color: #e50914; font-weight: bold;"></span> | 
-            💰 <span id="logged-money" style="color: #4bb543; font-weight: bold;"></span> лв.
+        <!-- Полета за вход / регистрация вдясно -->
+        <div class="auth-top-right" id="auth-forms">
+            <input type="text" id="username" placeholder="Потребител">
+            <input type="password" id="password" placeholder="Парола">
+            <button class="btn btn-danger" onclick="loginUser()">ВХОД</button>
+            <button class="btn btn-secondary" onclick="registerUser()">РЕГИСТРАЦИЯ</button>
         </div>
-        
-        <h3 style="margin-bottom: 20px;" id="section-title">Зареждане...</h3>
-        <div class="cars-container" id="cars-list"></div>
-        <div id="action-msg" class="msg" style="margin-top: 20px; font-weight: bold;"></div>
+
+        <!-- Статистика на потребителя (показва се след ВХОД) -->
+        <div class="user-stats-bar" id="user-stats">
+            <div class="stat-item">Пилот: <span id="stat-username">User</span></div>
+            <div class="stat-item">Пари: <span id="stat-money">1000</span> лв.</div>
+            <div class="stat-item">Кредити: <span id="stat-credits">10</span> 💎</div>
+            <div class="stat-item">Гориво: <span id="stat-fuel">100</span>/100 ⛽</div>
+            <button class="btn btn-secondary" onclick="logoutUser()">Изход</button>
+        </div>
+    </header>
+
+    <!-- НАЧАЛЕН ЕКРАН (Когато НЕ СИ логнат) -->
+    <div id="welcome-hero">
+        <h1>ВЛИЗАЙ В ГАРАЖА И СТАВАЙ ЛЕГЕНДА!</h1>
+        <p style="font-size: 18px; color: #ccc;">Влез в профила си отгоре вдясно или направи нова регистрация, за да започнеш състезанията.</p>
     </div>
 
-    <script>
-        let isLoginMode = true;
-        let currentUser = null;
+    <!-- ОСНОВЕН ИНТЕРФЕЙС (Показва се САМО след успешен ВХОД) -->
+    <div class="main-dashboard" id="dashboard">
+        
+        <!-- ЛЯВО МЕНЮ -->
+        <div class="sidebar">
+            <button class="menu-btn active" onclick="openTab(event, 'garage-tab')">🏎️ Моят Гараж</button>
+            <button class="menu-btn" onclick="openTab(event, 'tuning-tab')">🔧 Тунинг Магазин</button>
+            <button class="menu-btn" onclick="openTab(event, 'tracks-tab')">🏁 Писти & Гонки</button>
+            <button class="menu-btn" onclick="openTab(event, 'shop-tab')">🛒 VIP Магазин (P2W)</button>
+        </div>
 
-        function toggleMode() {
-            isLoginMode = !isLoginMode;
-            document.getElementById('form-title').innerText = isLoginMode ? 'Вход в играта' : 'Регистрация';
-            document.getElementById('action-btn').innerText = isLoginMode ? 'Вход' : 'Регистрирай се';
-            document.getElementById('switch-mode-btn').innerText = isLoginMode ? 'Нямаш акаунт? Регистрирай се' : 'Вече имаш акаунт? Влез';
-            document.getElementById('form-msg').innerText = '';
+        <!-- ДЯСНА ЧАСТ (СЪДЪРЖАНИЕ С ТАБОВЕ) -->
+        <div class="content-area">
             
-            const emailInput = document.getElementById('email');
-            if (isLoginMode) {
-                emailInput.classList.add('hidden');
-            } else {
-                emailInput.classList.remove('hidden');
-            }
-        }
+            <!-- 1. ГАРАЖ -->
+            <div id="garage-tab" class="tab-content active">
+                <h2>🏎️ МОЯТ ГАРАЖ</h2>
+                <p>Тук ще виждаш текущата си кола, характеристиките ѝ (конски сили, тегло) и възможността да я управляваш.</p>
+                <br>
+                <div style="background: #111; padding: 15px; border-radius: 5px; border-left: 4px solid #ff3300;">
+                    <h3>Текуща Кола: <span style="color: #ff3300;">Volkswagen Golf 4 1.9 TDI</span></h3>
+                    <p>Мощност: 115 к.с. | Тегло: 1250 кг</p>
+                </div>
+            </div>
 
-        async function handleAuth() {
-            const username = document.getElementById('username').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value.trim();
-            const msgDiv = document.getElementById('form-msg');
+            <!-- 2. ТУНИНГ -->
+            <div id="tuning-tab" class="tab-content">
+                <h2>🔧 ТУНИНГ МАГАЗИН & ЧАСТИ</h2>
+                <p>Купувай чип тунинг, турбини, олекотени джанти и титаниеви генерации, за да качваш конските сили.</p>
+                <br>
+                <ul>
+                    <li>Спортен панелен филтър (+8 к.с.) - 120 лв.</li>
+                    <li>Чип тунинг Stage 1 (+35 к.с.) - 400 лв.</li>
+                    <li>Хибридно Турбо (+90 к.с.) - 1300 лв.</li>
+                </ul>
+            </div>
 
-            if (!username || !password || (!isLoginMode && !email)) {
-                msgDiv.className = 'msg error';
-                msgDiv.innerText = 'Моля, попълни всички задължителни полета!';
-                return;
-            }
-
-            const endpoint = isLoginMode ? '/api/login' : '/api/register';
-            const payload = isLoginMode ? { username, password } : { username, email, password };
-
-            try {
-                const response = await fetch('http://localhost:3000' + endpoint, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                const data = await response.json();
-
-                if (!response.ok) {
-                    msgDiv.className = 'msg error';
-                    msgDiv.innerText = data.error;
-                } else {
-                    msgDiv.className = 'msg success';
-                    msgDiv.innerText = data.message;
-
-                    if (isLoginMode) {
-                        currentUser = data.user;
-                        setTimeout(() => {
-                            document.getElementById('auth-card').classList.add('hidden');
-                            document.getElementById('subtitle').classList.add('hidden');
-                            document.getElementById('game-panel').classList.remove('hidden');
-                            
-                            document.getElementById('logged-user').innerText = currentUser.username;
-                            document.getElementById('logged-money').innerText = currentUser.money;
-                            
-                            // Проверяваме дали потребителят има кола
-                            checkUserCar();
-                        }, 1000);
-                    } else {
-                        setTimeout(() => { toggleMode(); }, 1500);
-                    }
-                }
-            } catch (err) {
-                msgDiv.className = 'msg error';
-                msgDiv.innerText = 'Грешка при връзка със сървъра!';
-            }
-        }
-
-        // Проверка дали потребителят вече има записана кола
-        async function checkUserCar() {
-            try {
-                const response = await fetch(`http://localhost:3000/api/my-car/${currentUser.id}`);
-                const data = await response.json();
-
-                if (data.hasCar) {
-                    // Ако има кола, показваме гаража
-                    showGarage(data.car.car_name, data.car.hp, data.car.weight);
-                } else {
-                    // Ако няма, зареждаме списъка с безплатни
-                    document.getElementById('section-title').innerText = 'Избери своята първа безплатна кола:';
-                    loadFreeCars();
-                }
-            } catch (err) {
-                console.error('Грешка при проверка на гаража:', err);
-            }
-        }
-
-        async function loadFreeCars() {
-            try {
-                const response = await fetch('http://localhost:3000/api/free-cars');
-                const cars = await response.json();
-                const container = document.getElementById('cars-list');
-                container.innerHTML = '';
-
-                cars.forEach(car => {
-                    container.innerHTML += `
-                        <div class="car-card">
-                            <div style="font-size: 1.2rem; font-weight: bold; margin-bottom: 10px;">${car.name}</div>
-                            <div class="car-stats">
-                                <div>🐎 Мощност: ${car.base_hp} к.с.</div>
-                                <div>⚖️ Тегло: ${car.weight_kg} кг</div>
-                                <div>💰 Цена: Безплатна</div>
-                            </div>
-                            <button onclick="selectCar('${car.name}', ${car.base_hp}, ${car.weight_kg})">Вземи в гаража</button>
-                        </div>
-                    `;
-                });
-            } catch (err) {
-                console.error('Грешка при зареждане на колите:', err);
-            }
-        }
-
-        async function selectCar(carName, hp, weight) {
-            const actionMsg = document.getElementById('action-msg');
-            try {
-                const response = await fetch('http://localhost:3000/api/buy-car', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        userId: currentUser.id,
-                        carName: carName,
-                        hp: hp,
-                        weight: weight
-                    })
-                });
-
-                const data = await response.json();
-
-                if (!response.ok) {
-                    actionMsg.className = 'msg error';
-                    actionMsg.innerText = data.error;
-                } else {
-                    actionMsg.className = 'msg success';
-                    actionMsg.innerText = data.message;
-                    
-                    setTimeout(() => {
-                        actionMsg.innerText = '';
-                        showGarage(carName, hp, weight);
-                    }, 1500);
-                }
-            } catch (err) {
-                actionMsg.className = 'msg error';
-                actionMsg.innerText = 'Грешка при връзка със сървъра!';
-            }
-        }
-
-        // Функция за визуализиране на Гаража
-        function showGarage(carName, hp, weight) {
-            document.getElementById('section-title').innerText = 'Твоят гараж';
-            document.getElementById('cars-list').innerHTML = `
-                <div class="car-card" style="border-color: #007bff; width: 100%; max-width: 500px; margin: 0 auto;">
-                    <div style="font-size: 1.4rem; font-weight: bold; color: #007bff; margin-bottom: 15px;">🚗 ${carName}</div>
-                    <div class="car-stats" style="font-size: 1.1rem; text-align: center;">
-                        <div>🐎 Мощност: <strong>${hp} к.с.</strong></div>
-                        <div>⚖️ Тегло: <strong>${weight} кг</strong></div>
+            <!-- 3. ПИСТИ -->
+            <div id="tracks-tab" class="tab-content">
+                <h2>🏁 ИЗБЕРИ ПИСТА ЗА СЪСТЕЗАНИЕ</h2>
+                <p>Излез срещу ботове или реални играчи, печели пари, XP и тунинг части!</p>
+                <br>
+                <div style="display: flex; gap: 15px;">
+                    <div style="background: #151515; padding: 15px; border-radius: 5px; flex: 1;">
+                        <h3>Градски булевард</h3>
+                        <p>Дистанция: 400м</p>
+                        <p>Награда: 120 лв. | 15 XP</p>
+                        <button class="btn btn-danger" style="margin-top: 10px;">СТАРТ (20 ⛽)</button>
                     </div>
-                    
-                    <div class="action-btn-group" style="margin-top: 20px;">
-                        <button class="btn-blue" onclick="alert('Тунинг магазинът скоро ще бъде отворен!')">🔧 Тунинг</button>
-                        <button class="btn-green" onclick="alert('Състезанията скоро ще бъдат активни!')">🏁 Състезавай се</button>
+                    <div style="background: #151515; padding: 15px; border-radius: 5px; flex: 1;">
+                        <h3>Летище Бързово</h3>
+                        <p>Дистанция: 400м</p>
+                        <p>Награда: 500 лв. | 50 XP</p>
+                        <button class="btn btn-danger" style="margin-top: 10px;">СТАРТ (20 ⛽)</button>
                     </div>
                 </div>
-            `;
+            </div>
+
+            <!-- 4. VIP МАГАЗИН -->
+            <div id="shop-tab" class="tab-content">
+                <h2>🛒 VIP МАГАЗИН (ПАКЕТИ & ГОРИВО)</h2>
+                <p>Купувай кредити, неограничено гориво за време и ексклузивни пакети за бърз напредък.</p>
+                <br>
+                <div style="background: #151515; padding: 15px; border-radius: 5px; border: 1px solid #ff3300;">
+                    <h3>⚡ 1 Час Безкрайно Гориво</h3>
+                    <p>Цена: 5.00 € (получаваш и 50 бонуса кредита)</p>
+                    <button class="btn btn-danger" style="margin-top: 10px;">КУПИ СЕГА</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT ЛОГИКА ЗА ТАБОВЕТЕ И ВХОДА -->
+    <script>
+        // Превключване между бутоните в лявото меню
+        function openTab(evt, tabId) {
+            const tabContents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
+
+            const menuBtns = document.getElementsByClassName("menu-btn");
+            for (let i = 0; i < menuBtns.length; i++) {
+                menuBtns[i].classList.remove("active");
+            }
+
+            document.getElementById(tabId).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+
+        // Симулация на Вход (за теста на интерфейса)
+        function loginUser() {
+            const user = document.getElementById("username").value || "DemoPlayer";
+            
+            // Скриваме началното съобщение и форма
+            document.getElementById("welcome-hero").style.display = "none";
+            document.getElementById("auth-forms").style.display = "none";
+
+            // Показваме статусите и менютата
+            document.getElementById("user-stats").style.display = "flex";
+            document.getElementById("dashboard").style.display = "flex";
+            
+            document.getElementById("stat-username").innerText = user;
+        }
+
+        function registerUser() {
+            alert("Натисна Регистрация! За теста можеш директно да въведеш име и да натиснеш ВХОД.");
+        }
+
+        function logoutUser() {
+            document.getElementById("welcome-hero").style.display = "flex";
+            document.getElementById("auth-forms").style.display = "flex";
+
+            document.getElementById("user-stats").style.display = "none";
+            document.getElementById("dashboard").style.display = "none";
         }
     </script>
 </body>
