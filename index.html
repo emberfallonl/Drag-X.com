@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DragX - Вход и Регистрация</title>
+    <title>DragX - Гараж и Избор на кола</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -91,7 +91,6 @@
         .error { color: #ff4d4d; }
         .success { color: #4bb543; }
 
-        /* Стил за колите в гаража/избора */
         .cars-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -105,11 +104,6 @@
             border-radius: 12px;
             padding: 20px;
             text-align: center;
-            transition: transform 0.2s, border-color 0.2s;
-        }
-        .car-card:hover {
-            transform: translateY(-5px);
-            border-color: #e50914;
         }
         .car-stats {
             background: #2a2a2a;
@@ -134,7 +128,6 @@
         <h2 id="form-title" style="margin-top: 0;">Вход в играта</h2>
         
         <input type="text" id="username" placeholder="Потребителско име">
-        <!-- Полето за имейл се скрива автоматично при вход и се показва при регистрация -->
         <input type="email" id="email" class="hidden" placeholder="Имейл адрес">
         <input type="password" id="password" placeholder="Парола">
         
@@ -144,19 +137,21 @@
         <div class="msg" id="form-msg"></div>
     </div>
 
-    <!-- Игрови панел (Скрит докато играчът не влезе успешно) -->
+    <!-- Игрови панел -->
     <div id="game-panel" class="hidden" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
         <div style="margin-bottom: 25px; font-size: 1.2rem; background: #1e1e1e; padding: 10px 20px; border-radius: 8px; border: 1px solid #333;">
             Добре дошъл, <span id="logged-user" style="color: #e50914; font-weight: bold;"></span>! | 
             💰 Пари: <span id="logged-money" style="color: #4bb543; font-weight: bold;"></span> лв.
         </div>
         
-        <h3 style="margin-bottom: 20px;">Избери своята първа безплатна кола:</h3>
+        <h3 style="margin-bottom: 20px;" id="section-title">Избери своята първа безплатна кола:</h3>
         <div class="cars-container" id="cars-list"></div>
+        <div id="action-msg" class="msg" style="margin-top: 20px; font-weight: bold;"></div>
     </div>
 
     <script>
         let isLoginMode = true;
+        let currentUser = null;
 
         function toggleMode() {
             isLoginMode = !isLoginMode;
@@ -205,13 +200,14 @@
                     msgDiv.innerText = data.message;
 
                     if (isLoginMode) {
+                        currentUser = data.user;
                         setTimeout(() => {
                             document.getElementById('auth-card').classList.add('hidden');
                             document.getElementById('subtitle').classList.add('hidden');
                             document.getElementById('game-panel').classList.remove('hidden');
                             
-                            document.getElementById('logged-user').innerText = data.user.username;
-                            document.getElementById('logged-money').innerText = data.user.money;
+                            document.getElementById('logged-user').innerText = currentUser.username;
+                            document.getElementById('logged-money').innerText = currentUser.money;
                             loadFreeCars();
                         }, 1000);
                     } else {
@@ -240,7 +236,7 @@
                                 <div>⚖️ Тегло: ${car.weight_kg} кг</div>
                                 <div>💰 Цена: Безплатна</div>
                             </div>
-                            <button style="background-color: #e50914; color: white; border: none; padding: 10px; font-weight: bold; border-radius: 6px; cursor: pointer; width: 100%;" onclick="selectCar('${car.name}')">Вземи в гаража</button>
+                            <button onclick="selectCar('${car.name}', ${car.base_hp}, ${car.weight_kg})">Вземи в гаража</button>
                         </div>
                     `;
                 });
@@ -249,8 +245,47 @@
             }
         }
 
-        function selectCar(carName) {
-            alert('Колата ' + carName + ' беше добавена в твоя гараж!');
+        async function selectCar(carName, hp, weight) {
+            const actionMsg = document.getElementById('action-msg');
+            try {
+                const response = await fetch('http://localhost:3000/api/buy-car', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        userId: currentUser.id,
+                        carName: carName,
+                        hp: hp,
+                        weight: weight
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    actionMsg.className = 'msg error';
+                    actionMsg.innerText = data.error;
+                } else {
+                    actionMsg.className = 'msg success';
+                    actionMsg.innerText = data.message;
+                    
+                    setTimeout(() => {
+                        document.getElementById('section-title').innerText = 'Твоят гараж';
+                        document.getElementById('cars-list').innerHTML = `
+                            <div class="car-card" style="border-color: #4bb543; width: 100%;">
+                                <div style="font-size: 1.3rem; font-weight: bold; color: #4bb543; margin-bottom: 10px;">🚗 ${carName} (Активна кола)</div>
+                                <div class="car-stats">
+                                    <div>🐎 Мощност: ${hp} к.с.</div>
+                                    <div>⚖️ Тегло: ${weight} кг</div>
+                                </div>
+                                <p style="color: #aaa; font-style: italic;">Колата е в твоя гараж и е готова за тунинг и състезания!</p>
+                            </div>
+                        `;
+                    }, 1500);
+                }
+            } catch (err) {
+                actionMsg.className = 'msg error';
+                actionMsg.innerText = 'Грешка при връзка със сървъра!';
+            }
         }
     </script>
 </body>
