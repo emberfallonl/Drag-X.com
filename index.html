@@ -9,178 +9,83 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
         }
 
         body {
-            background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.85)), 
-                        url('https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
-            background-size: cover;
+            background-color: #121212;
             color: #ffffff;
-            min-height: 100vh;
+            height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        /* ---------------- НАВБАР / НАВЕРИЕ ---------------- */
+        /* НАВБАР */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 30px;
-            background: rgba(15, 15, 15, 0.9);
+            padding: 15px 25px;
+            background: #1a1a1a;
             border-bottom: 2px solid #ff3300;
         }
 
         .logo {
-            font-size: 28px;
-            font-weight: 900;
-            letter-spacing: 2px;
+            font-size: 24px;
+            font-weight: bold;
             color: #fff;
-            text-transform: uppercase;
         }
 
         .logo span {
             color: #ff3300;
         }
 
-        /* Форми за вход / регистрация най-горе вдясно */
-        .auth-top-right {
+        .auth-box {
             display: flex;
-            gap: 10px;
-            align-items: center;
+            gap: 8px;
         }
 
-        .auth-top-right input {
-            padding: 8px 12px;
+        .auth-box input {
+            padding: 6px 10px;
             background: #222;
             border: 1px solid #444;
             color: #fff;
             border-radius: 4px;
-            outline: none;
-        }
-
-        .auth-top-right input:focus {
-            border-color: #ff3300;
         }
 
         .btn {
-            padding: 8px 16px;
+            padding: 6px 14px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             font-weight: bold;
-            transition: 0.2s;
         }
 
-        .btn-danger {
+        .btn-red {
             background: #ff3300;
             color: #fff;
         }
 
-        .btn-danger:hover {
-            background: #cc2900;
-        }
-
-        .btn-secondary {
+        .btn-gray {
             background: #444;
             color: #fff;
         }
 
-        .btn-secondary:hover {
-            background: #555;
-        }
-
-        /* Статус бар при влезнал профил */
-        .user-stats-bar {
-            display: none; /* Показва се след вход */
-            gap: 20px;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 6px 15px;
-            border-radius: 20px;
-            border: 1px solid #ff3300;
-        }
-
-        .stat-item {
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        .stat-item span {
-            color: #ff3300;
-        }
-
-        /* ---------------- ОСНОВЕН ИНТЕРФЕЙС (СЛЕД ВХОД) ---------------- */
-        .main-dashboard {
-            display: none; /* Отваря се след успешно логване */
-            flex: 1;
-            display: flex;
-            height: calc(100vh - 65px);
-        }
-
-        /* Ляво Странично Меню */
-        .sidebar {
-            width: 260px;
-            background: rgba(10, 10, 10, 0.95);
-            border-right: 1px solid #333;
-            padding: 20px 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .menu-btn {
-            width: 100%;
-            padding: 14px 20px;
-            background: #1a1a1a;
-            color: #bbb;
-            border: 1px solid #2a2a2a;
-            border-radius: 6px;
-            text-align: left;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .menu-btn:hover, .menu-btn.active {
-            background: #ff3300;
-            color: #fff;
-            border-color: #ff3300;
-            padding-left: 25px;
-        }
-
-        /* Дясна Зона за Съдържание */
-        .content-area {
-            flex: 1;
-            padding: 30px;
-            overflow-y: auto;
-            background: rgba(0, 0, 0, 0.4);
-        }
-
-        .tab-content {
+        /* СТАТУС БАР (След влизане) */
+        .user-stats {
             display: none;
-            background: rgba(20, 20, 20, 0.85);
-            padding: 25px;
-            border-radius: 8px;
-            border: 1px solid #333;
+            gap: 15px;
+            align-items: center;
+            font-size: 14px;
         }
 
-        .tab-content.active {
-            display: block;
+        .user-stats span {
+            color: #ff3300;
+            font-weight: bold;
         }
 
-        h2 {
-            border-bottom: 2px solid #ff3300;
-            padding-bottom: 8px;
-            margin-bottom: 20px;
-            color: #fff;
-            font-size: 24px;
-        }
-
-        /* Начален екран за НЕлогнати потребители */
-        #welcome-hero {
+        /* ОСНОВЕН ЕКРАН */
+        .hero {
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -190,159 +95,169 @@
             padding: 20px;
         }
 
-        #welcome-hero h1 {
-            font-size: 50px;
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            color: #ff3300;
+        }
+
+        /* ДЕШБОРД (След влизане) */
+        .dashboard {
+            display: none; /* Скрито по подразбиране */
+            flex: 1;
+            display: none; /* Ще стане flex при вход */
+            height: calc(100vh - 60px);
+        }
+
+        /* ЛЯВО МЕНЮ */
+        .sidebar {
+            width: 240px;
+            background: #181818;
+            border-right: 1px solid #333;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .menu-btn {
+            width: 100%;
+            padding: 12px;
+            background: #222;
+            color: #ccc;
+            border: none;
+            border-radius: 4px;
+            text-align: left;
+            font-size: 15px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .menu-btn:hover, .menu-btn.active {
+            background: #ff3300;
+            color: #fff;
+        }
+
+        /* ДЯСНА ЧАСТ (СЪДЪРЖАНИЕ) */
+        .content {
+            flex: 1;
+            padding: 25px;
+            background: #1e1e1e;
+            overflow-y: auto;
+        }
+
+        .tab-pane {
+            display: none;
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
+
+        h2 {
+            border-bottom: 2px solid #ff3300;
+            padding-bottom: 5px;
             margin-bottom: 15px;
-            text-shadow: 0 0 10px rgba(255, 51, 0, 0.8);
         }
     </style>
 </head>
 <body>
 
-    <!-- НАВБАР -->
+    <!-- ГОРНА ЛЕНТА -->
     <header>
         <div class="logo">DRAG<span>X</span></div>
 
-        <!-- Полета за вход / регистрация вдясно -->
-        <div class="auth-top-right" id="auth-forms">
-            <input type="text" id="username" placeholder="Потребител">
-            <input type="password" id="password" placeholder="Парола">
-            <button class="btn btn-danger" onclick="loginUser()">ВХОД</button>
-            <button class="btn btn-secondary" onclick="registerUser()">РЕГИСТРАЦИЯ</button>
+        <!-- Вход / Регистрация (видими преди логване) -->
+        <div class="auth-box" id="authSection">
+            <input type="text" id="usernameInput" placeholder="Потребител">
+            <input type="password" placeholder="Парола">
+            <button class="btn btn-red" onclick="login()">ВХОД</button>
         </div>
 
-        <!-- Статистика на потребителя (показва се след ВХОД) -->
-        <div class="user-stats-bar" id="user-stats">
-            <div class="stat-item">Пилот: <span id="stat-username">User</span></div>
-            <div class="stat-item">Пари: <span id="stat-money">1000</span> лв.</div>
-            <div class="stat-item">Кредити: <span id="stat-credits">10</span> 💎</div>
-            <div class="stat-item">Гориво: <span id="stat-fuel">100</span>/100 ⛽</div>
-            <button class="btn btn-secondary" onclick="logoutUser()">Изход</button>
+        <!-- Статистика (видима след логване) -->
+        <div class="user-stats" id="statsSection">
+            Пилот: <span id="displayName">User</span> | 
+            Пари: <span>1000 лв.</span> | 
+            Гориво: <span>100/100 ⛽</span>
+            <button class="btn btn-gray" onclick="logout()">Изход</button>
         </div>
     </header>
 
-    <!-- НАЧАЛЕН ЕКРАН (Когато НЕ СИ логнат) -->
-    <div id="welcome-hero">
-        <h1>ВЛИЗАЙ В ГАРАЖА И СТАВАЙ ЛЕГЕНДА!</h1>
-        <p style="font-size: 18px; color: #ccc;">Влез в профила си отгоре вдясно или направи нова регистрация, за да започнеш състезанията.</p>
+    <!-- НАЧАЛЕН ЕКРАН (Преди влизане) -->
+    <div class="hero" id="heroSection">
+        <h1>ДРАГ СЪСТЕЗАНИЯ НА ЖИВО</h1>
+        <p>Въведи потребителско име горе вдясно и натисни "ВХОД", за да отвориш гаража и менютата.</p>
     </div>
 
-    <!-- ОСНОВЕН ИНТЕРФЕЙС (Показва се САМО след успешен ВХОД) -->
-    <div class="main-dashboard" id="dashboard">
-        
-        <!-- ЛЯВО МЕНЮ -->
+    <!-- ОСНОВЕН РАЗДЕЛ (След влизане) -->
+    <div class="dashboard" id="dashboardSection">
+        <!-- Ляво Меню -->
         <div class="sidebar">
-            <button class="menu-btn active" onclick="openTab(event, 'garage-tab')">🏎️ Моят Гараж</button>
-            <button class="menu-btn" onclick="openTab(event, 'tuning-tab')">🔧 Тунинг Магазин</button>
-            <button class="menu-btn" onclick="openTab(event, 'tracks-tab')">🏁 Писти & Гонки</button>
-            <button class="menu-btn" onclick="openTab(event, 'shop-tab')">🛒 VIP Магазин (P2W)</button>
+            <button class="menu-btn active" onclick="switchTab(event, 'tab-garage')">🏎️ Моят Гараж</button>
+            <button class="menu-btn" onclick="switchTab(event, 'tab-tuning')">🔧 Тунинг Магазин</button>
+            <button class="menu-btn" onclick="switchTab(event, 'tab-tracks')">🏁 Писти & Гонки</button>
+            <button class="menu-btn" onclick="switchTab(event, 'tab-shop')">🛒 VIP Магазин</button>
         </div>
 
-        <!-- ДЯСНА ЧАСТ (СЪДЪРЖАНИЕ С ТАБОВЕ) -->
-        <div class="content-area">
-            
-            <!-- 1. ГАРАЖ -->
-            <div id="garage-tab" class="tab-content active">
-                <h2>🏎️ МОЯТ ГАРАЖ</h2>
-                <p>Тук ще виждаш текущата си кола, характеристиките ѝ (конски сили, тегло) и възможността да я управляваш.</p>
-                <br>
-                <div style="background: #111; padding: 15px; border-radius: 5px; border-left: 4px solid #ff3300;">
-                    <h3>Текуща Кола: <span style="color: #ff3300;">Volkswagen Golf 4 1.9 TDI</span></h3>
-                    <p>Мощност: 115 к.с. | Тегло: 1250 кг</p>
-                </div>
+        <!-- Съдържание вдясно -->
+        <div class="content">
+            <div id="tab-garage" class="tab-pane active">
+                <h2>Моят Гараж</h2>
+                <p>Тук е твоята кола: <b>Volkswagen Golf 4 1.9 TDI</b> (115 к.с.)</p>
             </div>
-
-            <!-- 2. ТУНИНГ -->
-            <div id="tuning-tab" class="tab-content">
-                <h2>🔧 ТУНИНГ МАГАЗИН & ЧАСТИ</h2>
-                <p>Купувай чип тунинг, турбини, олекотени джанти и титаниеви генерации, за да качваш конските сили.</p>
-                <br>
-                <ul>
-                    <li>Спортен панелен филтър (+8 к.с.) - 120 лв.</li>
-                    <li>Чип тунинг Stage 1 (+35 к.с.) - 400 лв.</li>
-                    <li>Хибридно Турбо (+90 к.с.) - 1300 лв.</li>
-                </ul>
+            <div id="tab-tuning" class="tab-pane active" style="display: none;">
+                <h2>Тунинг Магазин</h2>
+                <p>Списък с части за тунинг (турбо, чип, джанти)...</p>
             </div>
-
-            <!-- 3. ПИСТИ -->
-            <div id="tracks-tab" class="tab-content">
-                <h2>🏁 ИЗБЕРИ ПИСТА ЗА СЪСТЕЗАНИЕ</h2>
-                <p>Излез срещу ботове или реални играчи, печели пари, XP и тунинг части!</p>
-                <br>
-                <div style="display: flex; gap: 15px;">
-                    <div style="background: #151515; padding: 15px; border-radius: 5px; flex: 1;">
-                        <h3>Градски булевард</h3>
-                        <p>Дистанция: 400м</p>
-                        <p>Награда: 120 лв. | 15 XP</p>
-                        <button class="btn btn-danger" style="margin-top: 10px;">СТАРТ (20 ⛽)</button>
-                    </div>
-                    <div style="background: #151515; padding: 15px; border-radius: 5px; flex: 1;">
-                        <h3>Летище Бързово</h3>
-                        <p>Дистанция: 400м</p>
-                        <p>Награда: 500 лв. | 50 XP</p>
-                        <button class="btn btn-danger" style="margin-top: 10px;">СТАРТ (20 ⛽)</button>
-                    </div>
-                </div>
+            <div id="tab-tracks" class="tab-pane active" style="display: none;">
+                <h2>Писти за Състезание</h2>
+                <p>Избери писта и пусни гонка срещу съперник...</p>
             </div>
-
-            <!-- 4. VIP МАГАЗИН -->
-            <div id="shop-tab" class="tab-content">
-                <h2>🛒 VIP МАГАЗИН (ПАКЕТИ & ГОРИВО)</h2>
-                <p>Купувай кредити, неограничено гориво за време и ексклузивни пакети за бърз напредък.</p>
-                <br>
-                <div style="background: #151515; padding: 15px; border-radius: 5px; border: 1px solid #ff3300;">
-                    <h3>⚡ 1 Час Безкрайно Гориво</h3>
-                    <p>Цена: 5.00 € (получаваш и 50 бонуса кредита)</p>
-                    <button class="btn btn-danger" style="margin-top: 10px;">КУПИ СЕГА</button>
-                </div>
+            <div id="tab-shop" class="tab-pane active" style="display: none;">
+                <h2>VIP Магазин</h2>
+                <p>Пакети с кредити и безкрайно гориво за време...</p>
             </div>
-
         </div>
     </div>
 
-    <!-- JAVASCRIPT ЛОГИКА ЗА ТАБОВЕТЕ И ВХОДА -->
     <script>
-        // Превключване между бутоните в лявото меню
-        function openTab(evt, tabId) {
-            const tabContents = document.getElementsByClassName("tab-content");
-            for (let i = 0; i < tabContents.length; i++) {
-                tabContents[i].classList.remove("active");
-            }
-
-            const menuBtns = document.getElementsByClassName("menu-btn");
-            for (let i = 0; i < menuBtns.length; i++) {
-                menuBtns[i].classList.remove("active");
-            }
-
-            document.getElementById(tabId).classList.add("active");
-            evt.currentTarget.classList.add("active");
-        }
-
-        // Симулация на Вход (за теста на интерфейса)
-        function loginUser() {
-            const user = document.getElementById("username").value || "DemoPlayer";
+        function login() {
+            const username = document.getElementById('usernameInput').value || "ИгровПотребител";
             
-            // Скриваме началното съобщение и форма
-            document.getElementById("welcome-hero").style.display = "none";
-            document.getElementById("auth-forms").style.display = "none";
+            // Скриваме началното съобщение и формата за вход
+            document.getElementById('heroSection').style.display = 'none';
+            document.getElementById('authSection').style.display = 'none';
 
-            // Показваме статусите и менютата
-            document.getElementById("user-stats").style.display = "flex";
-            document.getElementById("dashboard").style.display = "flex";
-            
-            document.getElementById("stat-username").innerText = user;
+            // Показваме лентата с пари/статистики и главното меню
+            document.getElementById('statsSection').style.display = 'flex';
+            document.getElementById('dashboardSection').style.display = 'flex';
+
+            document.getElementById('displayName').innerText = username;
         }
 
-        function registerUser() {
-            alert("Натисна Регистрация! За теста можеш директно да въведеш име и да натиснеш ВХОД.");
+        function logout() {
+            document.getElementById('heroSection').style.display = 'flex';
+            document.getElementById('authSection').style.display = 'flex';
+
+            document.getElementById('statsSection').style.display = 'none';
+            document.getElementById('dashboardSection').style.display = 'none';
         }
 
-        function logoutUser() {
-            document.getElementById("welcome-hero").style.display = "flex";
-            document.getElementById("auth-forms").style.display = "flex";
+        function switchTab(event, tabId) {
+            // Махаме активния клас от всички табове и бутони
+            const panes = document.querySelectorAll('.tab-pane');
+            panes.forEach(pane => {
+                pane.style.display = 'none';
+                pane.classList.remove('active');
+            });
 
-            document.getElementById("user-stats").style.display = "none";
-            document.getElementById("dashboard").style.display = "none";
+            const buttons = document.querySelectorAll('.menu-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Показваме избрания таб
+            document.getElementById(tabId).style.display = 'block';
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
         }
     </script>
 </body>
