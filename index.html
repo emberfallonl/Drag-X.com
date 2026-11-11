@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DragX - Избор на начална кола</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #e50914;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        p.subtitle {
+            color: #aaa;
+            margin-bottom: 30px;
+        }
+
+        .cars-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .car-card {
+            background-color: #1e1e1e;
+            border: 2px solid #333;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .car-card:hover {
+            transform: translateY(-5px);
+            border-color: #e50914;
+        }
+
+        .car-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .car-stats {
+            background: #2a2a2a;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            text-align: left;
+        }
+
+        .car-stats div {
+            margin: 5px 0;
+        }
+
+        .btn-select {
+            background-color: #e50914;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        .btn-select:hover {
+            background-color: #b20710;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>DragX Drag Racing</h1>
+    <p class="subtitle">Избери своята първа безплатна кола за гаража:</p>
+
+    <div class="cars-container" id="cars-list">
+        <!-- Колите ще се заредят тук динамично от базата данни -->
+    </div>
+
+    <script>
+        // Взимане на колите от нашия Node.js backend
+        async function loadCars() {
+            try {
+                const response = await fetch('http://localhost:3000/api/free-cars');
+                const cars = await response.json();
+
+                const container = document.getElementById('cars-list');
+                container.innerHTML = '';
+
+                cars.forEach(car => {
+                    const carCard = `
+                        <div class="car-card">
+                            <div class="car-title">${car.name}</div>
+                            <div class="car-stats">
+                                <div>🐎 <strong>Мощност:</strong> ${car.base_hp} к.с.</div>
+                                <div>⚖️ <strong>Тегло:</strong> ${car.weight_kg} кг</div>
+                                <div>💰 <strong>Цена:</strong> Безплатна</div>
+                            </div>
+                            <button class="btn-select" onclick="selectCar('${car.name}')">Избери тази кола</button>
+                        </div>
+                    `;
+                    container.innerHTML += carCard;
+                });
+            } catch (err) {
+                console.error('Грешка при зареждане на колите:', err);
+            }
+        }
+
+        function selectCar(carName) {
+            alert('Страхотен избор! Избра: ' + carName);
+        }
+
+        // Зареждаме колите при отваряне на страницата
+        loadCars();
+    </script>
+</body>
+</html>
