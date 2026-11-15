@@ -83,16 +83,8 @@
             line-height: 1;
         }
 
-        .logo span {
-            color: #ff3300;
-        }
-
-        .logo-sub {
-            font-size: 10px;
-            color: #a1a1aa;
-            text-transform: uppercase;
-            margin-top: 2px;
-        }
+        .logo span { color: #ff3300; }
+        .logo-sub { font-size: 10px; color: #a1a1aa; text-transform: uppercase; margin-top: 2px; }
 
         .server-info {
             margin-top: 6px;
@@ -133,17 +125,8 @@
             flex-shrink: 0;
         }
 
-        .ad-text strong {
-            color: #facc15;
-            display: block;
-            font-size: 12px;
-            margin-bottom: 2px;
-        }
-
-        .ad-text p {
-            color: #d4d4d8;
-            line-height: 1.25;
-        }
+        .ad-text strong { color: #facc15; display: block; font-size: 12px; margin-bottom: 2px; }
+        .ad-text p { color: #d4d4d8; line-height: 1.25; }
 
         .btn-post-ad {
             background: linear-gradient(180deg, #3f3f46, #27272a);
@@ -160,11 +143,7 @@
             justify-content: center;
             text-align: center;
         }
-
-        .btn-post-ad:hover {
-            border-color: #facc15;
-            background: #32323a;
-        }
+        .btn-post-ad:hover { border-color: #facc15; background: #32323a; }
 
         .vip-panel {
             background: linear-gradient(135deg, #ca8a04 0%, #eab308 50%, #a16207 100%);
@@ -182,14 +161,7 @@
         .vip-title { font-weight: 900; font-size: 18px; color: #fff; text-shadow: 1px 1px 2px #000; line-height: 1; }
         .vip-days { background: rgba(0,0,0,0.65); color: #facc15; font-weight: bold; font-size: 12px; padding: 2px 8px; border-radius: 3px; margin-top: 3px; }
 
-        .vip-links {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-            text-align: right;
-            font-size: 11px;
-            font-weight: bold;
-        }
+        .vip-links { display: flex; flex-direction: column; gap: 2px; text-align: right; font-size: 11px; font-weight: bold; }
         .vip-links a { color: #18181b; text-decoration: none; cursor: pointer; }
         .vip-links a:hover { text-decoration: underline; color: #fff; }
 
@@ -296,7 +268,6 @@
             align-items: center;
         }
 
-        /* ИСТИНСКА СНИМКА НА КОЛАТА В ГАРАЖА */
         .garage-car-img-box {
             width: 100%;
             height: 200px;
@@ -309,12 +280,7 @@
             align-items: center;
             justify-content: center;
         }
-
-        .garage-car-img-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .garage-car-img-box img { width: 100%; height: 100%; object-fit: cover; }
 
         /* ДОЛЕН ЛОГ СЪС СЪБИТИЯ */
         .event-log {
@@ -409,7 +375,7 @@
         .item-card h4 { font-size: 14px; color: #fff; }
         .item-card p { font-size: 12px; color: #a1a1aa; }
 
-        /* ПИСТА И АНИМАЦИЯ НА КОЛИТЕ */
+        /* ИСТИНСКА АНИМИРАНА ПИСТА ЗА ГОНКИ */
         .race-arena { background: #101014; border: 2px solid #ff3300; border-radius: 8px; padding: 14px; margin-bottom: 16px; }
         .traffic-light { display: flex; justify-content: center; gap: 10px; background: #000; width: fit-content; margin: 0 auto 12px auto; padding: 6px 14px; border-radius: 15px; border: 1px solid #333; }
         .bulb { width: 18px; height: 18px; border-radius: 50%; background: #27272a; }
@@ -418,14 +384,27 @@
         .bulb.green.on { background: #22c55e; box-shadow: 0 0 12px #22c55e; }
 
         .track-asphalt { background: #1c1c21; border-radius: 6px; padding: 10px 15px; position: relative; overflow: hidden; border-top: 2px solid #444; border-bottom: 2px solid #444; }
-        .lane { height: 65px; display: flex; align-items: center; position: relative; border-bottom: 2px dashed #3f3f46; }
+        .lane { height: 75px; display: flex; align-items: center; position: relative; border-bottom: 2px dashed #3f3f46; }
         .lane:last-child { border-bottom: none; }
         .finish-line { position: absolute; right: 40px; top: 0; bottom: 0; width: 12px; background: repeating-linear-gradient(0deg, #fff, #fff 8px, #000 8px, #000 16px); }
 
         .racer-car-container { position: absolute; left: 10px; display: flex; align-items: center; gap: 6px; z-index: 2; }
-        .car-thumb { width: 60px; height: 35px; object-fit: cover; border-radius: 3px; border: 1px solid #ff3300; transform: scaleX(-1); }
-        @keyframes burnout { 0% { transform: translateY(0); } 50% { transform: translateY(-2px); } 100% { transform: translateY(0); } }
-        .burning { animation: burnout 0.1s infinite; }
+        
+        /* Спрайт на колата в профил за гонката (анимиран вид) */
+        .car-sprite {
+            width: 110px;
+            height: 50px;
+            object-fit: contain;
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.8));
+        }
+
+        @keyframes burnout { 
+            0% { transform: translateY(0) scaleX(1); } 
+            50% { transform: translateY(-3px) scaleX(1); } 
+            100% { transform: translateY(0) scaleX(1); } 
+        }
+        .burning { animation: burnout 0.08s infinite; }
+        
         .racer-tag { background: rgba(0,0,0,0.75); padding: 2px 6px; border-radius: 3px; font-size: 10px; color: #facc15; border: 1px solid #444; }
 
         /* МОДАЛЕН ПРОЗОРЕЦ */
@@ -437,7 +416,7 @@
 <body>
 
     <div class="top-ticker">
-        🔥 Добре дошъл в DRAGX! Истински улични гонки, тунинг и реални автомобили! 🏎️💨
+        🔥 Добре дошъл в DRAGX! Улични драг гонки с реални анимации на автомобили! 🏎️💨
     </div>
 
     <div class="game-wrapper">
@@ -490,7 +469,7 @@
         <!-- ЕКРАН ЗА ВХОД -->
         <div class="login-screen" id="loginScreen">
             <h1 style="color: #ff3300; font-size: 32px; margin-bottom: 8px;">ВЛЕЗ НА УЛИЦАТА</h1>
-            <p style="color: #a1a1aa; margin-bottom: 20px; font-size: 14px;">Избери своя автомобил, тунинговай го и доминирай на 402 метра!</p>
+            <p style="color: #a1a1aa; margin-bottom: 20px; font-size: 14px;">Избери автомобил в профил и премери сили срещу другите бегачи на пистата!</p>
             
             <div class="login-box">
                 <input type="text" id="usernameInput" placeholder="Име на пилота (напр. StreetRacer)">
@@ -565,16 +544,18 @@
 
                             <div class="track-asphalt">
                                 <div class="finish-line"></div>
+                                <!-- Лентата на играча с анимирана кола в профил -->
                                 <div class="lane">
                                     <div class="racer-car-container" id="playerCarBox" style="left: 10px;">
                                         <span class="racer-tag" id="playerLaneLabel">Ти</span>
-                                        <img class="car-thumb" id="playerCarImg" src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=300&q=80" alt="Ти">
+                                        <img class="car-sprite" id="playerCarSprite" src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=300&q=80" alt="Ти">
                                     </div>
                                 </div>
+                                <!-- Лентата на съперника с анимирана кола в профил -->
                                 <div class="lane">
                                     <div class="racer-car-container" id="botCarBox" style="left: 10px;">
                                         <span class="racer-tag" id="botLaneLabel">Съперник</span>
-                                        <img class="car-thumb" id="botCarImg" src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=300&q=80" alt="Бот">
+                                        <img class="car-sprite" id="botCarSprite" src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=300&q=80" alt="Бот">
                                     </div>
                                 </div>
                             </div>
@@ -718,7 +699,8 @@
                 name: 'Volkswagen Golf 4 1.9 TDI',
                 hp: 115,
                 weight: 1280,
-                image: 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=800&q=80'
+                image: 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=800&q=80',
+                sprite: 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=300&q=80'
             },
             equippedSlots: {},
             isRacing: false
@@ -738,17 +720,17 @@
         ];
 
         const dealershipCars = [
-            { id: 1, name: 'Volkswagen Golf 4 1.9 TDI', hp: 115, weight: 1280, price: 0, image: 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=800&q=80' },
-            { id: 2, name: 'BMW E36 325i', hp: 192, weight: 1350, price: 2500, image: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=800&q=80' },
-            { id: 3, name: 'Audi S3 1.8T Quattro', hp: 240, weight: 1420, price: 5000, image: 'https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=800&q=80' },
-            { id: 4, name: 'Mercedes-Benz CLS 55 AMG', hp: 476, weight: 1850, price: 12000, image: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80' }
+            { id: 1, name: 'Volkswagen Golf 4 1.9 TDI', hp: 115, weight: 1280, price: 0, image: 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=800&q=80', sprite: 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=300&q=80' },
+            { id: 2, name: 'BMW E36 325i', hp: 192, weight: 1350, price: 2500, image: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=800&q=80', sprite: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=300&q=80' },
+            { id: 3, name: 'Audi S3 1.8T Quattro', hp: 240, weight: 1420, price: 5000, image: 'https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=800&q=80', sprite: 'https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=300&q=80' },
+            { id: 4, name: 'Mercedes-Benz CLS 55 AMG', hp: 476, weight: 1850, price: 12000, image: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80', sprite: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=300&q=80' }
         ];
 
         const tracks = [
-            { id: 1, name: 'Околовръстното', opponent: 'Opel Astra 1.6', botHp: 105, botWeight: 1180, botImage: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=300&q=80', reward: 350, xp: 20 },
-            { id: 2, name: 'Летище Божурище', opponent: 'BMW E36 325i', botHp: 192, botWeight: 1350, botImage: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=300&q=80', reward: 700, xp: 35 },
-            { id: 3, name: 'Индустриална зона', opponent: 'Audi S3 1.8T', botHp: 240, botWeight: 1420, botImage: 'https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=300&q=80', reward: 1300, xp: 50 },
-            { id: 4, name: 'Битка на титаните', opponent: 'Mercedes CLS 55 AMG', botHp: 476, botWeight: 1850, botImage: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=300&q=80', reward: 2600, xp: 80 }
+            { id: 1, name: 'Околовръстното', opponent: 'Opel Astra 1.6', botHp: 105, botWeight: 1180, botSprite: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=300&q=80', reward: 350, xp: 20 },
+            { id: 2, name: 'Летище Божурище', opponent: 'BMW E36 325i', botHp: 192, botWeight: 1350, botSprite: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=300&q=80', reward: 700, xp: 35 },
+            { id: 3, name: 'Индустриална зона', opponent: 'Audi S3 1.8T', botHp: 240, botWeight: 1420, botSprite: 'https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=300&q=80', reward: 1300, xp: 50 },
+            { id: 4, name: 'Битка на титаните', opponent: 'Mercedes CLS 55 AMG', botHp: 476, botWeight: 1850, botSprite: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=300&q=80', reward: 2600, xp: 80 }
         ];
 
         function enterGame() {
@@ -763,9 +745,7 @@
             addLog(`Добре дошъл на улицата, <span class="gold">${state.username}</span>!`);
         }
 
-        function logout() {
-            location.reload();
-        }
+        function logout() { location.reload(); }
 
         function addLog(htmlText) {
             const log = document.getElementById('eventLog');
@@ -801,9 +781,8 @@
             document.getElementById('garageHp').innerText = state.car.hp + ' к.с.';
             document.getElementById('garageWeight').innerText = state.car.weight + ' кг';
             
-            // Зареждане на реалната снимка в гаража
             document.getElementById('garageCarImg').src = state.car.image;
-            document.getElementById('playerCarImg').src = state.car.image;
+            document.getElementById('playerCarSprite').src = state.car.sprite;
 
             document.getElementById('playerLaneLabel').innerText = `${state.username} (${state.car.hp} к.с.)`;
             document.getElementById('rankMe').innerText = `3. ${state.username}`;
@@ -811,20 +790,14 @@
             document.getElementById('rankMyHp').innerText = state.car.hp;
 
             const defaultSlots = [
-                { icon: '🌀', label: 'Турбо' },
-                { icon: '💻', label: 'Чип' },
-                { icon: '🛞', label: 'Гуми' },
-                { icon: '💨', label: 'Филтър' },
-                { icon: '🔩', label: 'Окачване' },
-                { icon: '🔥', label: 'Нитро' }
+                { icon: '🌀', label: 'Турбо' }, { icon: '💻', label: 'Чип' }, { icon: '🛞', label: 'Гуми' },
+                { icon: '💨', label: 'Филтър' }, { icon: '🔩', label: 'Окачване' }, { icon: '🔥', label: 'Нитро' }
             ];
 
             const slotsGrid = document.getElementById('slotsGrid');
             slotsGrid.innerHTML = defaultSlots.map((s, idx) => {
                 const eq = state.equippedSlots[idx];
-                if (eq) {
-                    return `<div class="part-slot equipped" title="${eq.name}">${eq.icon}<span>${eq.name.split(' ')[0]}</span></div>`;
-                }
+                if (eq) return `<div class="part-slot equipped" title="${eq.name}">${eq.icon}<span>${eq.name.split(' ')[0]}</span></div>`;
                 return `<div class="part-slot">${s.icon}<span>${s.label}</span></div>`;
             }).join('');
         }
@@ -856,7 +829,6 @@
                 `;
             }).join('');
 
-            // Автосалон с реални снимки на колите
             document.getElementById('dealershipGrid').innerHTML = dealershipCars.map(c => {
                 const isCur = state.car.name === c.name;
                 return `
@@ -873,7 +845,7 @@
 
             document.getElementById('tracksGrid').innerHTML = tracks.map(t => `
                 <div class="item-card">
-                    <img src="${t.botImage}" alt="${t.opponent}">
+                    <img src="${t.botSprite}" alt="${t.opponent}">
                     <h4>🏁 ${t.name}</h4>
                     <p>Съперник: <b>${t.opponent}</b> (${t.botHp} к.с.)<br>Награда: <span style="color:#4ade80;">+${t.reward} лв.</span></p>
                     <button class="btn btn-red" onclick="startRace(${t.id})">СТАРТ НА ГОНКАТА</button>
@@ -909,7 +881,7 @@
             const c = dealershipCars.find(x => x.id === id);
             if (state.money < c.price) return alert('Нямаш достатъчно пари!');
             state.money -= c.price;
-            state.car = { name: c.name, hp: c.hp, weight: c.weight, image: c.image };
+            state.car = { name: c.name, hp: c.hp, weight: c.weight, image: c.image, sprite: c.sprite };
             state.equippedSlots = {};
             addLog(`Купи нов автомобил: <span class="green">${c.name}</span>!`);
             updateAllUI();
@@ -918,7 +890,7 @@
 
         function sellCurrentCar() {
             state.money += 1000;
-            state.car = { name: 'Volkswagen Golf 4 1.9 TDI', hp: 115, weight: 1280, image: 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=800&q=80' };
+            state.car = { name: 'Volkswagen Golf 4 1.9 TDI', hp: 115, weight: 1280, image: 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=800&q=80', sprite: 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=300&q=80' };
             state.equippedSlots = {};
             addLog(`Продаде колата си за <span class="green">+1000 лв.</span>`);
             updateAllUI();
@@ -947,13 +919,8 @@
             updateAllUI();
         }
 
-        function openAdModal() {
-            document.getElementById('adModal').style.display = 'flex';
-        }
-
-        function closeAdModal() {
-            document.getElementById('adModal').style.display = 'none';
-        }
+        function openAdModal() { document.getElementById('adModal').style.display = 'flex'; }
+        function closeAdModal() { document.getElementById('adModal').style.display = 'none'; }
 
         function publishPlayerAd() {
             const text = document.getElementById('adInputText').value.trim();
@@ -992,7 +959,7 @@
             playerBox.style.left = '10px';
             botBox.style.left = '10px';
             document.getElementById('botLaneLabel').innerText = `${track.opponent} (${track.botHp} к.с.)`;
-            document.getElementById('botCarImg').src = track.botImage;
+            document.getElementById('botCarSprite').src = track.botSprite;
 
             red.className = 'bulb red';
             yellow.className = 'bulb yellow';
@@ -1020,7 +987,7 @@
 
             const playerBox = document.getElementById('playerCarBox');
             const botBox = document.getElementById('botCarBox');
-            const trackWidth = document.querySelector('.track-asphalt').clientWidth - 95;
+            const trackWidth = document.querySelector('.track-asphalt').clientWidth - 110;
 
             const playerDuration = playerTime * 240;
             const botDuration = botTime * 240;
