@@ -12,277 +12,582 @@
             font-family: Tahoma, Arial, sans-serif;
         }
 
-        /* ТЪМЕН СЪСТЕЗАТЕЛЕН ФОН */
+        /* УЛИЧЕН СЪСТЕЗАТЕЛЕН ФОН ОТЛЯВО И ОТДЯСНО */
         body {
-            background-color: #060608;
-            background-image: radial-gradient(circle at center, #181824 0%, #060608 85%);
+            background-color: #09090b;
+            background-image: 
+                linear-gradient(to right, rgba(9,9,11,0.45) 0%, rgba(9,9,11,0.92) 18%, rgba(9,9,11,0.92) 82%, rgba(9,9,11,0.45) 100%),
+                url('https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             color: #e4e4e7;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            overflow-x: hidden;
         }
 
-        /* ГОРНА ЛЕНТА СЪС СТАТИСТИКИ (Като в xPr0) */
-        .top-navbar {
+        /* ГОРНА ИЗВЕСТИЕ ЛЕНТА */
+        .top-ticker {
             width: 100%;
-            background: linear-gradient(180deg, #1c1c26 0%, #0e0e14 100%);
+            max-width: 1180px;
+            background: linear-gradient(90deg, #b91c1c, #ea580c, #b91c1c);
+            color: #fff;
+            text-align: center;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 5px;
+            border-bottom: 1px solid #000;
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        /* ОСНОВЕН КОНТЕЙНЕР НА ИГРАТА */
+        .game-wrapper {
+            width: 100%;
+            max-width: 1180px;
+            background: #121215;
+            border-left: 2px solid #27272a;
+            border-right: 2px solid #27272a;
+            border-bottom: 2px solid #27272a;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.95);
+            display: flex;
+            flex-direction: column;
+            min-height: calc(100vh - 26px);
+        }
+
+        /* ================= ГОРЕН HEADER (ЛОГО + ОБЯВИ + VIP) ================= */
+        .game-header {
+            display: grid;
+            grid-template-columns: 230px 1fr 240px;
+            background: linear-gradient(180deg, #1f1f24 0%, #121215 100%);
             border-bottom: 2px solid #ff3300;
+            padding: 8px 10px;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .brand-box {
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #2e2e36;
+            padding-right: 8px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            color: #fff;
+            text-shadow: 0 2px 8px rgba(255, 51, 0, 0.6);
+            line-height: 1;
+        }
+
+        .logo span {
+            color: #ff3300;
+        }
+
+        .logo-sub {
+            font-size: 10px;
+            color: #a1a1aa;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        .server-info {
+            margin-top: 6px;
+            font-size: 11px;
+            color: #4ade80;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Централна част на хедъра: РЕКЛАМИ / ОБЯВИ ОТ ИГРАЧИ */
+        .player-ads-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 8px;
+            align-items: stretch;
+        }
+
+        .ad-slot {
+            background: #1a1a20;
+            border: 1px solid #33333d;
+            border-radius: 4px;
+            padding: 6px 8px;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            font-size: 11px;
+        }
+
+        .ad-avatar {
+            width: 38px;
+            height: 38px;
+            background: #27272a;
+            border: 1px solid #ff3300;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .ad-text strong {
+            color: #facc15;
+            display: block;
+            font-size: 12px;
+            margin-bottom: 2px;
+        }
+
+        .ad-text p {
+            color: #d4d4d8;
+            line-height: 1.25;
+        }
+
+        .btn-post-ad {
+            background: linear-gradient(180deg, #3f3f46, #27272a);
+            border: 1px solid #52525b;
+            color: #facc15;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .btn-post-ad:hover {
+            border-color: #facc15;
+            background: #32323a;
+        }
+
+        /* Дясна част на хедъра: ЗЛАТЕН VIP ПАНЕЛ */
+        .vip-panel {
+            background: linear-gradient(135deg, #ca8a04 0%, #eab308 50%, #a16207 100%);
+            border: 1px solid #fef08a;
+            border-radius: 5px;
+            padding: 6px 10px;
+            color: #000;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 6px 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
-            z-index: 50;
+            box-shadow: inset 0 0 10px rgba(255,255,255,0.4);
         }
 
-        .nav-menu-links {
-            display: flex;
-            gap: 4px;
-        }
-
-        .nav-btn {
-            background: linear-gradient(180deg, #2a2a36 0%, #16161f 100%);
-            border: 1px solid #444455;
-            color: #fff;
-            padding: 6px 14px;
-            font-size: 12px;
-            font-weight: bold;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: 0.15s;
-        }
-
-        .nav-btn:hover, .nav-btn.active {
-            background: linear-gradient(180deg, #ff3300 0%, #b91c1c 100%);
-            border-color: #ff5500;
-            box-shadow: 0 0 10px rgba(255, 51, 0, 0.5);
-        }
-
-        /* УРЕЖДАНЕ НА ВАЛУТИТЕ ГОРЕ (Пари, Злато, Кредити) */
-        .currencies-box {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            font-size: 13px;
-            font-weight: bold;
-        }
-
-        .currency-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            background: #09090c;
-            padding: 4px 10px;
-            border-radius: 4px;
-            border: 1px solid #333;
-        }
-
-        .money-val { color: #4ade80; }
-        .gold-val { color: #facc15; }
-        .credits-val { color: #38bdf8; }
-
-        /* ИГРОВ ИНТЕРФЕЙС В СТИЛ ГАРАЖ */
-        .game-container {
-            width: 100%;
-            max-width: 1100px;
-            margin: 15px auto;
-            background: linear-gradient(180deg, #121218 0%, #09090c 100%);
-            border: 2px solid #272730;
-            border-radius: 8px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.9);
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* ЕКРАН ЗА ВХОД */
-        .login-screen {
-            padding: 60px 20px;
+        .vip-left {
             text-align: center;
+        }
+
+        .vip-title {
+            font-weight: 900;
+            font-size: 18px;
+            color: #fff;
+            text-shadow: 1px 1px 2px #000;
+            line-height: 1;
+        }
+
+        .vip-days {
+            background: rgba(0,0,0,0.65);
+            color: #facc15;
+            font-weight: bold;
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 3px;
+            margin-top: 3px;
+        }
+
+        .vip-links {
             display: flex;
             flex-direction: column;
+            gap: 2px;
+            text-align: right;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .vip-links a {
+            color: #18181b;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .vip-links a:hover {
+            text-decoration: underline;
+            color: #fff;
+        }
+
+        /* ================= НАЧАЛЕН ЕКРАН ЗА ВХОД ================= */
+        .login-screen {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            gap: 15px;
+            padding: 40px 20px;
+            text-align: center;
+            background: radial-gradient(circle, rgba(255,51,0,0.12) 0%, rgba(18,18,21,0.98) 70%);
         }
 
         .login-box {
-            background: #181822;
-            border: 2px solid #ff3300;
+            background: #1a1a20;
+            border: 1px solid #ff3300;
             padding: 25px;
             border-radius: 8px;
-            width: 320px;
+            width: 100%;
+            max-width: 380px;
             display: flex;
             flex-direction: column;
             gap: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.8);
         }
 
         .login-box input {
-            padding: 9px;
-            background: #0d0d12;
-            border: 1px solid #444;
+            padding: 10px;
+            background: #111115;
+            border: 1px solid #3f3f46;
             color: #fff;
             border-radius: 4px;
             outline: none;
         }
 
-        /* АРЕНА НА ГАРАЖА (Фон с неонови светлини и подиум) */
-        .garage-stage {
-            position: relative;
-            height: 420px;
-            background: linear-gradient(180deg, rgba(20,20,30,0.8) 0%, rgba(10,10,15,0.95) 100%),
-                        url('https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1200&q=80');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-bottom: 2px solid #222;
+        .login-box input:focus {
+            border-color: #ff3300;
         }
 
-        /* ПЕРСОНАЖ / АВАТАР ВЛЯВО (Като в xPr0) */
-        .character-avatar-box {
-            position: absolute;
-            left: 20px;
-            bottom: 20px;
+        /* ================= 3-КОЛОНЕН ИГРОВ ИНТЕРФЕЙС ================= */
+        .main-layout {
+            display: none;
+            grid-template-columns: 205px 1fr 245px;
+            flex: 1;
+        }
+
+        /* 1. ЛЯВО МЕНЮ */
+        .left-sidebar {
+            background: #141418;
+            border-right: 1px solid #27272a;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            background: rgba(0,0,0,0.7);
-            border: 1px solid #444;
-            padding: 10px;
-            border-radius: 6px;
         }
 
-        .avatar-img {
-            font-size: 52px;
-            background: #222;
-            width: 70px;
-            height: 80px;
+        .nav-item {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 4px;
-            border: 1px solid #ff3300;
-            margin-bottom: 5px;
-        }
-
-        /* ЦЕНТРАЛНА КОЛА НА ПОДИУМА */
-        .car-podium-view {
-            text-align: center;
-            display: flex;
-            flex-direction: column;
             align-items: center;
             gap: 10px;
-        }
-
-        .podium-car-emoji {
-            font-size: 110px;
-            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.9));
-            animation: carFloat 2s infinite ease-in-out;
-        }
-
-        @keyframes carFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-4px); }
-        }
-
-        .car-name-badge {
-            background: rgba(0,0,0,0.8);
-            border: 1px solid #ff3300;
-            color: #fff;
-            padding: 6px 18px;
-            border-radius: 20px;
-            font-size: 16px;
+            padding: 9px 12px;
+            background: linear-gradient(180deg, #1e1e24 0%, #16161b 100%);
+            border-bottom: 1px solid #09090b;
+            color: #d4d4d8;
+            font-size: 13px;
             font-weight: bold;
-            letter-spacing: 1px;
-            text-shadow: 0 0 8px #ff3300;
+            cursor: pointer;
+            text-align: left;
+            border-left: 3px solid transparent;
+            transition: 0.15s;
         }
 
-        /* ДОЛНА ЛЕНТА СЪС СТАТИСТИКИ НА КОЛАТА (Скорост, Стабилност, Ускорение - като на снимката) */
-        .car-stats-footer {
-            background: #0d0d12;
-            border-top: 2px solid #222;
-            padding: 12px 20px;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
+        .nav-item:hover {
+            background: #27272f;
+            color: #fff;
         }
 
-        .stat-gauge {
+        .nav-item.active {
+            background: linear-gradient(90deg, #b91c1c 0%, #7f1d1d 100%);
+            color: #fff;
+            border-left: 3px solid #facc15;
+        }
+
+        .nav-icon {
+            width: 22px;
+            text-align: center;
+            font-size: 15px;
+        }
+
+        /* 2. ЦЕНТРАЛНА ЧАСТ */
+        .center-stage {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            font-size: 12px;
+            background: #18181d;
+            justify-content: space-between;
+        }
+
+        .center-topbar {
+            background: #111115;
+            border-bottom: 1px solid #27272a;
+            padding: 6px 12px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
             color: #a1a1aa;
         }
 
-        .stat-gauge strong {
-            font-size: 16px;
-            color: #fff;
-            margin-top: 2px;
+        .center-topbar span strong {
+            color: #ff5500;
         }
 
-        /* СЪДЪРЖАНИЕ ЗА ТУНИНГ, АВТОСАЛОН И ПИСТИ */
-        .content-area {
-            padding: 20px;
-            background: #121218;
-            min-height: 250px;
+        .center-content {
+            padding: 16px;
+            flex: 1;
+            overflow-y: auto;
         }
 
-        .tab-pane { display: none; }
-        .tab-pane.active { display: block; }
+        .tab-pane {
+            display: none;
+        }
 
-        .section-header {
-            font-size: 18px;
+        .tab-pane.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 17px;
             color: #fff;
             border-bottom: 2px solid #ff3300;
             padding-bottom: 6px;
-            margin-bottom: 15px;
+            margin-bottom: 14px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .grid-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 15px;
-        }
-
-        .card-item {
-            background: #1a1a24;
-            border: 1px solid #333342;
-            border-radius: 6px;
-            padding: 14px;
+        /* ДОЛЕН ЛОГ СЪС СЪБИТИЯ */
+        .event-log {
+            background: #0d0d10;
+            border-top: 2px solid #27272a;
+            padding: 8px 12px;
+            height: 95px;
+            overflow-y: auto;
+            font-size: 11px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            gap: 4px;
+        }
+
+        .log-entry {
+            color: #d4d4d8;
+            border-bottom: 1px dashed #222;
+            padding-bottom: 2px;
+        }
+
+        .log-entry .gold { color: #facc15; font-weight: bold; }
+        .log-entry .green { color: #4ade80; font-weight: bold; }
+        .log-entry .red { color: #f87171; font-weight: bold; }
+
+        /* 3. ДЯСНА КОЛОНА */
+        .right-sidebar {
+            background: #141418;
+            border-left: 1px solid #27272a;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
             gap: 10px;
         }
 
+        .profile-card {
+            background: #1c1c22;
+            border: 1px solid #32323c;
+            border-radius: 5px;
+            padding: 8px;
+        }
+
+        .profile-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #2e2e36;
+            padding-bottom: 5px;
+            margin-bottom: 8px;
+        }
+
+        .profile-name {
+            font-weight: bold;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .profile-status {
+            font-size: 10px;
+            color: #4ade80;
+        }
+
+        .avatar-bars-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .driver-avatar {
+            width: 54px;
+            height: 62px;
+            background: #27272f;
+            border: 1px solid #52525b;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+
+        .bars-box {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .bar-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            color: #a1a1aa;
+        }
+
+        .progress-bg {
+            width: 100%;
+            height: 8px;
+            background: #09090b;
+            border-radius: 3px;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+
+        .progress-fill-fuel {
+            height: 100%;
+            background: linear-gradient(90deg, #16a34a, #4ade80);
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .progress-fill-nitro {
+            height: 100%;
+            background: linear-gradient(90deg, #2563eb, #38bdf8);
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            background: #1c1c22;
+            border: 1px solid #32323c;
+            border-radius: 5px;
+            padding: 8px;
+            font-size: 11px;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            background: #121216;
+            padding: 4px 6px;
+            border-radius: 3px;
+        }
+
+        .stat-val-money { color: #4ade80; font-weight: bold; }
+        .stat-val-credits { color: #facc15; font-weight: bold; }
+        .stat-val-hp { color: #ff5500; font-weight: bold; }
+        .stat-val-wins { color: #38bdf8; font-weight: bold; }
+
+        .car-slots-box {
+            background: #1c1c22;
+            border: 1px solid #32323c;
+            border-radius: 5px;
+            padding: 8px;
+        }
+
+        .car-slots-title {
+            font-size: 11px;
+            color: #a1a1aa;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .slots-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+        }
+
+        .part-slot {
+            aspect-ratio: 1 / 1;
+            background: #111115;
+            border: 1px dashed #3f3f46;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #52525b;
+            position: relative;
+            text-align: center;
+            padding: 2px;
+        }
+
+        .part-slot.equipped {
+            border: 1px solid #ff3300;
+            background: #231715;
+            color: #fff;
+        }
+
+        .part-slot span {
+            font-size: 9px;
+            margin-top: 2px;
+            line-height: 1;
+        }
+
         .btn {
-            padding: 7px 14px;
+            padding: 7px 12px;
             border: none;
             border-radius: 4px;
-            font-weight: bold;
             cursor: pointer;
+            font-weight: bold;
             font-size: 12px;
+            transition: 0.15s;
         }
-        .btn:hover { filter: brightness(1.2); }
-        .btn-red { background: #ff3300; color: #fff; }
+
+        .btn:hover { filter: brightness(1.15); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-red { background: #dc2626; color: #fff; }
         .btn-green { background: #16a34a; color: #fff; }
+        .btn-gold { background: #eab308; color: #000; }
+        .btn-blue { background: #2563eb; color: #fff; }
         .btn-gray { background: #3f3f46; color: #fff; }
 
-        /* АНИМИРАНА ПИСТА ЗА ГОНКИ */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 12px;
+        }
+
+        .item-card {
+            background: #202027;
+            border: 1px solid #32323e;
+            border-radius: 6px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .item-card h4 { font-size: 14px; color: #fff; }
+        .item-card p { font-size: 12px; color: #a1a1aa; }
+
+        /* ПИСТА И АНИМАЦИЯ */
         .race-arena {
-            background: #09090c;
+            background: #101014;
             border: 2px solid #ff3300;
             border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
+            padding: 14px;
+            margin-bottom: 16px;
         }
 
         .traffic-light {
@@ -292,18 +597,24 @@
             background: #000;
             width: fit-content;
             margin: 0 auto 12px auto;
-            padding: 6px 16px;
-            border-radius: 20px;
+            padding: 6px 14px;
+            border-radius: 15px;
             border: 1px solid #333;
         }
 
-        .bulb { width: 20px; height: 20px; border-radius: 50%; background: #222; }
+        .bulb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #27272a;
+        }
+
         .bulb.red.on { background: #ef4444; box-shadow: 0 0 12px #ef4444; }
         .bulb.yellow.on { background: #eab308; box-shadow: 0 0 12px #eab308; }
         .bulb.green.on { background: #22c55e; box-shadow: 0 0 12px #22c55e; }
 
-        .asphalt-track {
-            background: #1c1c24;
+        .track-asphalt {
+            background: #1c1c21;
             border-radius: 6px;
             padding: 10px 15px;
             position: relative;
@@ -312,156 +623,389 @@
             border-bottom: 2px solid #444;
         }
 
-        .race-lane {
-            height: 60px;
+        .lane {
+            height: 58px;
             display: flex;
             align-items: center;
             position: relative;
-            border-bottom: 2px dashed #444;
+            border-bottom: 2px dashed #3f3f46;
         }
-        .race-lane:last-child { border-bottom: none; }
+
+        .lane:last-child { border-bottom: none; }
 
         .finish-line {
-            position: absolute; right: 40px; top: 0; bottom: 0; width: 12px;
+            position: absolute;
+            right: 40px;
+            top: 0;
+            bottom: 0;
+            width: 12px;
             background: repeating-linear-gradient(0deg, #fff, #fff 8px, #000 8px, #000 16px);
         }
 
-        .racer-box {
-            position: absolute; left: 10px; display: flex; align-items: center; gap: 6px; z-index: 2;
+        .racer-car-container {
+            position: absolute;
+            left: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            z-index: 2;
         }
-        .racer-icon { font-size: 34px; transform: scaleX(-1); }
-        .racer-name-tag { background: rgba(0,0,0,0.8); padding: 2px 6px; border-radius: 3px; font-size: 11px; color: #facc15; border: 1px solid #444; }
+
+        .car-icon {
+            font-size: 32px;
+            transform: scaleX(-1);
+        }
+
+        @keyframes burnout {
+            0% { transform: scaleX(-1) translateY(0px); }
+            50% { transform: scaleX(-1) translateY(-2px); }
+            100% { transform: scaleX(-1) translateY(0px); }
+        }
+
+        .burning { animation: burnout 0.1s infinite; }
+
+        .racer-tag {
+            background: rgba(0,0,0,0.75);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 10px;
+            color: #facc15;
+            border: 1px solid #444;
+        }
+
+        /* МОДАЛЕН ПРОЗОРЕЦ ЗА ПУСКАНЕ НА ОБЯВА */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-box {
+            background: #1c1c22;
+            border: 2px solid #facc15;
+            padding: 20px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 380px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .modal-box input {
+            padding: 8px;
+            background: #111;
+            border: 1px solid #444;
+            color: #fff;
+            border-radius: 4px;
+        }
     </style>
 </head>
 <body>
 
-    <!-- ГОРНА НАВЕГАЦИОННА ЛЕНТА В СТИЛ xPr0 -->
-    <header class="top-navbar">
-        <div class="nav-menu-links">
-            <button class="nav-btn active" onclick="switchTab(event, 'tab-garage')">🏠 Гараж</button>
-            <button class="nav-btn" onclick="switchTab(event, 'tab-tracks')">🏁 Състезания</button>
-            <button class="nav-btn" onclick="switchTab(event, 'tab-tuning')">🔧 Тунинг Сервиз</button>
-            <button class="nav-btn" onclick="switchTab(event, 'tab-dealership')">🏛️ Автосалон</button>
-        </div>
+    <div class="top-ticker">
+        🔥 Добре дошъл в DRAGX! Всеки нов пилот получава 2500 лв. и 25 VIP Кредита бонус за старт! 🏎️💨
+    </div>
 
-        <div class="currencies-box" id="currenciesSection" style="display: none;">
-            <div class="currency-item">💵 <span class="money-val" id="topMoney">2500</span> лв.</div>
-            <div class="currency-item">🪙 <span class="gold-val" id="topGold">2</span> кюлчета</div>
-            <div class="currency-item">💎 <span class="credits-val" id="topCredits">25</span> кредита</div>
-            <div class="currency-item">⛽ <span style="color:#f97316;" id="topFuel">100</span>/100</div>
-        </div>
-    </header>
+    <div class="game-wrapper">
+        <header class="game-header">
+            <div class="brand-box">
+                <div class="logo">DRAG<span>X</span></div>
+                <div class="logo-sub">Онлайн Драг Състезания</div>
+                <div class="server-info">
+                    <span>● 42 онлайн</span>
+                    <span id="clockDisplay">16:00</span>
+                </div>
+            </div>
 
-    <div class="game-container">
-        
+            <div class="player-ads-container">
+                <div class="ad-slot" id="adSlot1">
+                    <div class="ad-avatar">🏎️</div>
+                    <div class="ad-text">
+                        <strong>TurboKing</strong>
+                        <p>Продавам рядко Хибридно Турбо +75 к.с.! Пишете на ЛС.</p>
+                    </div>
+                </div>
+
+                <div class="ad-slot" id="adSlot2">
+                    <div class="ad-avatar">🏁</div>
+                    <div class="ad-text">
+                        <strong>DriftMaster</strong>
+                        <p>Търся сериозни пилоти за отбор Street Kings! Само 200+ к.с.</p>
+                    </div>
+                </div>
+
+                <button class="btn-post-ad" onclick="openAdModal()">
+                    📢 Пусни обява<br>
+                    <span style="color: #fff; font-size: 10px;">(5 Кредита)</span>
+                </button>
+            </div>
+
+            <div class="vip-panel">
+                <div class="vip-left">
+                    <div class="vip-title">VIP</div>
+                    <div class="vip-days" id="vipCreditsBadge">25 КР.</div>
+                </div>
+                <div class="vip-links">
+                    <a onclick="switchTab(null, 'tab-ranking')">🏆 Зала на Славата</a>
+                    <a onclick="switchTab(null, 'tab-vip')">⚡ VIP Екстри</a>
+                    <a onclick="buyCreditsDemo()">💎 Зареди кредити</a>
+                </div>
+            </div>
+        </header>
+
         <!-- ЕКРАН ЗА ВХОД -->
         <div class="login-screen" id="loginScreen">
-            <h1 style="color: #ff3300; font-size: 34px; letter-spacing: 2px;">DRAGX - УЛИЧНИ ГОНКИ</h1>
-            <p style="color: #a1a1aa; font-size: 14px;">Влез в света на тунинга, състезанията и адреналина.</p>
+            <h1 style="color: #ff3300; font-size: 32px; margin-bottom: 8px;">ВЛЕЗ НА УЛИЦАТА</h1>
+            <p style="color: #a1a1aa; margin-bottom: 20px; font-size: 14px;">Тунинговай колата си, пускай обяви за редки части и доминирай на 402 метра!</p>
+            
             <div class="login-box">
-                <input type="text" id="usernameInput" placeholder="Име на пилот">
-                <input type="password" placeholder="Парола">
+                <input type="text" id="usernameInput" placeholder="Име на пилота (напр. StreetRacer)">
+                <input type="password" id="passwordInput" placeholder="Парола">
                 <button class="btn btn-red" style="padding: 10px; font-size: 14px;" onclick="enterGame()">🏁 ВХОД В ИГРАТА</button>
+                <button class="btn btn-green" style="padding: 10px; font-size: 14px;" onclick="enterGame()">⚡ Бърз Тест Вход</button>
             </div>
         </div>
 
-        <!-- ОСНОВНА ИГРОВА ЧАСТ -->
-        <div id="gameContent" style="display: none;">
+        <!-- ОСНОВЕН 3-КОЛОНЕН ИНТЕРФЕЙС -->
+        <div class="main-layout" id="mainLayout">
             
-            <!-- ГАРАЖНА СЦЕНА (С подиум и герой вляво) -->
-            <div class="garage-stage">
-                <div class="character-avatar-box">
-                    <div class="avatar-img">👩‍🎤</div>
-                    <span style="font-size: 11px; color: #facc15; font-weight: bold;" id="sideUsername">Пилот</span>
+            <!-- 1. ЛЯВО МЕНЮ -->
+            <aside class="left-sidebar">
+                <button class="nav-item active" onclick="switchTab(event, 'tab-garage')"><span class="nav-icon">🏠</span> Моят Гараж</button>
+                <button class="nav-item" onclick="switchTab(event, 'tab-tracks')"><span class="nav-icon">🏁</span> Улицата & Гонки</button>
+                <button class="nav-item" onclick="switchTab(event, 'tab-tuning')"><span class="nav-icon">🔧</span> Тунинг Сервиз</button>
+                <button class="nav-item" onclick="switchTab(event, 'tab-dealership')"><span class="nav-icon">🏛️</span> Автосалон</button>
+                <button class="nav-item" onclick="switchTab(event, 'tab-blackmarket')"><span class="nav-icon">🕶️</span> Черен Пазар</button>
+                <button class="nav-item" onclick="switchTab(event, 'tab-ranking')"><span class="nav-icon">🏆</span> Класация</button>
+                <button class="nav-item" onclick="switchTab(event, 'tab-vip')"><span class="nav-icon">💎</span> VIP Магазин</button>
+                <button class="nav-item" onclick="logout()" style="margin-top: auto; color: #f87171;"><span class="nav-icon">🚪</span> Изход</button>
+            </aside>
+
+            <!-- 2. ЦЕНТРАЛНА ЧАСТ -->
+            <main class="center-stage">
+                <div class="center-topbar">
+                    <span>Активна кола: <strong id="topCarName">VW Golf 4 1.9 TDI</strong></span>
+                    <span>Време 402м: <strong id="topCarTime">16.40 сек.</strong></span>
                 </div>
 
-                <div class="car-podium-view">
-                    <div class="podium-car-emoji" id="mainCarEmoji">🚗</div>
-                    <div class="car-name-badge" id="mainCarName">Volkswagen Golf 4 1.9 TDI</div>
-                </div>
-            </div>
-
-            <!-- ДОЛНИ СТАТИСТИКИ НА КОЛАТА (Скорост, Стабилност, Ускорение) -->
-            <div class="car-stats-footer">
-                <div class="stat-gauge"><span>🚀 МОЩНОСТ</span><strong id="statHp">115 к.с.</strong></div>
-                <div class="stat-gauge"><span>⚖️ ТЕГЛО</span><strong id="statWeight">1280 кг</strong></div>
-                <div class="stat-gauge"><span>⏱️ ВРЕМЕ 402М</span><strong id="statTime">16.40 сек.</strong></div>
-                <button class="btn btn-red" onclick="sellCar()">Продай колата (+1000 лв.)</button>
-            </div>
-
-            <!-- ТАБОве СЪС СЪДЪРЖАНИЕ -->
-            <div class="content-area">
-                
-                <!-- 1. ГАРАЖ ТАБ -->
-                <div id="tab-garage" class="tab-pane active">
-                    <div class="section-header"><span>🏠 Твоят Гараж</span></div>
-                    <p style="color: #aaa; font-size: 13px;">Тук колата ти стои на сигурно преди следващата гонка. Избери Тунинг сервиза или излез на пистата!</p>
-                </div>
-
-                <!-- 2. СЪСТЕЗАНИЯ ТАБ -->
-                <div id="tab-tracks" class="tab-pane">
-                    <div class="section-header"><span>🏁 Драг Писта (402 метра)</span></div>
-                    
-                    <div class="race-arena">
-                        <div class="traffic-light">
-                            <div class="bulb red" id="lightRed"></div>
-                            <div class="bulb yellow" id="lightYellow"></div>
-                            <div class="bulb green" id="lightGreen"></div>
+                <div class="center-content">
+                    <!-- ТАБ: ГАРАЖ -->
+                    <div id="tab-garage" class="tab-pane active">
+                        <div class="section-title">
+                            <span>🏠 Моят Гараж</span>
+                            <button class="btn btn-red" onclick="sellCurrentCar()">💵 Продай колата (+1000 лв.)</button>
                         </div>
 
-                        <div class="asphalt-track">
-                            <div class="finish-line"></div>
-                            <div class="race-lane">
-                                <div class="racer-box" id="playerBox" style="left: 10px;">
-                                    <span class="racer-name-tag" id="playerLaneName">Ти</span>
-                                    <span class="racer-icon" id="playerIcon">🚗</span>
-                                </div>
+                        <div style="background: #121216; border: 1px solid #32323c; border-radius: 6px; padding: 18px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                            <div>
+                                <span style="background: #ff3300; color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 3px; font-weight: bold;">ГОТОВА ЗА СТАРТ</span>
+                                <h3 id="garageCarTitle" style="font-size: 22px; margin-top: 6px;">Volkswagen Golf 4 1.9 TDI</h3>
+                                <p style="color: #a1a1aa; font-size: 13px; margin-top: 4px;">
+                                    Мощност: <b style="color: #fff;" id="garageHp">115 к.с.</b> | 
+                                    Тегло: <b style="color: #fff;" id="garageWeight">1280 кг</b>
+                                </p>
                             </div>
-                            <div class="race-lane">
-                                <div class="racer-box" id="botBox" style="left: 10px;">
-                                    <span class="racer-name-tag" id="botLaneName">Съперник</span>
-                                    <span class="racer-icon" id="botIcon">🚙</span>
-                                </div>
-                            </div>
+                            <div style="font-size: 64px;" id="garageCarEmoji">🚗</div>
+                        </div>
+
+                        <h4 style="font-size: 13px; color: #a1a1aa; margin-bottom: 8px;">Бързи действия:</h4>
+                        <div style="display: flex; gap: 10px;">
+                            <button class="btn btn-green" onclick="switchTab(null, 'tab-tracks')">🏁 Излез на пистата</button>
+                            <button class="btn btn-blue" onclick="switchTab(null, 'tab-tuning')">🔧 Отиди в Тунинг сервиза</button>
                         </div>
                     </div>
 
-                    <div class="grid-cards" id="tracksGrid"></div>
+                    <!-- ТАБ: УЛИЦАТА И ГОНКИ -->
+                    <div id="tab-tracks" class="tab-pane">
+                        <div class="section-title">
+                            <span>🏁 Улични Драг Гонки (402 метра)</span>
+                            <span style="font-size: 12px; color: #a1a1aa;">Разход: 10 Гориво</span>
+                        </div>
+
+                        <div class="race-arena">
+                            <div class="traffic-light">
+                                <div class="bulb red" id="lightRed"></div>
+                                <div class="bulb yellow" id="lightYellow"></div>
+                                <div class="bulb green" id="lightGreen"></div>
+                            </div>
+
+                            <div class="track-asphalt">
+                                <div class="finish-line"></div>
+                                <div class="lane">
+                                    <div class="racer-car-container" id="playerCarBox" style="left: 10px;">
+                                        <span class="racer-tag" id="playerLaneLabel">Ти (115 к.с.)</span>
+                                        <span class="car-icon" id="playerCarIcon">🚗</span>
+                                    </div>
+                                </div>
+                                <div class="lane">
+                                    <div class="racer-car-container" id="botCarBox" style="left: 10px;">
+                                        <span class="racer-tag" id="botLaneLabel">Съперник</span>
+                                        <span class="car-icon" id="botCarIcon">🚙</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cards-grid" id="tracksGrid"></div>
+                    </div>
+
+                    <!-- ТАБ: ТУНИНГ СЕРВИЗ -->
+                    <div id="tab-tuning" class="tab-pane">
+                        <div class="section-title"><span>🔧 Тунинг Сервиз (Части за твоята кола)</span></div>
+                        <div class="cards-grid" id="tuningGrid"></div>
+                    </div>
+
+                    <!-- ТАБ: АВТОСАЛОН -->
+                    <div id="tab-dealership" class="tab-pane">
+                        <div class="section-title"><span>🏛️ Автосалон - Купи нов автомобил</span></div>
+                        <div class="cards-grid" id="dealershipGrid"></div>
+                    </div>
+
+                    <!-- ТАБ: ЧЕРЕН ПАЗАР -->
+                    <div id="tab-blackmarket" class="tab-pane">
+                        <div class="section-title">
+                            <span>🕶️ Черен Пазар (Редки итеми с Кредити)</span>
+                            <span style="font-size: 12px; color: #facc15;">Твоите кредити: <b id="bmCredits">25</b></span>
+                        </div>
+                        <div class="cards-grid" id="blackMarketGrid"></div>
+                    </div>
+
+                    <!-- ТАБ: КЛАСАЦИЯ -->
+                    <div id="tab-ranking" class="tab-pane">
+                        <div class="section-title"><span>🏆 Топ Пилоти на Сървъра</span></div>
+                        <div style="background: #121216; border: 1px solid #32323c; border-radius: 6px; padding: 12px; font-size: 13px;">
+                            <p style="padding: 6px 0; border-bottom: 1px solid #222;">🥇 <b>1. TurboKing</b> — Mercedes CLS 55 AMG (620 к.с.) | 142 победи</p>
+                            <p style="padding: 6px 0; border-bottom: 1px solid #222;">🥈 <b>2. DriftMaster</b> — Audi S3 1.8T (410 к.с.) | 98 победи</p>
+                            <p style="padding: 6px 0; color: #facc15;">🥉 <b id="rankMe">3. Ти</b> — <span id="rankMyCar">VW Golf 4</span> (<span id="rankMyHp">115</span> к.с.)</p>
+                        </div>
+                    </div>
+
+                    <!-- ТАБ: VIP МАГАЗИН -->
+                    <div id="tab-vip" class="tab-pane">
+                        <div class="section-title"><span>💎 VIP Магазин & Екстри</span></div>
+                        <div class="cards-grid">
+                            <div class="item-card">
+                                <h4>⛽ Пълен резервоар (100/100)</h4>
+                                <p>Възстановява веднага горивото ти за нови гонки.</p>
+                                <button class="btn btn-green" onclick="refuelMoney()">Купи за 200 лв.</button>
+                            </div>
+                            <div class="item-card">
+                                <h4>📢 VIP Обява на началната лента</h4>
+                                <p>Пусни реклама най-горе, за да я видят всички играчи!</p>
+                                <button class="btn btn-gold" onclick="openAdModal()">Пусни за 5 Кредита</button>
+                            </div>
+                            <div class="item-card">
+                                <h4>💰 Пакет 5000 лв. Кеш</h4>
+                                <p>Обмени 10 VIP кредита за 5000 лв. в брой.</p>
+                                <button class="btn btn-gold" onclick="exchangeCredits()">Обмени (10 Кредита)</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- 3. ТУНИНГ СЕРВИЗ ТАБ -->
-                <div id="tab-tuning" class="tab-pane">
-                    <div class="section-header"><span>🔧 Тунинг Сервиз</span></div>
-                    <div class="grid-cards" id="tuningGrid"></div>
+                <!-- ДОЛЕН ЛОГ СЪС СЪБИТИЯ -->
+                <div class="event-log" id="eventLog">
+                    <div class="log-entry">🏁 Добре дошъл в <span class="gold">DragX</span>! Избери писта или тунинговай колата си.</div>
+                </div>
+            </main>
+
+            <!-- 3. ДЯСНА КОЛОНА -->
+            <aside class="right-sidebar">
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div>
+                            <div class="profile-name" id="sideUsername">Пилот</div>
+                            <div class="profile-status">● На линия / В гаража</div>
+                        </div>
+                        <span style="background: #27272a; padding: 2px 6px; border-radius: 3px; font-size: 11px; color: #facc15;">Ниво <b id="sideLevel">1</b></span>
+                    </div>
+
+                    <div class="avatar-bars-row">
+                        <div class="driver-avatar">😎</div>
+                        <div class="bars-box">
+                            <div>
+                                <div class="bar-label"><span>⛽ Гориво</span><span id="fuelText">100/100</span></div>
+                                <div class="progress-bg"><div class="progress-fill-fuel" id="fuelBar"></div></div>
+                            </div>
+                            <div>
+                                <div class="bar-label"><span>🔥 Респект (XP)</span><span id="xpText">0/100</span></div>
+                                <div class="progress-bg"><div class="progress-fill-nitro" id="xpBar" style="width: 10%;"></div></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- 4. АВТОСАЛОН ТАБ -->
-                <div id="tab-dealership" class="tab-pane">
-                    <div class="section-header"><span>🏛️ Автосалон - Купуване на коли</span></div>
-                    <div class="grid-cards" id="dealershipGrid"></div>
+                <div class="stats-grid">
+                    <div class="stat-item"><span>💵 Пари:</span><span class="stat-val-money" id="sideMoney">2500</span></div>
+                    <div class="stat-item"><span>💎 Кредити:</span><span class="stat-val-credits" id="sideCredits">25</span></div>
+                    <div class="stat-item"><span>🐎 Мощност:</span><span class="stat-val-hp" id="sideHp">115 к.с.</span></div>
+                    <div class="stat-item"><span>🏆 Победи:</span><span class="stat-val-wins" id="sideWins">0</span></div>
                 </div>
 
+                <div class="car-slots-box">
+                    <div class="car-slots-title">Монтирани части (6 слота)</div>
+                    <div class="slots-grid" id="slotsGrid">
+                        <div class="part-slot">🌀<span>Турбо</span></div>
+                        <div class="part-slot">💻<span>Чип</span></div>
+                        <div class="part-slot">🛞<span>Гуми</span></div>
+                        <div class="part-slot">💨<span>Филтър</span></div>
+                        <div class="part-slot">🔩<span>Окачване</span></div>
+                        <div class="part-slot">🔥<span>Нитро</span></div>
+                    </div>
+                </div>
+            </aside>
+
+        </div>
+    </div>
+
+    <!-- МОДАЛЕН ПРОЗОРЕЦ ЗА ПУСКАНЕ НА ОБЯВА -->
+    <div class="modal-overlay" id="adModal">
+        <div class="modal-box">
+            <h3 style="color: #facc15; font-size: 16px;">📢 Пусни VIP Обява най-горе</h3>
+            <p style="font-size: 12px; color: #ccc;">Обявата ти ще се появи веднага в горната лента пред всички играчи! Цена: <b>5 Кредита</b>.</p>
+            <input type="text" id="adInputText" maxlength="75" placeholder="Напр: Продавам рядко Нитро +120 к.с.! Пишете ми...">
+            <div style="display: flex; gap: 8px; justify-content: flex-end;">
+                <button class="btn btn-gray" onclick="closeAdModal()">Отказ</button>
+                <button class="btn btn-gold" onclick="publishPlayerAd()">Публикувай (5 Кредита)</button>
             </div>
         </div>
     </div>
 
     <script>
         let state = {
-            username: 'Пилот',
-            money: 3500,
-            gold: 2,
+            username: 'УличенПилот',
+            money: 2500,
             credits: 25,
             fuel: 100,
-            car: { name: 'Volkswagen Golf 4 1.9 TDI', hp: 115, weight: 1280, icon: '🚗' },
+            xp: 10,
+            level: 1,
+            wins: 0,
+            car: {
+                name: 'Volkswagen Golf 4 1.9 TDI',
+                hp: 115,
+                weight: 1280,
+                icon: '🚗'
+            },
+            equippedSlots: {},
             isRacing: false
         };
 
         const tuningParts = [
-            { id: 1, name: 'Спортен въздушен филтър', hp: 10, weight: 2, price: 250 },
-            { id: 2, name: 'Stage 1 Чип Тунинг', hp: 35, weight: 0, price: 600 },
-            { id: 3, name: 'Олекотени джанти', hp: 0, weight: 35, price: 750 },
-            { id: 4, name: 'Хибридно Турбо GT2260V', hp: 75, weight: -5, price: 1400 },
-            { id: 5, name: 'Нитро система NOS', hp: 120, weight: -10, price: 2800 }
+            { id: 1, slot: 3, icon: '💨', name: 'Спортен филтър', hp: 10, weight: 2, price: 250 },
+            { id: 2, slot: 1, icon: '💻', name: 'Stage 1 Чип', hp: 35, weight: 0, price: 600 },
+            { id: 3, slot: 2, icon: '🛞', name: 'Олекотени джанти', hp: 0, weight: 35, price: 750 },
+            { id: 4, slot: 0, icon: '🌀', name: 'Хибридно Турбо', hp: 75, weight: -5, price: 1400 },
+            { id: 5, slot: 4, icon: '🔩', name: 'Спортно окачване', hp: 20, weight: 15, price: 1100 }
+        ];
+
+        const blackMarketItems = [
+            { id: 101, slot: 5, icon: '🔥', name: 'Рядко Нитро NOS (+120 к.с.)', hp: 120, weight: -10, credits: 10, desc: 'Забранена състезателна система за мигновен старт.' },
+            { id: 102, slot: 0, icon: '🚀', name: 'Керамично Би-Турбо (+160 к.с.)', hp: 160, weight: 0, credits: 15, desc: 'Уникална част от Черния пазар.' }
         ];
 
         const dealershipCars = [
@@ -472,82 +1016,159 @@
         ];
 
         const tracks = [
-            { id: 1, name: 'Околовръстното', opponent: 'Opel Astra 1.6', botHp: 105, botWeight: 1180, botIcon: '🚙', reward: 350 },
-            { id: 2, name: 'Летище Божурище', opponent: 'BMW E36 325i', botHp: 192, botWeight: 1350, botIcon: '🏎️', reward: 700 },
-            { id: 3, name: 'Индустриална зона', opponent: 'Audi S3 1.8T', botHp: 240, botWeight: 1420, botIcon: '🏎️', reward: 1300 },
-            { id: 4, name: 'Битка на титаните', opponent: 'Mercedes CLS 55 AMG', botHp: 476, botWeight: 1850, botIcon: '🚓', reward: 2600 }
+            { id: 1, name: 'Околовръстното', opponent: 'Opel Astra 1.6', botHp: 105, botWeight: 1180, botIcon: '🚙', reward: 350, xp: 20 },
+            { id: 2, name: 'Летище Божурище', opponent: 'BMW E36 325i', botHp: 192, botWeight: 1350, botIcon: '🏎️', reward: 700, xp: 35 },
+            { id: 3, name: 'Индустриална зона', opponent: 'Audi S3 1.8T', botHp: 240, botWeight: 1420, botIcon: '🏎️', reward: 1300, xp: 50 },
+            { id: 4, name: 'Битка на титаните', opponent: 'Mercedes CLS 55 AMG', botHp: 476, botWeight: 1850, botIcon: '🚓', reward: 2600, xp: 80 }
         ];
 
         function enterGame() {
-            const name = document.getElementById('usernameInput').value.trim();
-            if (name) state.username = name;
+            const val = document.getElementById('usernameInput').value.trim();
+            if (val) state.username = val;
 
             document.getElementById('loginScreen').style.display = 'none';
-            document.getElementById('gameContent').style.display = 'block';
-            document.getElementById('currenciesSection').style.display = 'flex';
+            document.getElementById('mainLayout').style.display = 'grid';
 
-            updateUI();
-            renderGrids();
+            updateAllUI();
+            renderAllGrids();
+            addLog(`Добре дошъл на улицата, <span class="gold">${state.username}</span>!`);
         }
 
-        function calcTime(hp, weight) {
+        function logout() {
+            location.reload();
+        }
+
+        function addLog(htmlText) {
+            const log = document.getElementById('eventLog');
+            const div = document.createElement('div');
+            div.className = 'log-entry';
+            div.innerHTML = `» ${htmlText}`;
+            log.prepend(div);
+        }
+
+        function calcQuarterMile(hp, weight) {
             return Number((5.825 * Math.cbrt(weight / hp)).toFixed(2));
         }
 
-        function updateUI() {
+        function updateAllUI() {
             document.getElementById('sideUsername').innerText = state.username;
-            document.getElementById('topMoney').innerText = state.money;
-            document.getElementById('topGold').innerText = state.gold;
-            document.getElementById('topCredits').innerText = state.credits;
-            document.getElementById('topFuel').innerText = state.fuel;
+            document.getElementById('sideLevel').innerText = state.level;
+            document.getElementById('sideMoney').innerText = state.money + ' лв.';
+            document.getElementById('sideCredits').innerText = state.credits;
+            document.getElementById('sideHp').innerText = state.car.hp + ' к.с.';
+            document.getElementById('sideWins').innerText = state.wins;
+            document.getElementById('vipCreditsBadge').innerText = state.credits + ' КР.';
+            document.getElementById('bmCredits').innerText = state.credits;
 
-            document.getElementById('mainCarName').innerText = state.car.name;
-            document.getElementById('mainCarEmoji').innerText = state.car.icon;
-            document.getElementById('statHp').innerText = state.car.hp + ' к.с.';
-            document.getElementById('statWeight').innerText = state.car.weight + ' кг';
-            document.getElementById('statTime').innerText = calcTime(state.car.hp, state.car.weight) + ' сек.';
+            document.getElementById('fuelText').innerText = `${state.fuel}/100`;
+            document.getElementById('fuelBar').style.width = `${state.fuel}%`;
+            document.getElementById('xpText').innerText = `${state.xp}/100`;
+            document.getElementById('xpBar').style.width = `${state.xp}%`;
 
-            document.getElementById('playerLaneName').innerText = state.username;
-            document.getElementById('playerIcon').innerText = state.car.icon;
+            const time402 = calcQuarterMile(state.car.hp, state.car.weight);
+            document.getElementById('topCarName').innerText = state.car.name;
+            document.getElementById('topCarTime').innerText = time402 + ' сек.';
+            document.getElementById('garageCarTitle').innerText = state.car.name;
+            document.getElementById('garageHp').innerText = state.car.hp + ' к.с.';
+            document.getElementById('garageWeight').innerText = state.car.weight + ' кг';
+            document.getElementById('garageCarEmoji').innerText = state.car.icon;
+
+            document.getElementById('playerLaneLabel').innerText = `${state.username} (${state.car.hp} к.с.)`;
+            document.getElementById('playerCarIcon').innerText = state.car.icon;
+            document.getElementById('rankMe').innerText = `3. ${state.username}`;
+            document.getElementById('rankMyCar').innerText = state.car.name;
+            document.getElementById('rankMyHp').innerText = state.car.hp;
+
+            const defaultSlots = [
+                { icon: '🌀', label: 'Турбо' },
+                { icon: '💻', label: 'Чип' },
+                { icon: '🛞', label: 'Гуми' },
+                { icon: '💨', label: 'Филтър' },
+                { icon: '🔩', label: 'Окачване' },
+                { icon: '🔥', label: 'Нитро' }
+            ];
+
+            const slotsGrid = document.getElementById('slotsGrid');
+            slotsGrid.innerHTML = defaultSlots.map((s, idx) => {
+                const eq = state.equippedSlots[idx];
+                if (eq) {
+                    return `<div class="part-slot equipped" title="${eq.name}">${eq.icon}<span>${eq.name.split(' ')[0]}</span></div>`;
+                }
+                return `<div class="part-slot">${s.icon}<span>${s.label}</span></div>`;
+            }).join('');
         }
 
-        function renderGrids() {
-            // Тунинг
-            document.getElementById('tuningGrid').innerHTML = tuningParts.map(p => `
-                <div class="card-item">
-                    <h4>🔧 ${p.name}</h4>
-                    <p style="font-size: 12px; color: #aaa;">+${p.hp} к.с.</p>
-                    <button class="btn btn-red" onclick="buyPart(${p.id})">Купи (${p.price} лв.)</button>
-                </div>
-            `).join('');
+        function renderAllGrids() {
+            document.getElementById('tuningGrid').innerHTML = tuningParts.map(p => {
+                const owned = state.equippedSlots[p.slot]?.name === p.name;
+                return `
+                    <div class="item-card">
+                        <h4>${p.icon} ${p.name}</h4>
+                        <p>+${p.hp} к.с. ${p.weight > 0 ? `/ -${p.weight} кг` : ''}</p>
+                        <button class="btn ${owned ? 'btn-gray' : 'btn-red'}" ${owned ? 'disabled' : ''} onclick="buyTuning(${p.id})">
+                            ${owned ? 'Монтирано' : `Купи (${p.price} лв.)`}
+                        </button>
+                    </div>
+                `;
+            }).join('');
 
-            // Автосалон
-            document.getElementById('dealershipGrid').innerHTML = dealershipCars.map(c => `
-                <div class="card-item">
-                    <h4>${c.icon} ${c.name}</h4>
-                    <p style="font-size: 12px; color: #aaa;">${c.hp} к.с. / ${c.weight} кг</p>
-                    <button class="btn btn-green" onclick="buyCar(${c.id})">Купи (${c.price} лв.)</button>
-                </div>
-            `).join('');
+            document.getElementById('blackMarketGrid').innerHTML = blackMarketItems.map(item => {
+                const owned = state.equippedSlots[item.slot]?.name === item.name;
+                return `
+                    <div class="item-card" style="border-color: #eab308;">
+                        <h4>${item.icon} ${item.name}</h4>
+                        <p>${item.desc}</p>
+                        <button class="btn ${owned ? 'btn-gray' : 'btn-gold'}" ${owned ? 'disabled' : ''} onclick="buyBlackMarket(${item.id})">
+                            ${owned ? 'Монтирано' : `Купи за ${item.credits} Кредита`}
+                        </button>
+                    </div>
+                `;
+            }).join('');
 
-            // Писти
+            document.getElementById('dealershipGrid').innerHTML = dealershipCars.map(c => {
+                const isCur = state.car.name === c.name;
+                return `
+                    <div class="item-card">
+                        <h4>${c.icon} ${c.name}</h4>
+                        <p>Мощност: <b>${c.hp} к.с.</b> | Тегло: <b>${c.weight} кг</b></p>
+                        <button class="btn ${isCur ? 'btn-gray' : 'btn-blue'}" ${isCur ? 'disabled' : ''} onclick="buyCar(${c.id})">
+                            ${isCur ? 'Активна кола' : `Купи (${c.price} лв.)`}
+                        </button>
+                    </div>
+                `;
+            }).join('');
+
             document.getElementById('tracksGrid').innerHTML = tracks.map(t => `
-                <div class="card-item">
+                <div class="item-card">
                     <h4>🏁 ${t.name}</h4>
-                    <p style="font-size: 12px; color: #aaa;">Съперник: ${t.opponent} (${t.botHp} к.с.)<br>Награда: <span style="color:#4ade80;">+${t.reward} лв.</span></p>
-                    <button class="btn btn-red" onclick="startRace(${t.id})">СТАРТ</button>
+                    <p>Съперник: <b>${t.opponent}</b> (${t.botHp} к.с.)<br>Награда: <span style="color:#4ade80;">+${t.reward} лв.</span></p>
+                    <button class="btn btn-red" onclick="startRace(${t.id})">СТАРТ НА ГОНКАТА</button>
                 </div>
             `).join('');
         }
 
-        function buyPart(id) {
+        function buyTuning(id) {
             const p = tuningParts.find(x => x.id === id);
             if (state.money < p.price) return alert('Нямаш достатъчно пари!');
             state.money -= p.price;
             state.car.hp += p.hp;
             state.car.weight = Math.max(700, state.car.weight - p.weight);
-            updateUI();
-            alert(`Монтира успешно ${p.name}!`);
+            state.equippedSlots[p.slot] = { name: p.name, icon: p.icon };
+            addLog(`Монтира <span class="gold">${p.name}</span> (+${p.hp} к.с.)!`);
+            updateAllUI();
+            renderAllGrids();
+        }
+
+        function buyBlackMarket(id) {
+            const item = blackMarketItems.find(x => x.id === id);
+            if (state.credits < item.credits) return alert('Нямаш достатъчно VIP Кредити!');
+            state.credits -= item.credits;
+            state.car.hp += item.hp;
+            state.car.weight = Math.max(700, state.car.weight - item.weight);
+            state.equippedSlots[item.slot] = { name: item.name, icon: item.icon };
+            addLog(`Купи от Черния пазар <span class="gold">${item.name}</span>!`);
+            updateAllUI();
+            renderAllGrids();
         }
 
         function buyCar(id) {
@@ -555,86 +1176,164 @@
             if (state.money < c.price) return alert('Нямаш достатъчно пари!');
             state.money -= c.price;
             state.car = { name: c.name, hp: c.hp, weight: c.weight, icon: c.icon };
-            updateUI();
-            alert(`Ти купи и се качи в ${c.name}!`);
+            state.equippedSlots = {};
+            addLog(`Купи нов автомобил: <span class="green">${c.name}</span>!`);
+            updateAllUI();
+            renderAllGrids();
         }
 
-        function sellCar() {
+        function sellCurrentCar() {
             state.money += 1000;
             state.car = { name: 'Volkswagen Golf 4 1.9 TDI', hp: 115, weight: 1280, icon: '🚗' };
-            updateUI();
-            alert('Продаде колата за 1000 лв. и се върна на базовия Golf.');
+            state.equippedSlots = {};
+            addLog(`Продаде колата си за <span class="green">+1000 лв.</span>`);
+            updateAllUI();
+            renderAllGrids();
+        }
+
+        function refuelMoney() {
+            if (state.money < 200) return alert('Нямаш 200 лв.!');
+            state.money -= 200;
+            state.fuel = 100;
+            addLog(`Зареди резервоара на <span class="green">100/100</span>!`);
+            updateAllUI();
+        }
+
+        function exchangeCredits() {
+            if (state.credits < 10) return alert('Нямаш 10 кредита!');
+            state.credits -= 10;
+            state.money += 5000;
+            addLog(`Обмени 10 кредита за <span class="green">+5000 лв.</span>!`);
+            updateAllUI();
+        }
+
+        function buyCreditsDemo() {
+            state.credits += 15;
+            addLog(`Зареди <span class="gold">+15 VIP Кредита</span>!`);
+            updateAllUI();
+        }
+
+        function openAdModal() {
+            document.getElementById('adModal').style.display = 'flex';
+        }
+
+        function closeAdModal() {
+            document.getElementById('adModal').style.display = 'none';
+        }
+
+        function publishPlayerAd() {
+            const text = document.getElementById('adInputText').value.trim();
+            if (!text) return alert('Напиши текст за обявата!');
+            if (state.credits < 5) return alert('Нямаш 5 кредита за обява!');
+
+            state.credits -= 5;
+            document.getElementById('adSlot1').innerHTML = `
+                <div class="ad-avatar">😎</div>
+                <div class="ad-text">
+                    <strong>${state.username}</strong>
+                    <p>${text}</p>
+                </div>
+            `;
+            document.getElementById('adInputText').value = '';
+            closeAdModal();
+            addLog(`Публикува VIP обява в горната лента за <span class="gold">5 Кредита</span>!`);
+            updateAllUI();
         }
 
         function startRace(trackId) {
             if (state.isRacing) return;
-            if (state.fuel < 10) return alert('Нямаш достатъчно гориво!');
+            if (state.fuel < 10) return alert('Нямаш гориво! Зареди от VIP Магазина.');
 
             const track = tracks.find(t => t.id === trackId);
             state.isRacing = true;
             state.fuel -= 10;
-            updateUI();
+            updateAllUI();
 
-            const pBox = document.getElementById('playerBox');
-            const bBox = document.getElementById('botBox');
+            const playerBox = document.getElementById('playerCarBox');
+            const botBox = document.getElementById('botCarBox');
             const red = document.getElementById('lightRed');
             const yellow = document.getElementById('lightYellow');
             const green = document.getElementById('lightGreen');
 
-            pBox.style.left = '10px';
-            bBox.style.left = '10px';
-            document.getElementById('botLaneName').innerText = track.opponent;
-            document.getElementById('botIcon').innerText = track.botIcon;
+            playerBox.style.left = '10px';
+            botBox.style.left = '10px';
+            document.getElementById('botLaneLabel').innerText = `${track.opponent} (${track.botHp} к.с.)`;
+            document.getElementById('botCarIcon').innerText = track.botIcon;
 
-            red.className = 'bulb red'; yellow.className = 'bulb yellow'; green.className = 'bulb green';
+            red.className = 'bulb red';
+            yellow.className = 'bulb yellow';
+            green.className = 'bulb green';
 
             setTimeout(() => red.classList.add('on'), 200);
-            setTimeout(() => { red.classList.remove('on'); yellow.classList.add('on'); }, 700);
+            setTimeout(() => { red.classList.remove('on'); yellow.classList.add('on'); }, 800);
             setTimeout(() => {
                 yellow.classList.remove('on');
                 green.classList.add('on');
-                runRaceAnimation(track);
-            }, 1200);
+                playerBox.classList.add('burning');
+                botBox.classList.add('burning');
+            }, 1400);
+
+            setTimeout(() => {
+                playerBox.classList.remove('burning');
+                botBox.classList.remove('burning');
+                runCarsAnimation(track);
+            }, 1900);
         }
 
-        function runRaceAnimation(track) {
-            const pTime = calcTime(state.car.hp, state.car.weight);
-            const bTime = calcTime(track.botHp, track.botWeight) + (Math.random() * 0.2 - 0.1);
+        function runCarsAnimation(track) {
+            const playerTime = calcQuarterMile(state.car.hp, state.car.weight);
+            const botTime = calcQuarterMile(track.botHp, track.botWeight) + (Math.random() * 0.25 - 0.12);
 
-            const pBox = document.getElementById('playerBox');
-            const bBox = document.getElementById('botBox');
-            const trackW = document.querySelector('.asphalt-track').clientWidth - 90;
+            const playerBox = document.getElementById('playerCarBox');
+            const botBox = document.getElementById('botCarBox');
+            const trackWidth = document.querySelector('.track-asphalt').clientWidth - 95;
 
-            const start = performance.now();
+            const playerDuration = playerTime * 240;
+            const botDuration = botTime * 240;
+            const startTime = performance.now();
+
             function animate(now) {
-                const el = now - start;
-                const pProg = Math.min(1, Math.pow(el / (pTime * 230), 1.3));
-                const bProg = Math.min(1, Math.pow(el / (bTime * 230), 1.3));
+                const elapsed = now - startTime;
+                const pProg = Math.min(1, Math.pow(elapsed / playerDuration, 1.35));
+                const bProg = Math.min(1, Math.pow(elapsed / botDuration, 1.35));
 
-                pBox.style.left = (10 + pProg * trackW) + 'px';
-                bBox.style.left = (10 + bProg * trackW) + 'px';
+                playerBox.style.left = (10 + pProg * trackWidth) + 'px';
+                botBox.style.left = (10 + bProg * trackWidth) + 'px';
 
                 if (pProg < 1 || bProg < 1) {
                     requestAnimationFrame(animate);
                 } else {
                     state.isRacing = false;
-                    if (pTime <= bTime) {
+                    const won = playerTime <= botTime;
+                    if (won) {
                         state.money += track.reward;
-                        alert(`🏆 ПОБЕДА! Време: ${pTime} сек. срещу ${bTime.toFixed(2)} сек. (+${track.reward} лв.)`);
+                        state.wins += 1;
+                        state.xp += track.xp;
+                        if (state.xp >= 100) {
+                            state.level += 1;
+                            state.xp -= 100;
+                            state.credits += 5;
+                            addLog(`🎉 Вдигна <span class="gold">Ниво ${state.level}</span>! Бонус +5 Кредита!`);
+                        }
+                        addLog(`🏆 ПОБЕДА срещу ${track.opponent} (${playerTime} сек. vs ${botTime.toFixed(2)} сек.) -> <span class="green">+${track.reward} лв.</span>`);
                     } else {
-                        alert(`❌ ЗАГУБА! Време: ${pTime} сек. срещу ${bTime.toFixed(2)} сек.`);
+                        addLog(`❌ ЗАГУБА от ${track.opponent} (${playerTime} сек. vs ${botTime.toFixed(2)} сек.). Тунинговай колата!`);
                     }
-                    updateUI();
+                    updateAllUI();
                 }
             }
+
             requestAnimationFrame(animate);
         }
 
         function switchTab(event, tabId) {
             document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+
             document.getElementById(tabId).classList.add('active');
-            if (event && event.currentTarget) event.currentTarget.classList.add('active');
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            }
         }
     </script>
 </body>
