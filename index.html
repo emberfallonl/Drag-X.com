@@ -250,7 +250,7 @@
 <body>
 
     <div class="top-ticker">
-        🔥 Добре дошъл в DRAGX! Улични състезания, отбори, банка, вестник и казино! 🏎️💨
+        🔥 Добре дошъл в DRAGX! Академия за пилоти, валута "Връзки" от 15-то ниво, банка и казино! 🏎️💨
     </div>
 
     <div class="game-wrapper">
@@ -303,7 +303,7 @@
         <!-- ЕКРАН ЗА ВХОД -->
         <div class="login-screen" id="loginScreen">
             <h1 style="color: #ff3300; font-size: 32px; margin-bottom: 8px;">ВЛЕЗ НА УЛИЦАТА</h1>
-            <p style="color: #a1a1aa; margin-bottom: 20px; font-size: 14px;">Банка, казино, отбори, вестник и тунинг — всичко на едно място!</p>
+            <p style="color: #a1a1aa; margin-bottom: 20px; font-size: 14px;">Тренирай пилота си в Академията, трупай Връзки и доминирай!</p>
             
             <div class="login-box">
                 <input type="text" id="usernameInput" placeholder="Име на пилота (напр. StreetRacer)">
@@ -323,6 +323,7 @@
                 <button class="nav-item" onclick="switchTab(event, 'tab-tuning')"><span class="nav-icon">🔧</span> Тунинг Сервиз</button>
                 <button class="nav-item" onclick="switchTab(event, 'tab-dealership')"><span class="nav-icon">🏛️</span> Автосалон</button>
                 <button class="nav-item" onclick="switchTab(event, 'tab-blackmarket')"><span class="nav-icon">🕶️</span> Черен Пазар</button>
+                <button class="nav-item" onclick="switchTab(event, 'tab-academy')"><span class="nav-icon">📚</span> Учебен Център</button>
                 <button class="nav-item" onclick="switchTab(event, 'tab-city')"><span class="nav-icon">🏙️</span> Град (Банка)</button>
                 <button class="nav-item" onclick="switchTab(event, 'tab-casino')"><span class="nav-icon">🎲</span> Казино</button>
                 <button class="nav-item" onclick="switchTab(event, 'tab-newspaper')"><span class="nav-icon">📰</span> Вестник</button>
@@ -404,7 +405,7 @@
                         <div class="cards-grid" id="tuningGrid"></div>
                     </div>
 
-                    <!-- АВТОСАЛОН (С ПОКУПКА С ПАРИ ИЛИ КРЕДИТИ) -->
+                    <!-- АВТОСАЛОН -->
                     <div id="tab-dealership" class="tab-pane">
                         <div class="section-title"><span>🏛️ Автосалон (Купи с Лева или Кредити)</span></div>
                         <div class="cards-grid" id="dealershipGrid"></div>
@@ -419,12 +420,53 @@
                         <div class="cards-grid" id="playerMarketGrid"></div>
                     </div>
 
+                    <!-- УЧЕБЕН ЦЕНТЪР (АКАДЕМИЯ ЗА ПИЛОТИ) -->
+                    <div id="tab-academy" class="tab-pane">
+                        <div class="section-title"><span>📚 Учебен Център (Академия за Пилоти)</span></div>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
+                            <!-- ИНТЕЛЕКТ (ВОДАЧА) -->
+                            <div style="background: #121216; border: 1px solid #32323c; border-radius: 6px; padding: 14px;">
+                                <h4 style="color: #38bdf8; margin-bottom: 6px;">🧠 Интелект (Пилот)</h4>
+                                <p style="font-size: 12px; color: #a1a1aa; margin-bottom: 8px;">Тренирай реакцията и стабилността си на пътя.</p>
+                                <p style="font-size: 12px; margin-bottom: 8px;">Ниво на умение: <b id="intelLevel" style="color:#fff;">1</b></p>
+                                <button class="btn btn-blue" onclick="trainAcademy('intel')">Тренирай (500 лв.)</button>
+                            </div>
+
+                            <!-- СИЛА (КОЛАТА) -->
+                            <div style="background: #121216; border: 1px solid #32323c; border-radius: 6px; padding: 14px;">
+                                <h4 style="color: #ff5500; margin-bottom: 6px;">💪 Сила (Техника)</h4>
+                                <p style="font-size: 12px; color: #a1a1aa; margin-bottom: 8px;">Укрепи издръжливостта на автомобила си.</p>
+                                <p style="font-size: 12px; margin-bottom: 8px;">Ниво на умение: <b id="strengthLevel" style="color:#fff;">1</b></p>
+                                <button class="btn btn-red" onclick="trainAcademy('strength')">Тренирай (500 лв.)</button>
+                            </div>
+                        </div>
+
+                        <!-- НАСТАВНИЦИ И МЕХАНИЦИ (КУПУВАТ СЕ С КРЕДИТИ) -->
+                        <div style="background: #191922; border: 1px solid #eab308; border-radius: 6px; padding: 14px;">
+                            <h4 style="color: #facc15; margin-bottom: 6px;">👥 Наеми Наставник / Механик (С VIP Кредити)</h4>
+                            <p style="font-size: 12px; color: #a1a1aa; margin-bottom: 10px;">Професионалните ментори ти дават постоянен бонус към гонките.</p>
+                            <div class="cards-grid">
+                                <div class="item-card">
+                                    <h4>👨‍🔧 Главен Механик</h4>
+                                    <p style="font-size: 11px;">Намалява теглото с 20 кг.</p>
+                                    <button class="btn btn-gold" onclick="hireMentor('mechanic')">Наеми (10 Кр.)</button>
+                                </div>
+                                <div class="item-card">
+                                    <h4>🏁 Стар Опитен Наставник</h4>
+                                    <p style="font-size: 11px;">Дава +15% по-бързи времена.</p>
+                                    <button class="btn btn-gold" onclick="hireMentor('coach')">Наеми (15 Кр.)</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- ГРАД И БАНКА -->
                     <div id="tab-city" class="tab-pane">
                         <div class="section-title"><span>🏙️ Градски център & Банка</span></div>
                         <div style="background: #121216; border: 1px solid #32323c; border-radius: 6px; padding: 18px; margin-bottom: 16px;">
                             <h3 style="color: #4ade80; margin-bottom: 6px;">🏦 Улична Банка</h3>
-                            <p style="font-size: 12px; color: #a1a1aa; margin-bottom: 12px;">Дръж парите си тук, за да не ти ги взимат при загуба на улицата!</p>
+                            <p style="font-size: 12px; color: #a1a1aa; margin-bottom: 12px;">Пази парите си в безопасност от загуби на улицата!</p>
                             <p style="font-size: 13px; margin-bottom: 8px;">Пари в банката: <b style="color: #4ade80;" id="bankMoneyText">0 лв.</b></p>
                             <div style="display: flex; gap: 8px; margin-bottom: 14px;">
                                 <input type="number" id="bankAmount" placeholder="Сума" style="padding: 6px; background: #111; border: 1px solid #444; color:#fff; border-radius:4px;">
@@ -432,8 +474,6 @@
                                 <button class="btn btn-blue" onclick="bankWithdraw()">Тегли</button>
                             </div>
                             <hr style="border-color: #333; margin: 12px 0;">
-                            <h4 style="color: #facc15; margin-bottom: 6px;">💳 Бърз заем</h4>
-                            <p style="font-size: 12px; color: #a1a1aa; margin-bottom: 8px;">Вземи заем от 5000 лв., за да тунингуваш колата си веднага!</p>
                             <button class="btn btn-gold" onclick="takeLoan()">Вземи заем (5000 лв.)</button>
                         </div>
                     </div>
@@ -444,13 +484,11 @@
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
                             <div style="background: #121216; border: 1px solid #32323c; border-radius: 6px; padding: 16px;">
                                 <h4>🎲 Игра на Зарове</h4>
-                                <p style="font-size: 12px; color: #a1a1aa; margin: 6px 0;">Ако хвърлиш над 4, печелиш двойно!</p>
-                                <button class="btn btn-gold" onclick="playDice()">Заложи 300 лв. и хвърли</button>
+                                <button class="btn btn-gold" style="margin-top: 8px;" onclick="playDice()">Заложи 300 лв.</button>
                             </div>
                             <div style="background: #121216; border: 1px solid #32323c; border-radius: 6px; padding: 16px;">
-                                <h4>🎰 Рулетка (Червено/Черно)</h4>
-                                <p style="font-size: 12px; color: #a1a1aa; margin: 6px 0;">Познай печелившия цвят за двойна печалба.</p>
-                                <button class="btn btn-green" onclick="playRoulette('red')">Заложи 500 лв. на Червено</button>
+                                <h4>🎰 Рулетка</h4>
+                                <button class="btn btn-green" style="margin-top: 8px;" onclick="playRoulette('red')">Заложи 500 лв.</button>
                             </div>
                         </div>
                     </div>
@@ -460,14 +498,11 @@
                         <div class="section-title"><span>📰 Уличен Вестник & Обяви</span></div>
                         <div style="background: #121216; border: 1px solid #32323c; border-radius: 6px; padding: 14px; font-size: 13px; line-height: 1.5;">
                             <h4 style="color: #facc15; margin-bottom: 4px;">📰 Брой №1 на "Драг Хроники"</h4>
-                            <p style="color: #ccc; margin-bottom: 10px;">Световните новини от подземните гонки разтърсиха столицата! Отборите се стягат за грандиозен шампионат в стил Формула 1.</p>
-                            <hr style="border-color: #333; margin: 8px 0;">
-                            <p><b>Обява от TurboKing:</b> Търся опитен пилот за отбора Street Kings. Изискване: над 200 к.с.</p>
-                            <p><b>Обява от Полицията:</b> Засилени патрули около Околовръстното тази вечер!</p>
+                            <p style="color: #ccc; margin-bottom: 10px;">Новият Учебен център отвори врати! Пилотите вече тренират своите умения за по-добра издръжливост и стабилност.</p>
                         </div>
                     </div>
 
-                    <!-- ОТБОРИ / КЛУБОВЕ (ОТ НИВО 12) -->
+                    <!-- ОТБОРИ (ОТ НИВО 12) -->
                     <div id="tab-crews" class="tab-pane">
                         <div class="section-title"><span>👥 Отбори & Формула 1 Клубове (От Ниво 12)</span></div>
                         <div id="crewContentArea"></div>
@@ -489,18 +524,15 @@
                         <div class="cards-grid">
                             <div class="item-card">
                                 <h4>⛽ Пълен резервоар (100/100)</h4>
-                                <p>Възстановява веднага горивото ти за нови гонки.</p>
                                 <button class="btn btn-green" onclick="refuelMoney()">Купи за 200 лв.</button>
                             </div>
                             <div class="item-card">
-                                <h4>📢 VIP Обява на лентата</h4>
-                                <p>Пусни реклама най-горе за всички играчи.</p>
-                                <button class="btn btn-gold" onclick="openAdModal()">Пусни за 5 Кредита</button>
+                                <h4>📢 VIP Обява</h4>
+                                <button class="btn btn-gold" onclick="openAdModal()">Пусни за 5 Кр.</button>
                             </div>
                             <div class="item-card">
                                 <h4>💰 Пакет 5000 лв. Кеш</h4>
-                                <p>Обмени 10 VIP кредита за 5000 лв. в брой.</p>
-                                <button class="btn btn-gold" onclick="exchangeCredits()">Обмени (10 Кредита)</button>
+                                <button class="btn btn-gold" onclick="exchangeCredits()">Обмени (10 Кр.)</button>
                             </div>
                         </div>
                     </div>
@@ -508,7 +540,7 @@
 
                 <!-- ЛОГ -->
                 <div class="event-log" id="eventLog">
-                    <div class="log-entry">🏁 Добре дошъл в <span class="gold">DragX</span>! Посети банката в града, за да пазиш парите си.</div>
+                    <div class="log-entry">🏁 Добре дошъл в <span class="gold">DragX</span>! Посети новия Учебен център за тренировки.</div>
                 </div>
             </main>
 
@@ -541,6 +573,7 @@
                 <div class="stats-grid">
                     <div class="stat-item"><span>💵 Пари:</span><span class="stat-val-money" id="sideMoney">2500</span></div>
                     <div class="stat-item"><span>💎 Кредити:</span><span class="stat-val-credits" id="sideCredits">25</span></div>
+                    <div class="stat-item"><span>🤝 Връзки:</span><span style="color:#38bdf8; font-weight:bold;" id="sideConnections">0</span></div>
                     <div class="stat-item"><span>🐎 Мощност:</span><span class="stat-val-hp" id="sideHp">115 к.с.</span></div>
                     <div class="stat-item"><span>🏆 Победи:</span><span class="stat-val-wins" id="sideWins">0</span></div>
                 </div>
@@ -564,7 +597,7 @@
     <div class="modal-overlay" id="adModal">
         <div class="modal-box">
             <h3 style="color: #facc15; font-size: 16px;">📢 Пусни VIP Обява</h3>
-            <input type="text" id="adInputText" maxlength="75" placeholder="Текст на обявата...">
+            <input type="text" id="adInputText" maxlength="75" placeholder="Текст...">
             <div style="display: flex; gap: 8px; justify-content: flex-end;">
                 <button class="btn btn-gray" onclick="closeAdModal()">Отказ</button>
                 <button class="btn btn-gold" onclick="publishPlayerAd()">Публикувай</button>
@@ -575,7 +608,7 @@
     <div class="modal-overlay" id="sellPartModal">
         <div class="modal-box">
             <h3 style="color: #facc15; font-size: 16px;">🕶️ Продай част</h3>
-            <input type="text" id="sellPartName" placeholder="Име на частта">
+            <input type="text" id="sellPartName" placeholder="Име">
             <input type="number" id="sellPartPrice" placeholder="Цена в лв.">
             <div style="display: flex; gap: 8px; justify-content: flex-end;">
                 <button class="btn btn-gray" onclick="closeSellModal()">Отказ</button>
@@ -590,12 +623,16 @@
             money: 2500,
             bankMoney: 0,
             credits: 25,
+            connections: 0, // Трета валута: Връзки (от 15 ниво)
             fuel: 100,
             xp: 10,
             level: 1,
             wins: 0,
+            intelLvl: 1,
+            strengthLvl: 1,
+            hasMechanic: false,
+            hasCoach: false,
             myCrew: null,
-            myRole: null, // Роля в отбора (напр. Пилот, Механик, Капитан)
             car: {
                 name: 'Volkswagen Golf 4 1.9 TDI',
                 hp: 115,
@@ -606,13 +643,8 @@
             isRacing: false
         };
 
-        let playerMarketList = [
-            { id: 1, seller: 'TurboKing', itemName: 'Спортен филтър (+10 к.с.)', price: 300 }
-        ];
-
-        let crewsList = [
-            { id: 1, name: 'Street Kings F1', leader: 'TurboKing', members: 4, points: 1450 }
-        ];
+        let playerMarketList = [{ id: 1, seller: 'TurboKing', itemName: 'Спортен филтър', price: 300 }];
+        let crewsList = [{ id: 1, name: 'Street Kings F1', leader: 'TurboKing', members: 4, points: 1450 }];
 
         const tuningParts = [
             { id: 1, slot: 3, icon: '💨', name: 'Спортен филтър', hp: 10, weight: 2, price: 250 },
@@ -657,7 +689,9 @@
         }
 
         function calcQuarterMile(hp, weight) {
-            return Number((5.825 * Math.cbrt(weight / hp)).toFixed(2));
+            let baseTime = 5.825 * Math.cbrt(weight / hp);
+            if (state.hasCoach) baseTime *= 0.85; // Наставникът дава по-бързи времена
+            return Number(baseTime.toFixed(2));
         }
 
         function updateAllUI() {
@@ -665,6 +699,7 @@
             document.getElementById('sideLevel').innerText = state.level;
             document.getElementById('sideMoney').innerText = state.money + ' лв.';
             document.getElementById('sideCredits').innerText = state.credits;
+            document.getElementById('sideConnections').innerText = state.connections;
             document.getElementById('sideHp').innerText = state.car.hp + ' к.с.';
             document.getElementById('sideWins').innerText = state.wins;
             document.getElementById('vipCreditsBadge').innerText = state.credits + ' КР.';
@@ -674,6 +709,9 @@
             document.getElementById('fuelBar').style.width = `${state.fuel}%`;
             document.getElementById('xpText').innerText = `${state.xp}/100`;
             document.getElementById('xpBar').style.width = `${state.xp}%`;
+
+            document.getElementById('intelLevel').innerText = state.intelLvl;
+            document.getElementById('strengthLevel').innerText = state.strengthLvl;
 
             const time402 = calcQuarterMile(state.car.hp, state.car.weight);
             document.getElementById('topCarName').innerText = state.car.name;
@@ -690,19 +728,43 @@
             document.getElementById('rankMyCar').innerText = state.car.name;
             document.getElementById('rankMyHp').innerText = state.car.hp;
 
-            const defaultSlots = [
-                { icon: '🌀', label: 'Турбо' }, { icon: '💻', label: 'Чип' }, { icon: '🛞', label: 'Гуми' },
-                { icon: '💨', label: 'Филтър' }, { icon: '🔩', label: 'Окачване' }, { icon: '🔥', label: 'Нитро' }
-            ];
-
-            const slotsGrid = document.getElementById('slotsGrid');
-            slotsGrid.innerHTML = defaultSlots.map((s, idx) => {
-                const eq = state.equippedSlots[idx];
-                if (eq) return `<div class="part-slot equipped" title="Монтирано: ${eq.name}">${eq.icon}<span>${eq.name.split(' ')[0]}</span></div>`;
-                return `<div class="part-slot">${s.icon}<span>${s.label}</span></div>`;
-            }).join('');
-
             renderCrewsUI();
+        }
+
+        // Академия тренировки
+        function trainAcademy(type) {
+            const cost = 500;
+            if (state.money < cost) return alert('Нямаш достатъчно пари за тренировка!');
+            state.money -= cost;
+
+            if (type === 'intel') {
+                state.intelLvl += 1;
+                addLog(`🧠 Интелектът ти се повиши до ниво <span class="gold">${state.intelLvl}</span>!`);
+            } else {
+                state.strengthLvl += 1;
+                state.car.weight = Math.max(700, state.car.weight - 10);
+                addLog(`💪 Силата на техниката се повиши! Теглото намаля.`);
+            }
+            updateAllUI();
+        }
+
+        // Наемане на наставници с кредити
+        function hireMentor(type) {
+            if (type === 'mechanic') {
+                if (state.credits < 10) return alert('Нямаш 10 кредита!');
+                if (state.hasMechanic) return alert('Вече имаш механик!');
+                state.credits -= 10;
+                state.hasMechanic = true;
+                state.car.weight -= 20;
+                addLog(`👨‍🔧 Нае главен механик! Теглото падна с 20 кг.`);
+            } else {
+                if (state.credits < 15) return alert('Нямаш 15 кредита!');
+                if (state.hasCoach) return alert('Вече имаш наставник!');
+                state.credits -= 15;
+                state.hasCoach = true;
+                addLog(`🏁 Нае опитен наставник! Времената ти на пистата са с 15% по-добри.`);
+            }
+            updateAllUI();
         }
 
         function renderAllGrids() {
@@ -711,7 +773,7 @@
                 return `
                     <div class="item-card">
                         <h4>${p.icon} ${p.name}</h4>
-                        <p>+${p.hp} к.с. ${p.weight > 0 ? `/ -${p.weight} кг` : ''}</p>
+                        <p>+${p.hp} к.с.</p>
                         <button class="btn ${owned ? 'btn-gray' : 'btn-red'}" ${owned ? 'disabled' : ''} onclick="buyTuning(${p.id})">
                             ${owned ? 'Монтирано' : `Купи (${p.price} лв.)`}
                         </button>
@@ -719,31 +781,24 @@
                 `;
             }).join('');
 
-            document.getElementById('playerMarketGrid').innerHTML = playerMarketList.length === 0 ? 
-                `<p style="color:#a1a1aa; font-size:13px;">Няма активни обяви.</p>` :
-                playerMarketList.map(item => `
-                    <div class="item-card black-market-card">
-                        <h4>🔥 ${item.itemName}</h4>
-                        <p>Продавач: <b>${item.seller}</b><br>Цена: <span style="color:#4ade80;">${item.price} лв.</span></p>
-                        <button class="btn btn-gold" onclick="buyPlayerPart(${item.id})">Купи частта</button>
-                    </div>
-                `).join('');
+            document.getElementById('playerMarketGrid').innerHTML = playerMarketList.map(item => `
+                <div class="item-card black-market-card">
+                    <h4>🔥 ${item.itemName}</h4>
+                    <p>Продавач: <b>${item.seller}</b><br>Цена: <span style="color:#4ade80;">${item.price} лв.</span></p>
+                    <button class="btn btn-gold" onclick="buyPlayerPart(${item.id})">Купи</button>
+                </div>
+            `).join('');
 
-            // Автосалон с покупка с пари или кредити
             document.getElementById('dealershipGrid').innerHTML = dealershipCars.map(c => {
                 const isCur = state.car.name === c.name;
                 return `
                     <div class="item-card">
                         <img src="${c.image}" alt="${c.name}">
                         <h4>${c.name}</h4>
-                        <p>Мощност: <b>${c.hp} к.с.</b> | Тегло: <b>${c.weight} кг</b></p>
+                        <p>${c.hp} к.с. | ${c.weight} кг</p>
                         <div style="display: flex; gap: 4px; margin-top: 6px;">
-                            <button class="btn ${isCur ? 'btn-gray' : 'btn-blue'}" ${isCur ? 'disabled' : ''} onclick="buyCar(${c.id}, 'money')" style="flex:1;">
-                                ${isCur ? 'Активна' : `${c.price} лв.`}
-                            </button>
-                            <button class="btn ${isCur ? 'btn-gray' : 'btn-gold'}" ${isCur ? 'disabled' : ''} onclick="buyCar(${c.id}, 'credits')" style="flex:1;">
-                                ${c.credits} Кр.
-                            </button>
+                            <button class="btn ${isCur ? 'btn-gray' : 'btn-blue'}" ${isCur ? 'disabled' : ''} onclick="buyCar(${c.id}, 'money')" style="flex:1;">${c.price} лв.</button>
+                            <button class="btn ${isCur ? 'btn-gray' : 'btn-gold'}" ${isCur ? 'disabled' : ''} onclick="buyCar(${c.id}, 'credits')" style="flex:1;">${c.credits} Кр.</button>
                         </div>
                     </div>
                 `;
@@ -754,283 +809,156 @@
                     <img src="${t.botImage}" alt="${t.opponent}">
                     <h4>🏁 ${t.name}</h4>
                     <p>Съперник: <b>${t.opponent}</b> (${t.botHp} к.с.)<br>Награда: <span style="color:#4ade80;">+${t.reward} лв.</span></p>
-                    <button class="btn btn-red" onclick="startRace(${t.id})">СТАРТ НА БИТКАТА</button>
+                    <button class="btn btn-red" onclick="startRace(${t.id})">СТАРТ</button>
                 </div>
             `).join('');
         }
 
-        // Банка логика
+        // Банка
         function bankDeposit() {
             const amt = Number(document.getElementById('bankAmount').value);
-            if (!amt || amt <= 0 || amt > state.money) return alert('Невалидна сума!');
-            state.money -= amt;
-            state.bankMoney += amt;
-            addLog(`Внесе <span class="green">${amt} лв.</span> в банката.`);
-            updateAllUI();
+            if (!amt || amt <= 0 || amt > state.money) return;
+            state.money -= amt; state.bankMoney += amt; updateAllUI();
         }
-
         function bankWithdraw() {
             const amt = Number(document.getElementById('bankAmount').value);
-            if (!amt || amt <= 0 || amt > state.bankMoney) return alert('Невалидна сума!');
-            state.bankMoney -= amt;
-            state.money += amt;
-            addLog(`Изтегли <span class="green">${amt} лв.</span> от банката.`);
-            updateAllUI();
+            if (!amt || amt <= 0 || amt > state.bankMoney) return;
+            state.bankMoney -= amt; state.money += amt; updateAllUI();
         }
+        function takeLoan() { state.money += 5000; updateAllUI(); }
 
-        function takeLoan() {
-            state.money += 5000;
-            addLog(`Взе банков заем от <span class="gold">5000 лв.</span>!`);
-            updateAllUI();
-        }
-
-        // Казино логика
+        // Казино
         function playDice() {
-            if (state.money < 300) return alert('Нямаш 300 лв. за залог!');
+            if (state.money < 300) return;
             state.money -= 300;
-            const roll = Math.floor(Math.random() * 6) + 1;
-            if (roll > 3) {
-                state.money += 600;
-                addLog(`🎲 Казино (Зарове): Хвърли ${roll} и спечели <span class="green">+600 лв.</span>!`);
-                alert(`🎲 Печелиш! Хвърли ${roll}. Печелиш 600 лв.`);
-            } else {
-                addLog(`🎲 Казино (Зарове): Хвърли ${roll} и загуби 300 лв.`);
-                alert(`🎲 Загуба! Хвърли ${roll}.`);
-            }
+            if (Math.random() > 0.5) state.money += 600;
             updateAllUI();
         }
-
-        function playRoulette(choice) {
-            if (state.money < 500) return alert('Нямаш 500 лв. за рулетка!');
+        function playRoulette() {
+            if (state.money < 500) return;
             state.money -= 500;
-            const win = Math.random() < 0.5;
-            if (win) {
-                state.money += 1000;
-                addLog(`🎰 Казино (Рулетка): Топката падна на печеливш цвят! <span class="green">+1000 лв.</span>`);
-                alert(`🎰 Печелиш на рулетката (+1000 лв.)!`);
-            } else {
-                addLog(`🎰 Казино (Рулетка): Топката падна на грешен цвят. Загуба 500 лв.`);
-                alert(`🎰 Загуби на рулетката.`);
-            }
+            if (Math.random() > 0.5) state.money += 1000;
             updateAllUI();
         }
 
-        // Отбори (Ф1 стил от Ниво 12)
+        // Отбори (от 12 ниво) + валута Връзки (от 15 ниво)
         function renderCrewsUI() {
             const area = document.getElementById('crewContentArea');
             if (state.level < 12) {
-                area.innerHTML = `
-                    <div style="background: #121216; border: 1px solid #32323c; border-radius: 6px; padding: 25px; text-align: center;">
-                        <h3 style="color: #f87171; font-size: 18px; margin-bottom: 8px;">🔒 Отборите са заключени!</h3>
-                        <p style="color: #a1a1aa; font-size: 13px;">Трябва да достигнеш поне <b>Ниво 12</b> за участие в отбори и Формула 1 клубове.</p>
-                        <p style="color: #facc15; font-size: 12px; margin-top: 10px;">Текущо ниво: ${state.level} / 12</p>
-                    </div>
-                `;
+                area.innerHTML = `<div style="padding:20px; text-align:center;"><h3 style="color:#f87171;">🔒 Заключено (Изисква Ниво 12)</h3></div>`;
                 return;
             }
 
-            let crewHtml = '';
+            let html = `<div style="margin-bottom:15px;"><p style="color:#38bdf8;">Твоите Връзки: <b>${state.connections}</b> (Отключват се на Ниво 15)</p></div>`;
             if (!state.myCrew) {
-                crewHtml = `
-                    <div style="background: #121216; border: 1px solid #32323c; border-radius: 6px; padding: 15px; margin-bottom: 15px;">
-                        <h4 style="color: #fff; margin-bottom: 8px;">🏰 Създай F1 Отбор (5000 лв.)</h4>
-                        <div style="display: flex; gap: 8px;">
-                            <input type="text" id="newCrewName" placeholder="Име на отбора" style="padding: 6px; background: #111; border: 1px solid #444; color: #fff; border-radius: 4px; flex: 1;">
-                            <button class="btn btn-green" onclick="createCrew()">Създай</button>
-                        </div>
-                    </div>
-                `;
+                html += `<button class="btn btn-green" onclick="createCrew()">Създай Клуб (5000 лв.)</button>`;
             } else {
-                crewHtml = `
-                    <div style="background: #191922; border: 1px solid #4ade80; border-radius: 6px; padding: 15px; margin-bottom: 15px; text-align: center;">
-                        <h3 style="color: #4ade80; font-size: 18px;">Твоят отбор: ${state.myCrew}</h3>
-                        <p style="color: #a1a1aa; font-size: 12px; margin-top: 4px;">Роля: <b>${state.myRole || 'Пилот'}</b></p>
-                        <button class="btn btn-red" style="margin-top: 10px;" onclick="startCrewWar()">⚔️ Отборна F1 Битка (+50 т.)</button>
-                    </div>
-                `;
+                html += `<p style="color:#4ade80;">Ти си в отбор: ${state.myCrew}</p>`;
+                if (state.level >= 15) {
+                    html += `<button class="btn btn-gold" style="margin-top:8px;" onclick="gainConnection()">Получи Връзка под масата</button>`;
+                }
             }
-
-            crewHtml += '<div class="cards-grid">' + crewsList.map(c => `
-                <div class="item-card">
-                    <h4>🏎️ ${c.name}</h4>
-                    <p>Лидер: <b>${c.leader}</b><br>Точки: <span style="color:#facc15;">${c.points}</span></p>
-                    ${!state.myCrew ? `<button class="btn btn-blue" onclick="joinCrew('${c.name}')">Влез в отбора</button>` : ''}
-                </div>
-            `).join('') + '</div>';
-
-            area.innerHTML = crewHtml;
+            area.innerHTML = html;
         }
 
         function createCrew() {
-            const name = document.getElementById('newCrewName').value.trim();
-            if (!name) return;
-            if (state.money < 5000) return alert('Нямаш 5000 лв.');
-            state.money -= 5000;
-            state.myCrew = name;
-            state.myRole = 'Капитан';
-            crewsList.push({ id: Date.now(), name: name, leader: state.username, members: 1, points: 100 });
+            if (state.money < 5000) return;
+            state.money -= 5000; state.myCrew = 'EliteRacers'; updateAllUI();
+        }
+
+        function gainConnection() {
+            if (state.level < 15) return alert('Изисква 15-то ниво!');
+            state.connections += 1;
+            addLog(`🤝 Доби нова <span style="color:#38bdf8">Връзка</span> в подземния свят!`);
             updateAllUI();
         }
 
-        function joinCrew(name) {
-            state.myCrew = name;
-            state.myRole = 'Пилот';
-            updateAllUI();
-        }
-
-        function startCrewWar() {
-            const crew = crewsList.find(x => x.name === state.myCrew);
-            if (crew) crew.points += 50;
-            addLog(`⚔️ Отборна F1 битка спечелена за клуб <span class="gold">${state.myCrew}</span>!`);
-            updateAllUI();
-        }
-
-        // Покупка на коли с пари или кредити
         function buyCar(id, type) {
             const c = dealershipCars.find(x => x.id === id);
             if (type === 'money') {
-                if (state.money < c.price) return alert('Нямаш достатъчно пари в брой!');
+                if (state.money < c.price) return;
                 state.money -= c.price;
             } else {
-                if (state.credits < c.credits) return alert('Нямаш достатъчно VIP Кредити!');
+                if (state.credits < c.credits) return;
                 state.credits -= c.credits;
             }
             state.car = { name: c.name, hp: c.hp, weight: c.weight, image: c.image };
-            state.equippedSlots = {};
-            addLog(`Купи нов автомобил: <span class="green">${c.name}</span>!`);
-            updateAllUI();
-            renderAllGrids();
+            updateAllUI(); renderAllGrids();
         }
 
         function buyTuning(id) {
             const p = tuningParts.find(x => x.id === id);
-            if (state.money < p.price) return alert('Нямаш достатъчно пари!');
+            if (state.money < p.price) return;
             state.money -= p.price;
             state.car.hp += p.hp;
-            state.car.weight = Math.max(700, state.car.weight - p.weight);
             state.equippedSlots[p.slot] = { name: p.name, icon: p.icon };
-            addLog(`Монтира <span class="gold">${p.name}</span>!`);
-            updateAllUI();
-            renderAllGrids();
-        }
-
-        function openSellModal() { document.getElementById('sellPartModal').style.display = 'flex'; }
-        function closeSellModal() { document.getElementById('sellPartModal').style.display = 'none'; }
-
-        function confirmSellPart() {
-            const name = document.getElementById('sellPartName').value.trim();
-            const price = Number(document.getElementById('sellPartPrice').value);
-            if (!name || !price) return;
-            playerMarketList.push({ id: Date.now(), seller: state.username, itemName: name, price: price });
-            closeSellModal();
-            renderAllGrids();
-        }
-
-        function buyPlayerPart(id) {
-            const idx = playerMarketList.findIndex(x => x.id === id);
-            if (idx === -1) return;
-            const item = playerMarketList[idx];
-            if (state.money < item.price) return alert('Нямаш пари!');
-            state.money -= item.price;
-            state.car.hp += 15;
-            playerMarketList.splice(idx, 1);
-            updateAllUI();
-            renderAllGrids();
+            updateAllUI(); renderAllGrids();
         }
 
         function sellCurrentCar() {
             state.money += 1000;
             state.car = { name: 'Volkswagen Golf 4 1.9 TDI', hp: 115, weight: 1280, image: 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=800&q=80' };
             state.equippedSlots = {};
-            updateAllUI();
-            renderAllGrids();
+            updateAllUI(); renderAllGrids();
         }
 
-        function refuelMoney() {
-            if (state.money < 200) return alert('Нямаш 200 лв.');
-            state.money -= 200;
-            state.fuel = 100;
-            updateAllUI();
-        }
-
-        function exchangeCredits() {
-            if (state.credits < 10) return alert('Нямаш 10 кредита.');
-            state.credits -= 10;
-            state.money += 5000;
-            updateAllUI();
-        }
-
-        function buyCreditsDemo() {
-            state.credits += 15;
-            updateAllUI();
-        }
-
-        function openAdModal() { document.getElementById('adModal').style.display = 'flex'; }
-        function closeAdModal() { document.getElementById('adModal').style.display = 'none'; }
-
+        function refuelMoney() { if(state.money>=200){state.money-=200; state.fuel=100; updateAllUI();} }
+        function exchangeCredits() { if(state.credits>=10){state.credits-=10; state.money+=5000; updateAllUI();} }
+        function buyCreditsDemo() { state.credits+=15; updateAllUI(); }
+        function openAdModal() { document.getElementById('adModal').style.display='flex'; }
+        function closeAdModal() { document.getElementById('adModal').style.display='none'; }
         function publishPlayerAd() {
-            const text = document.getElementById('adInputText').value.trim();
-            if (!text || state.credits < 5) return;
-            state.credits -= 5;
-            document.getElementById('adSlot1').innerHTML = `<div class="ad-avatar">😎</div><div class="ad-text"><strong>${state.username}</strong><p>${text}</p></div>`;
-            closeAdModal();
-            updateAllUI();
+            if(state.credits<5) return;
+            state.credits-=5; closeAdModal(); updateAllUI();
+        }
+        function openSellModal() { document.getElementById('sellPartModal').style.display='flex'; }
+        function closeSellModal() { document.getElementById('sellPartModal').style.display='none'; }
+        function confirmSellPart() {
+            const name = document.getElementById('sellPartName').value;
+            const price = Number(document.getElementById('sellPartPrice').value);
+            if(!name || !price) return;
+            playerMarketList.push({id:Date.now(), seller:state.username, itemName:name, price:price});
+            closeSellModal(); renderAllGrids();
+        }
+        function buyPlayerPart(id) {
+            const idx = playerMarketList.findIndex(x => x.id === id);
+            if(idx===-1 || state.money < playerMarketList[idx].price) return;
+            state.money -= playerMarketList[idx].price;
+            state.car.hp += 15; playerMarketList.splice(idx,1);
+            updateAllUI(); renderAllGrids();
         }
 
         function startRace(trackId) {
-            if (state.isRacing) return;
-            if (state.fuel < 10) return alert('Нямаш гориво!');
-
+            if (state.isRacing || state.fuel < 10) return;
             const track = tracks.find(t => t.id === trackId);
-            state.isRacing = true;
-            state.fuel -= 10;
-            updateAllUI();
+            state.isRacing = true; state.fuel -= 10; updateAllUI();
 
             const pBox = document.getElementById('playerBox');
             const bBox = document.getElementById('botBox');
             const arena = document.getElementById('battleArena');
-            const red = document.getElementById('lightRed');
-            const yellow = document.getElementById('lightYellow');
-            const green = document.getElementById('lightGreen');
+            const red = document.getElementById('lightRed'), yellow = document.getElementById('lightYellow'), green = document.getElementById('lightGreen');
 
             document.getElementById('botLabel').innerText = `${track.opponent} (${track.botHp} к.с.)`;
             document.getElementById('botImg').src = track.botImage;
 
             red.className = 'bulb red'; yellow.className = 'bulb yellow'; green.className = 'bulb green';
-
             setTimeout(() => red.classList.add('on'), 300);
             setTimeout(() => { red.classList.remove('on'); yellow.classList.add('on'); }, 900);
-            setTimeout(() => {
-                yellow.classList.remove('on'); green.classList.add('on');
-                pBox.classList.add('revving'); bBox.classList.add('revving'); arena.classList.add('shaking');
-            }, 1500);
+            setTimeout(() => { yellow.classList.remove('on'); green.classList.add('on'); pBox.classList.add('revving'); bBox.classList.add('revving'); arena.classList.add('shaking'); }, 1500);
 
             setTimeout(() => {
                 pBox.classList.remove('revving'); bBox.classList.remove('revving'); arena.classList.remove('shaking');
-                
                 const playerTime = calcQuarterMile(state.car.hp, state.car.weight);
                 const botTime = calcQuarterMile(track.botHp, track.botWeight) + (Math.random() * 0.2 - 0.1);
 
                 state.isRacing = false;
-                const won = playerTime <= botTime;
-                if (won) {
-                    state.money += track.reward;
-                    state.wins += 1;
-                    state.xp += track.xp;
-                    if (state.xp >= 100) {
-                        state.level += 1;
-                        state.xp -= 100;
-                        state.credits += 5;
-                        addLog(`🎉 Вдигна <span class="gold">Ниво ${state.level}</span>!`);
-                    }
-                    addLog(`🏆 ПОБЕДА срещу ${track.opponent} -> <span class="green">+${track.reward} лв.</span>`);
-                    alert(`🏆 ПОБЕДА! Печелиш +${track.reward} лв.`);
+                if (playerTime <= botTime) {
+                    state.money += track.reward; state.wins += 1; state.xp += track.xp;
+                    if (state.xp >= 100) { state.level += 1; state.xp -= 100; state.credits += 5; }
+                    addLog(`🏆 ПОБЕДА! +${track.reward} лв.`); alert(`🏆 ПОБЕДА! Печелиш +${track.reward} лв.`);
                 } else {
-                    // Загуба: губи малка част от ресурсите, ако не са в банката
-                    let lostCash = Math.min(200, state.money);
-                    state.money -= lostCash;
-                    addLog(`❌ ЗАГУБА от ${track.opponent}. Загуби <span class="red">-${lostCash} лв.</span> респект и пари!`);
-                    alert(`❌ ЗАГУБА! Губиш ${lostCash} лв. Съвет: пази парите си в Банката в градския център!`);
+                    let lost = Math.min(200, state.money); state.money -= lost;
+                    addLog(`❌ ЗАГУБА! Губиш ${lost} лв.`); alert(`❌ ЗАГУБА! Губиш ${lost} лв.`);
                 }
                 updateAllUI();
             }, 2300);
