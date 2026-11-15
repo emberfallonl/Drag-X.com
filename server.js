@@ -170,8 +170,8 @@ app.get('/api/shop', async (req, res) => {
     }
 });
 
-// Стартиране на сървъра на порт 3000
-const PORT = 3000;
-app.listen(PORT, () => {
-    console.log(`🚀 DragX бекенд сървърът е стартиран на http://localhost:${PORT}`);
+// Стартиране на сървъра (поддържа и Render, и локално)
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`🚀 DragX бекенд сървърът е стартиран на порт ${PORT}`);
 });
