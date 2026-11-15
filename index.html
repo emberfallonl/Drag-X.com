@@ -80,20 +80,10 @@
             cursor: not-allowed;
         }
 
-        .btn-red {
-            background: #ff3300;
-            color: #fff;
-        }
-
-        .btn-green {
-            background: #16a34a;
-            color: #fff;
-        }
-
-        .btn-gray {
-            background: #33333d;
-            color: #fff;
-        }
+        .btn-red { background: #ff3300; color: #fff; }
+        .btn-green { background: #16a34a; color: #fff; }
+        .btn-gray { background: #33333d; color: #fff; }
+        .btn-blue { background: #2563eb; color: #fff; }
 
         /* СТАТУС БАР */
         .user-stats {
@@ -297,7 +287,7 @@
             color: #fff;
         }
 
-        /* ИСТИНСКА АРЕНА ЗА ГОНКА */
+        /* АРЕНА ЗА ГОНКА */
         .race-arena {
             background: linear-gradient(180deg, #18181f 0%, #0d0d11 100%);
             border: 2px solid #ff3300;
@@ -435,7 +425,7 @@
 
         <div class="user-stats" id="statsSection">
             Пилот: <span id="displayName">User</span> | 
-            Пари: <span id="displayMoney">1500</span> лв. | 
+            Пари: <span id="displayMoney">2500</span> лв. | 
             Гориво: <span id="displayFuel">100</span>/100 ⛽
             <button class="btn btn-gray" onclick="logout()">Изход</button>
         </div>
@@ -444,7 +434,7 @@
     <!-- НАЧАЛЕН ЕКРАН -->
     <div class="hero" id="heroSection">
         <h1>УЛИЧНИ ДРАГ СЪСТЕЗАНИЯ</h1>
-        <p>Тунинговай колата си, излез на 402 метра и докажи кой е най-бързият на старта срещу мощни съперници!</p>
+        <p>Купувай мощни коли, тунинговай ги, излизай на 402 метра и докажи кой е най-бързият!</p>
         <button class="btn btn-green" style="font-size: 16px; padding: 12px 24px;" onclick="demoLogin()">⚡ Бърз Старт (Тест режим)</button>
     </div>
 
@@ -452,6 +442,7 @@
     <div class="dashboard" id="dashboardSection">
         <div class="sidebar">
             <button class="menu-btn active" onclick="switchTab(event, 'tab-garage')">🏎️ Моят Гараж</button>
+            <button class="menu-btn" onclick="switchTab(event, 'tab-dealership')">🏛️ Автосалон (Купи кола)</button>
             <button class="menu-btn" onclick="switchTab(event, 'tab-tuning')">🔧 Тунинг Магазин</button>
             <button class="menu-btn" onclick="switchTab(event, 'tab-tracks')">🏁 Писти & Гонки</button>
             <button class="menu-btn" onclick="switchTab(event, 'tab-shop')">🛒 VIP Магазин</button>
@@ -464,4 +455,409 @@
                 <div class="garage-showcase">
                     <div>
                         <span class="badge badge-rare">АКТИВЕН АВТОМОБИЛ</span>
-                        <h3 id="carNameDisplay" style="font-size: 26px
+                        <h3 id="carNameDisplay" style="font-size: 26px; margin-top: 8px;">Volkswagen Golf 4 1.9 TDI</h3>
+                        <div class="car-specs">
+                            <div class="spec-box">
+                                <small>МОЩНОСТ</small>
+                                <strong id="carHpDisplay">115 к.с.</strong>
+                            </div>
+                            <div class="spec-box">
+                                <small>ТЕГЛО</small>
+                                <strong id="carWeightDisplay">1280 кг</strong>
+                            </div>
+                            <div class="spec-box">
+                                <small>ВРЕМЕ 402м (ОЦЕНКА)</small>
+                                <strong id="carQuarterMileDisplay">16.40 сек.</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="car-visual" id="mainCarEmoji">🚗</div>
+                </div>
+
+                <button class="btn btn-red" onclick="sellCurrentCar()" style="margin-bottom: 20px;">💵 Продай тази кола (+1000 лв.)</button>
+
+                <h3>Монтирани части</h3>
+                <p id="installedPartsList" style="color: #aaa; margin-top: 8px;">Нямаш монтирани тунинг части. Посети Тунинг Магазина!</p>
+            </div>
+
+            <!-- 2. АВТОСАЛОН -->
+            <div id="tab-dealership" class="tab-pane">
+                <h2>Автосалон - Купуване на нови коли</h2>
+                <p style="color: #aaa; margin-bottom: 15px;">Избери следващия си звяр за уличните гонки:</p>
+                <div class="grid" id="dealershipGrid"></div>
+            </div>
+
+            <!-- 3. ТУНИНГ МАГАЗИН -->
+            <div id="tab-tuning" class="tab-pane">
+                <h2>Тунинг Магазин</h2>
+                <div class="grid" id="tuningGrid"></div>
+            </div>
+
+            <!-- 4. ПИСТИ И ГОНКИ -->
+            <div id="tab-tracks" class="tab-pane">
+                <h2>Драг Писта (402 метра)</h2>
+
+                <div class="race-arena">
+                    <div class="traffic-light">
+                        <div class="bulb red" id="lightRed"></div>
+                        <div class="bulb yellow" id="lightYellow"></div>
+                        <div class="bulb green" id="lightGreen"></div>
+                    </div>
+
+                    <div class="track-asphalt">
+                        <div class="finish-line"></div>
+                        
+                        <div class="lane">
+                            <div class="racer-car-container" id="playerCarBox" style="left: 10px;">
+                                <div class="racer-info-tag" id="playerLaneLabel">Голф (115 к.с.)</div>
+                                <div class="car-icon" id="playerCarIcon">🚗</div>
+                            </div>
+                        </div>
+
+                        <div class="lane">
+                            <div class="racer-car-container" id="botCarBox" style="left: 10px;">
+                                <div class="racer-info-tag" id="botLaneLabel">Mercedes (476 к.с.)</div>
+                                <div class="car-icon" id="botCarIcon">🚓</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="race-result-banner" id="raceBanner"></div>
+                </div>
+
+                <h3>Избери съперник (Разход: 10 ⛽)</h3>
+                <div class="grid" id="tracksGrid" style="margin-top: 12px;"></div>
+            </div>
+
+            <!-- 5. VIP МАГАЗИН -->
+            <div id="tab-shop" class="tab-pane">
+                <h2>VIP Магазин & Зареждане</h2>
+                <div class="grid">
+                    <div class="card">
+                        <span class="badge badge-legendary">ГОРИВО</span>
+                        <h3>Туба с 100 Октана</h3>
+                        <p>Възстановява горивото ти на 100/100 веднага.</p>
+                        <button class="btn btn-green" onclick="refuelCar()">Зареди за 200 лв.</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let state = {
+            username: 'УличенПилот',
+            money: 2500,
+            fuel: 100,
+            car: {
+                name: 'Volkswagen Golf 4 1.9 TDI',
+                hp: 115,
+                weight: 1280,
+                icon: '🚗'
+            },
+            installedParts: [],
+            isRacing: false
+        };
+
+        const dealershipCars = [
+            { id: 1, name: 'Volkswagen Golf 4 1.9 TDI', hp: 115, weight: 1280, price: 0, icon: '🚗', badge: 'badge-common' },
+            { id: 2, name: 'BMW E36 325i', hp: 192, weight: 1350, price: 2500, icon: '🏎️', badge: 'badge-rare' },
+            { id: 3, name: 'Audi S3 1.8T Quattro', hp: 240, weight: 1420, price: 5000, icon: '🏎️', badge: 'badge-rare' },
+            { id: 4, name: 'Mercedes-Benz CLS 55 AMG', hp: 476, weight: 1850, price: 12000, icon: '🚓', badge: 'badge-epic' }
+        ];
+
+        const tuningParts = [
+            { id: 1, name: 'Спортен въздушен филтър', rarity: 'Обикновена', badge: 'badge-common', hp: 10, weight: 2, price: 250 },
+            { id: 2, name: 'Stage 1 Чип Тунинг', rarity: 'Рядка', badge: 'badge-rare', hp: 35, weight: 0, price: 600 },
+            { id: 3, name: 'Олекотени 17" Джанти', rarity: 'Рядка', badge: 'badge-rare', hp: 0, weight: 35, price: 750 },
+            { id: 4, name: 'Хибридно Турбо GT2260V', rarity: 'Епична', badge: 'badge-epic', hp: 75, weight: -5, price: 1400 },
+            { id: 5, name: 'Спортно окачване + Слик гуми', rarity: 'Епична', badge: 'badge-epic', hp: 20, weight: 15, price: 1100 },
+            { id: 6, name: 'Нитро система (NOS +120 к.с.)', rarity: 'Легендарна', badge: 'badge-legendary', hp: 120, weight: -10, price: 2800 }
+        ];
+
+        const tracks = [
+            { id: 1, name: 'Околовръстното', opponent: 'Opel Astra 1.6', botHp: 105, botWeight: 1180, botIcon: '🚙', reward: 300 },
+            { id: 2, name: 'Летище Божурище', opponent: 'BMW E36 325i', botHp: 192, botWeight: 1350, botIcon: '🏎️', reward: 650 },
+            { id: 3, name: 'Индустриална зона', opponent: 'Audi S3 1.8T', botHp: 240, botWeight: 1420, botIcon: '🏎️', reward: 1200 },
+            { id: 4, name: 'Битка на титаните', opponent: 'Mercedes CLS 55 AMG', botHp: 476, botWeight: 1850, botIcon: '🚓', reward: 2500 }
+        ];
+
+        function demoLogin() {
+            const inputVal = document.getElementById('usernameInput').value;
+            if (inputVal.trim() !== '') {
+                state.username = inputVal;
+            }
+            enterGame();
+        }
+
+        function login() {
+            demoLogin();
+        }
+
+        function registerUser() {
+            const inputVal = document.getElementById('usernameInput').value;
+            if (inputVal.trim() !== '') {
+                state.username = inputVal;
+            }
+            alert('Успешна регистрация! Добре дошъл в играта.');
+            enterGame();
+        }
+
+        function enterGame() {
+            document.getElementById('heroSection').style.display = 'none';
+            document.getElementById('authSection').style.display = 'none';
+            document.getElementById('statsSection').style.display = 'flex';
+            document.getElementById('dashboardSection').style.display = 'flex';
+            updateUI();
+            renderDealership();
+            renderShop();
+            renderTracks();
+        }
+
+        function logout() {
+            location.reload();
+        }
+
+        function calcQuarterMile(hp, weight) {
+            const ratio = weight / hp;
+            const time = 5.825 * Math.cbrt(ratio);
+            return Number(time.toFixed(2));
+        }
+
+        function updateUI() {
+            document.getElementById('displayName').innerText = state.username;
+            document.getElementById('displayMoney').innerText = state.money;
+            document.getElementById('displayFuel').innerText = state.fuel;
+
+            document.getElementById('carNameDisplay').innerText = state.car.name;
+            document.getElementById('carHpDisplay').innerText = state.car.hp + ' к.с.';
+            document.getElementById('carWeightDisplay').innerText = state.car.weight + ' кг';
+            document.getElementById('carQuarterMileDisplay').innerText = calcQuarterMile(state.car.hp, state.car.weight) + ' сек.';
+            document.getElementById('mainCarEmoji').innerText = state.car.icon;
+
+            document.getElementById('playerLaneLabel').innerText = `${state.username} (${state.car.hp} к.с.)`;
+            document.getElementById('playerCarIcon').innerText = state.car.icon;
+
+            if (state.installedParts.length > 0) {
+                document.getElementById('installedPartsList').innerHTML = state.installedParts
+                    .map(p => `<span class="badge badge-common" style="margin: 3px;">✅ ${p}</span>`)
+                    .join('');
+            } else {
+                document.getElementById('installedPartsList').innerText = 'Нямаш монтирани тунинг части. Посети Тунинг Магазина!';
+            }
+        }
+
+        function renderDealership() {
+            const grid = document.getElementById('dealershipGrid');
+            grid.innerHTML = dealershipCars.map(car => {
+                const isCurrent = state.car.name === car.name;
+                return `
+                    <div class="card">
+                        <div>
+                            <span class="badge ${car.badge}">${car.price === 0 ? 'Безплатна' : car.price + ' лв.'}</span>
+                            <h3 style="margin-top: 8px;">${car.icon} ${car.name}</h3>
+                            <p style="margin-top: 6px;">Мощност: <b>${car.hp} к.с.</b> | Тегло: <b>${car.weight} кг</b></p>
+                        </div>
+                        <button class="btn ${isCurrent ? 'btn-gray' : 'btn-blue'}" 
+                                ${isCurrent ? 'disabled' : ''} 
+                                onclick="buyCar(${car.id})">
+                            ${isCurrent ? 'Активна кола' : 'Купи и избери'}
+                        </button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function buyCar(carId) {
+            const car = dealershipCars.find(c => c.id === carId);
+            if (!car) return;
+            if (state.money < car.price) return alert('Нямаш достатъчно пари за тази кола!');
+
+            state.money -= car.price;
+            state.car = { name: car.name, hp: car.hp, weight: car.weight, icon: car.icon };
+            state.installedParts = []; // Ресет на частите за новата кола
+
+            updateUI();
+            renderDealership();
+            renderShop();
+            alert(`Ти купи и се качи в ${car.name}!`);
+        }
+
+        function sellCurrentCar() {
+            const refund = 1000;
+            state.money += refund;
+            state.car = { name: 'Volkswagen Golf 4 1.9 TDI', hp: 115, weight: 1280, icon: '🚗' };
+            state.installedParts = [];
+            updateUI();
+            renderDealership();
+            renderShop();
+            alert(`Колата беше продадена за ${refund} лв.! Върнахте се на стартовия Golf.`);
+        }
+
+        function renderShop() {
+            const grid = document.getElementById('tuningGrid');
+            grid.innerHTML = tuningParts.map(part => {
+                const owned = state.installedParts.includes(part.name);
+                return `
+                    <div class="card">
+                        <div>
+                            <span class="badge ${part.badge}">${part.rarity}</span>
+                            <h3 style="margin-top: 8px;">${part.name}</h3>
+                            <p style="margin-top: 6px;">
+                                ${part.hp > 0 ? `+${part.hp} к.с. ` : ''}
+                                ${part.weight > 0 ? `-${part.weight} кг облекчение` : ''}
+                            </p>
+                        </div>
+                        <button class="btn ${owned ? 'btn-gray' : 'btn-red'}" 
+                                ${owned ? 'disabled' : ''} 
+                                onclick="buyPart(${part.id})">
+                            ${owned ? 'Монтирано' : `Купи за ${part.price} лв.`}
+                        </button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function buyPart(partId) {
+            const part = tuningParts.find(p => p.id === partId);
+            if (!part) return;
+            if (state.money < part.price) return alert('Нямаш достатъчно пари! Спечели някоя гонка.');
+
+            state.money -= part.price;
+            state.car.hp += part.hp;
+            state.car.weight = Math.max(700, state.car.weight - part.weight);
+            state.installedParts.push(part.name);
+
+            updateUI();
+            renderShop();
+        }
+
+        function renderTracks() {
+            const grid = document.getElementById('tracksGrid');
+            grid.innerHTML = tracks.map(t => `
+                <div class="card">
+                    <div>
+                        <span class="badge badge-common">НАГРАДА: ${t.reward} ЛВ.</span>
+                        <h3 style="margin-top: 8px;">${t.name}</h3>
+                        <p style="margin-top: 6px;">Съперник: <b>${t.opponent}</b> (${t.botHp} к.с.)</p>
+                    </div>
+                    <button class="btn btn-red" onclick="startRace(${t.id})">🏁 СТАРТ НА ГОНКАТА</button>
+                </div>
+            `).join('');
+        }
+
+        function startRace(trackId) {
+            if (state.isRacing) return;
+            if (state.fuel < 10) return alert('Нямаш достатъчно гориво! Зареди от VIP Магазина.');
+
+            const track = tracks.find(t => t.id === trackId);
+            state.isRacing = true;
+            state.fuel -= 10;
+            updateUI();
+
+            const playerBox = document.getElementById('playerCarBox');
+            const botBox = document.getElementById('botCarBox');
+            const banner = document.getElementById('raceBanner');
+            const red = document.getElementById('lightRed');
+            const yellow = document.getElementById('lightYellow');
+            const green = document.getElementById('lightGreen');
+
+            banner.style.display = 'none';
+            playerBox.style.left = '10px';
+            botBox.style.left = '10px';
+            
+            document.getElementById('botLaneLabel').innerText = `${track.opponent} (${track.botHp} к.с.)`;
+            document.getElementById('botCarIcon').innerText = track.botIcon;
+
+            red.className = 'bulb red';
+            yellow.className = 'bulb yellow';
+            green.className = 'bulb green';
+
+            setTimeout(() => { red.classList.add('on'); }, 200);
+            setTimeout(() => { red.classList.remove('on'); yellow.classList.add('on'); }, 900);
+            setTimeout(() => {
+                yellow.classList.remove('on');
+                green.classList.add('on');
+                playerBox.classList.add('burning');
+                botBox.classList.add('burning');
+            }, 1600);
+
+            setTimeout(() => {
+                playerBox.classList.remove('burning');
+                botBox.classList.remove('burning');
+                runCarsAnimation(track);
+            }, 2100);
+        }
+
+        function runCarsAnimation(track) {
+            const playerTime = calcQuarterMile(state.car.hp, state.car.weight);
+            const botTime = calcQuarterMile(track.botHp, track.botWeight) + (Math.random() * 0.25 - 0.12);
+
+            const playerBox = document.getElementById('playerCarBox');
+            const botBox = document.getElementById('botCarBox');
+            const trackWidth = document.querySelector('.track-asphalt').clientWidth - 95;
+
+            const visualScale = 250;
+            const playerDuration = playerTime * visualScale;
+            const botDuration = botTime * visualScale;
+            const startTime = performance.now();
+
+            function animate(now) {
+                const elapsed = now - startTime;
+                const pProgress = Math.min(1, Math.pow(elapsed / playerDuration, 1.35));
+                const bProgress = Math.min(1, Math.pow(elapsed / botDuration, 1.35));
+
+                playerBox.style.left = (10 + pProgress * trackWidth) + 'px';
+                botBox.style.left = (10 + bProgress * trackWidth) + 'px';
+
+                if (pProgress < 1 || bProgress < 1) {
+                    requestAnimationFrame(animate);
+                } else {
+                    finishRace(track, playerTime, Number(botTime.toFixed(2)));
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        function finishRace(track, playerTime, botTime) {
+            state.isRacing = false;
+            const banner = document.getElementById('raceBanner');
+            const won = playerTime <= botTime;
+
+            banner.style.display = 'block';
+            if (won) {
+                state.money += track.reward;
+                banner.className = 'race-result-banner win-banner';
+                banner.innerHTML = `🏆 ПОБЕДА! Твоето време: ${playerTime} сек. | ${track.opponent}: ${botTime} сек. (+${track.reward} лв.)`;
+            } else {
+                banner.className = 'race-result-banner lose-banner';
+                banner.innerHTML = `❌ ЗАГУБА! Твоето време: ${playerTime} сек. | ${track.opponent}: ${botTime} сек. Тунинговай колата в гаража!`;
+            }
+
+            updateUI();
+        }
+
+        function refuelCar() {
+            if (state.money < 200) return alert('Нямаш 200 лв. за гориво!');
+            state.money -= 200;
+            state.fuel = 100;
+            updateUI();
+            alert('Резервоарът е зареден на 100%! ⛽');
+        }
+
+        function switchTab(event, tabId) {
+            document.querySelectorAll('.tab-pane').forEach(p => {
+                p.style.display = 'none';
+                p.classList.remove('active');
+            });
+            document.querySelectorAll('.menu-btn').forEach(b => b.classList.remove('active'));
+
+            const target = document.getElementById(tabId);
+            target.style.display = 'block';
+            target.classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
