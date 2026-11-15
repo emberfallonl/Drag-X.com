@@ -12,7 +12,6 @@
             font-family: Tahoma, Arial, sans-serif;
         }
 
-        /* КЛАСИЧЕСКИ ТЪМЕН СЪСТЕЗАТЕЛЕН ФОН */
         body {
             background-color: #09090b;
             background-image: 
@@ -28,7 +27,6 @@
             align-items: center;
         }
 
-        /* ГОРНА ИЗВЕСТИЕ ЛЕНТА */
         .top-ticker {
             width: 100%;
             max-width: 1180px;
@@ -42,7 +40,6 @@
             text-shadow: 1px 1px 2px #000;
         }
 
-        /* ОСНОВЕН КОНТЕЙНЕР НА ИГРАТА */
         .game-wrapper {
             width: 100%;
             max-width: 1180px;
@@ -56,7 +53,6 @@
             min-height: calc(100vh - 26px);
         }
 
-        /* ================= ГОРЕН HEADER ================= */
         .game-header {
             display: grid;
             grid-template-columns: 230px 1fr 240px;
@@ -99,7 +95,6 @@
         .vip-links a { color: #18181b; text-decoration: none; cursor: pointer; }
         .vip-links a:hover { text-decoration: underline; color: #fff; }
 
-        /* ================= НАЧАЛЕН ЕКРАН ЗА ВХОД ================= */
         .login-screen {
             flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;
             padding: 40px 20px; text-align: center; background: radial-gradient(circle, rgba(255,51,0,0.12) 0%, rgba(18,18,21,0.98) 70%);
@@ -111,10 +106,8 @@
         .login-box input { padding: 10px; background: #111115; border: 1px solid #3f3f46; color: #fff; border-radius: 4px; outline: none; }
         .login-box input:focus { border-color: #ff3300; }
 
-        /* ================= 3-КОЛОНЕН ИГРОВ ИНТЕРФЕЙС ================= */
         .main-layout { display: none; grid-template-columns: 205px 1fr 245px; flex: 1; }
 
-        /* 1. ЛЯВО МЕНЮ */
         .left-sidebar { background: #141418; border-right: 1px solid #27272a; display: flex; flex-direction: column; }
         .nav-item {
             display: flex; align-items: center; gap: 10px; padding: 9px 12px;
@@ -126,7 +119,6 @@
         .nav-item.active { background: linear-gradient(90deg, #b91c1c 0%, #7f1d1d 100%); color: #fff; border-left: 3px solid #facc15; }
         .nav-icon { width: 22px; text-align: center; font-size: 15px; }
 
-        /* 2. ЦЕНТРАЛНА ЧАСТ */
         .center-stage { display: flex; flex-direction: column; background: #18181d; justify-content: space-between; }
         .center-topbar { background: #111115; border-bottom: 1px solid #27272a; padding: 6px 12px; display: flex; justify-content: space-between; font-size: 11px; color: #a1a1aa; }
         .center-topbar span strong { color: #ff5500; }
@@ -145,16 +137,13 @@
             box-shadow: 0 0 15px rgba(255, 51, 0, 0.2);
         }
         .garage-car-img-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.3s; }
-        .garage-car-img-box:hover img { transform: scale(1.03); }
 
-        /* ДОЛЕН ЛОГ СЪС СЪБИТИЯ */
         .event-log { background: #0d0d10; border-top: 2px solid #27272a; padding: 8px 12px; height: 95px; overflow-y: auto; font-size: 11px; display: flex; flex-direction: column; gap: 4px; }
         .log-entry { color: #d4d4d8; border-bottom: 1px dashed #222; padding-bottom: 2px; }
         .log-entry .gold { color: #facc15; font-weight: bold; }
         .log-entry .green { color: #4ade80; font-weight: bold; }
         .log-entry .red { color: #f87171; font-weight: bold; }
 
-        /* 3. ДЯСНА КОЛОНА */
         .right-sidebar { background: #141418; border-left: 1px solid #27272a; padding: 10px; display: flex; flex-direction: column; gap: 10px; }
         .profile-card { background: #1c1c22; border: 1px solid #32323c; border-radius: 5px; padding: 8px; }
         .profile-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #2e2e36; padding-bottom: 5px; margin-bottom: 8px; }
@@ -184,7 +173,6 @@
         .part-slot {
             aspect-ratio: 1 / 1; background: #111115; border: 1px dashed #3f3f46; border-radius: 4px;
             display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 18px; color: #52525b; text-align: center; padding: 2px;
-            cursor: default; transition: 0.2s;
         }
         .part-slot.equipped { border: 1px solid #ff3300; background: #231715; color: #fff; box-shadow: inset 0 0 8px rgba(255, 51, 0, 0.4); }
         .part-slot span { font-size: 9px; margin-top: 2px; line-height: 1; }
@@ -208,14 +196,12 @@
         .item-card h4 { font-size: 14px; color: #fff; }
         .item-card p { font-size: 12px; color: #a1a1aa; }
 
-        /* НЕОНОВ БЛЯСЪК ЗА ЧЕРНИЯ ПАЗАР */
         .black-market-card {
             border: 1px solid #eab308 !important;
             background: linear-gradient(135deg, #201a11 0%, #202027 100%);
             box-shadow: 0 0 10px rgba(234, 179, 8, 0.15);
         }
 
-        /* АРЕНА ЗА ГОНКА С ЕФЕКТ НА ТРЕСЕНЕ */
         .xpr0-battle-arena {
             background: linear-gradient(180deg, #181822 0%, #0b0b0e 100%);
             border: 2px solid #ff3300;
@@ -246,34 +232,9 @@
         .bulb.yellow.on { background: #eab308; box-shadow: 0 0 18px #eab308; }
         .bulb.green.on { background: #22c55e; box-shadow: 0 0 18px #22c55e; }
 
-        .battle-display {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            gap: 20px;
-            margin-top: 10px;
-        }
-
-        .fighter-box {
-            background: #14141a;
-            border: 1px solid #333;
-            border-radius: 6px;
-            padding: 12px;
-            width: 45%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .fighter-img {
-            width: 100%;
-            height: 140px;
-            object-fit: cover;
-            border-radius: 4px;
-            border: 1px solid #ff3300;
-            background: #000;
-        }
+        .battle-display { display: flex; justify-content: space-around; align-items: center; gap: 20px; margin-top: 10px; }
+        .fighter-box { background: #14141a; border: 1px solid #333; border-radius: 6px; padding: 12px; width: 45%; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .fighter-img { width: 100%; height: 140px; object-fit: cover; border-radius: 4px; border: 1px solid #ff3300; background: #000; }
 
         @keyframes revEngine {
             0%, 100% { transform: scale(1); }
@@ -281,7 +242,6 @@
         }
         .revving { animation: revEngine 0.12s infinite; }
 
-        /* МОДАЛНИ ПРОЗОРЦИ */
         .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 100; justify-content: center; align-items: center; }
         .modal-box { background: #1c1c22; border: 2px solid #facc15; padding: 20px; border-radius: 8px; width: 90%; max-width: 380px; display: flex; flex-direction: column; gap: 12px; }
         .modal-box input, .modal-box select { padding: 8px; background: #111; border: 1px solid #444; color: #fff; border-radius: 4px; }
@@ -290,7 +250,7 @@
 <body>
 
     <div class="top-ticker">
-        🔥 Добре дошъл в DRAGX! Отборни битки от Ниво 12 и Черен пазар изцяло с играчи! 🏎️💨
+        🔥 Добре дошъл в DRAGX! Улични състезания, отбори, банка, вестник и казино! 🏎️💨
     </div>
 
     <div class="game-wrapper">
@@ -343,7 +303,7 @@
         <!-- ЕКРАН ЗА ВХОД -->
         <div class="login-screen" id="loginScreen">
             <h1 style="color: #ff3300; font-size: 32px; margin-bottom: 8px;">ВЛЕЗ НА УЛИЦАТА</h1>
-            <p style="color: #a1a1aa; margin-bottom: 20px; font-size: 14px;">Създай отбор, търгувай части на Черния пазар и стани №1!</p>
+            <p style="color: #a1a1aa; margin-bottom: 20px; font-size: 14px;">Банка, казино, отбори, вестник и тунинг — всичко на едно място!</p>
             
             <div class="login-box">
                 <input type="text" id="usernameInput" placeholder="Име на пилота (напр. StreetRacer)">
@@ -353,23 +313,26 @@
             </div>
         </div>
 
-        <!-- ОСНОВЕН 3-КОЛОНЕН ИНТЕРФЕЙС -->
+        <!-- ОСНОВЕН ИНТЕРФЕЙС -->
         <div class="main-layout" id="mainLayout">
             
-            <!-- 1. ЛЯВО МЕНЮ -->
+            <!-- ЛЯВО МЕНЮ -->
             <aside class="left-sidebar">
                 <button class="nav-item active" onclick="switchTab(event, 'tab-garage')"><span class="nav-icon">🏠</span> Моят Гараж</button>
                 <button class="nav-item" onclick="switchTab(event, 'tab-tracks')"><span class="nav-icon">🏁</span> Улицата & Гонки</button>
                 <button class="nav-item" onclick="switchTab(event, 'tab-tuning')"><span class="nav-icon">🔧</span> Тунинг Сервиз</button>
                 <button class="nav-item" onclick="switchTab(event, 'tab-dealership')"><span class="nav-icon">🏛️</span> Автосалон</button>
                 <button class="nav-item" onclick="switchTab(event, 'tab-blackmarket')"><span class="nav-icon">🕶️</span> Черен Пазар</button>
-                <button class="nav-item" onclick="switchTab(event, 'tab-crews')"><span class="nav-icon">👥</span> Отбори (Клубове)</button>
+                <button class="nav-item" onclick="switchTab(event, 'tab-city')"><span class="nav-icon">🏙️</span> Град (Банка)</button>
+                <button class="nav-item" onclick="switchTab(event, 'tab-casino')"><span class="nav-icon">🎲</span> Казино</button>
+                <button class="nav-item" onclick="switchTab(event, 'tab-newspaper')"><span class="nav-icon">📰</span> Вестник</button>
+                <button class="nav-item" onclick="switchTab(event, 'tab-crews')"><span class="nav-icon">👥</span> Отбори</button>
                 <button class="nav-item" onclick="switchTab(event, 'tab-ranking')"><span class="nav-icon">🏆</span> Класация</button>
                 <button class="nav-item" onclick="switchTab(event, 'tab-vip')"><span class="nav-icon">💎</span> VIP Магазин</button>
                 <button class="nav-item" onclick="logout()" style="margin-top: auto; color: #f87171;"><span class="nav-icon">🚪</span> Изход</button>
             </aside>
 
-            <!-- 2. ЦЕНТРАЛНА ЧАСТ -->
+            <!-- ЦЕНТРАЛНА ЧАСТ -->
             <main class="center-stage">
                 <div class="center-topbar">
                     <span>Активна кола: <strong id="topCarName">VW Golf 4 1.9 TDI</strong></span>
@@ -377,7 +340,7 @@
                 </div>
 
                 <div class="center-content">
-                    <!-- ТАБ: ГАРАЖ -->
+                    <!-- ГАРАЖ -->
                     <div id="tab-garage" class="tab-pane active">
                         <div class="section-title">
                             <span>🏠 Моят Гараж</span>
@@ -399,11 +362,11 @@
                         <h4 style="font-size: 13px; color: #a1a1aa; margin-bottom: 8px;">Бързи действия:</h4>
                         <div style="display: flex; gap: 10px;">
                             <button class="btn btn-green" onclick="switchTab(null, 'tab-tracks')">🏁 Излез на пистата</button>
-                            <button class="btn btn-blue" onclick="switchTab(null, 'tab-tuning')">🔧 Отиди в Тунинг сервиза</button>
+                            <button class="btn btn-blue" onclick="switchTab(null, 'tab-tuning')">🔧 Тунинг сервиз</button>
                         </div>
                     </div>
 
-                    <!-- ТАБ: УЛИЦАТА И ГОНКИ -->
+                    <!-- ГОНКИ -->
                     <div id="tab-tracks" class="tab-pane">
                         <div class="section-title">
                             <span>🏁 Улични Драг Битки</span>
@@ -435,35 +398,82 @@
                         <div class="cards-grid" id="tracksGrid"></div>
                     </div>
 
-                    <!-- ТАБ: ТУНИНГ СЕРВИЗ -->
+                    <!-- ТУНИНГ -->
                     <div id="tab-tuning" class="tab-pane">
-                        <div class="section-title"><span>🔧 Тунинг Сервиз (Части за твоята кола)</span></div>
+                        <div class="section-title"><span>🔧 Тунинг Сервиз</span></div>
                         <div class="cards-grid" id="tuningGrid"></div>
                     </div>
 
-                    <!-- ТАБ: АВТОСАЛОН -->
+                    <!-- АВТОСАЛОН (С ПОКУПКА С ПАРИ ИЛИ КРЕДИТИ) -->
                     <div id="tab-dealership" class="tab-pane">
-                        <div class="section-title"><span>🏛️ Автосалон - Купи нов автомобил</span></div>
+                        <div class="section-title"><span>🏛️ Автосалон (Купи с Лева или Кредити)</span></div>
                         <div class="cards-grid" id="dealershipGrid"></div>
                     </div>
 
-                    <!-- ТАБ: ЧЕРЕН ПАЗАР (САМО ОТ ИГРАЧИ) -->
+                    <!-- ЧЕРЕН ПАЗАР -->
                     <div id="tab-blackmarket" class="tab-pane">
                         <div class="section-title">
-                            <span>🕶️ Черен Пазар (Обяви от реални играчи)</span>
-                            <button class="btn btn-gold" onclick="openSellModal()">➕ Пусни част за продажба</button>
+                            <span>🕶️ Черен Пазар (Обяви от играчи)</span>
+                            <button class="btn btn-gold" onclick="openSellModal()">➕ Пусни част</button>
                         </div>
-                        <p style="font-size: 12px; color: #a1a1aa; margin-bottom: 12px;">Тук играчите продават тунинг части и оборудване, които са спечелили или купили.</p>
                         <div class="cards-grid" id="playerMarketGrid"></div>
                     </div>
 
-                    <!-- ТАБ: ОТБОРИ / КЛУБОВЕ (ОТ НИВО 12) -->
+                    <!-- ГРАД И БАНКА -->
+                    <div id="tab-city" class="tab-pane">
+                        <div class="section-title"><span>🏙️ Градски център & Банка</span></div>
+                        <div style="background: #121216; border: 1px solid #32323c; border-radius: 6px; padding: 18px; margin-bottom: 16px;">
+                            <h3 style="color: #4ade80; margin-bottom: 6px;">🏦 Улична Банка</h3>
+                            <p style="font-size: 12px; color: #a1a1aa; margin-bottom: 12px;">Дръж парите си тук, за да не ти ги взимат при загуба на улицата!</p>
+                            <p style="font-size: 13px; margin-bottom: 8px;">Пари в банката: <b style="color: #4ade80;" id="bankMoneyText">0 лв.</b></p>
+                            <div style="display: flex; gap: 8px; margin-bottom: 14px;">
+                                <input type="number" id="bankAmount" placeholder="Сума" style="padding: 6px; background: #111; border: 1px solid #444; color:#fff; border-radius:4px;">
+                                <button class="btn btn-green" onclick="bankDeposit()">Внеси</button>
+                                <button class="btn btn-blue" onclick="bankWithdraw()">Тегли</button>
+                            </div>
+                            <hr style="border-color: #333; margin: 12px 0;">
+                            <h4 style="color: #facc15; margin-bottom: 6px;">💳 Бърз заем</h4>
+                            <p style="font-size: 12px; color: #a1a1aa; margin-bottom: 8px;">Вземи заем от 5000 лв., за да тунингуваш колата си веднага!</p>
+                            <button class="btn btn-gold" onclick="takeLoan()">Вземи заем (5000 лв.)</button>
+                        </div>
+                    </div>
+
+                    <!-- КАЗИНО -->
+                    <div id="tab-casino" class="tab-pane">
+                        <div class="section-title"><span>🎲 Казино "Лас Вегас"</span></div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                            <div style="background: #121216; border: 1px solid #32323c; border-radius: 6px; padding: 16px;">
+                                <h4>🎲 Игра на Зарове</h4>
+                                <p style="font-size: 12px; color: #a1a1aa; margin: 6px 0;">Ако хвърлиш над 4, печелиш двойно!</p>
+                                <button class="btn btn-gold" onclick="playDice()">Заложи 300 лв. и хвърли</button>
+                            </div>
+                            <div style="background: #121216; border: 1px solid #32323c; border-radius: 6px; padding: 16px;">
+                                <h4>🎰 Рулетка (Червено/Черно)</h4>
+                                <p style="font-size: 12px; color: #a1a1aa; margin: 6px 0;">Познай печелившия цвят за двойна печалба.</p>
+                                <button class="btn btn-green" onclick="playRoulette('red')">Заложи 500 лв. на Червено</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ВЕСТНИК -->
+                    <div id="tab-newspaper" class="tab-pane">
+                        <div class="section-title"><span>📰 Уличен Вестник & Обяви</span></div>
+                        <div style="background: #121216; border: 1px solid #32323c; border-radius: 6px; padding: 14px; font-size: 13px; line-height: 1.5;">
+                            <h4 style="color: #facc15; margin-bottom: 4px;">📰 Брой №1 на "Драг Хроники"</h4>
+                            <p style="color: #ccc; margin-bottom: 10px;">Световните новини от подземните гонки разтърсиха столицата! Отборите се стягат за грандиозен шампионат в стил Формула 1.</p>
+                            <hr style="border-color: #333; margin: 8px 0;">
+                            <p><b>Обява от TurboKing:</b> Търся опитен пилот за отбора Street Kings. Изискване: над 200 к.с.</p>
+                            <p><b>Обява от Полицията:</b> Засилени патрули около Околовръстното тази вечер!</p>
+                        </div>
+                    </div>
+
+                    <!-- ОТБОРИ / КЛУБОВЕ (ОТ НИВО 12) -->
                     <div id="tab-crews" class="tab-pane">
-                        <div class="section-title"><span>👥 Отбори & Клубни битки (От Ниво 12)</span></div>
+                        <div class="section-title"><span>👥 Отбори & Формула 1 Клубове (От Ниво 12)</span></div>
                         <div id="crewContentArea"></div>
                     </div>
 
-                    <!-- ТАБ: КЛАСАЦИЯ -->
+                    <!-- КЛАСАЦИЯ -->
                     <div id="tab-ranking" class="tab-pane">
                         <div class="section-title"><span>🏆 Топ Пилоти на Сървъра</span></div>
                         <div style="background: #121216; border: 1px solid #32323c; border-radius: 6px; padding: 12px; font-size: 13px;">
@@ -473,7 +483,7 @@
                         </div>
                     </div>
 
-                    <!-- ТАБ: VIP МАГАЗИН -->
+                    <!-- VIP МАГАЗИН -->
                     <div id="tab-vip" class="tab-pane">
                         <div class="section-title"><span>💎 VIP Магазин & Екстри</span></div>
                         <div class="cards-grid">
@@ -483,8 +493,8 @@
                                 <button class="btn btn-green" onclick="refuelMoney()">Купи за 200 лв.</button>
                             </div>
                             <div class="item-card">
-                                <h4>📢 VIP Обява на началната лента</h4>
-                                <p>Пусни реклама най-горе, за да я видят всички играчи!</p>
+                                <h4>📢 VIP Обява на лентата</h4>
+                                <p>Пусни реклама най-горе за всички играчи.</p>
                                 <button class="btn btn-gold" onclick="openAdModal()">Пусни за 5 Кредита</button>
                             </div>
                             <div class="item-card">
@@ -496,19 +506,19 @@
                     </div>
                 </div>
 
-                <!-- ДОЛЕН ЛОГ СЪС СЪБИТИЯ -->
+                <!-- ЛОГ -->
                 <div class="event-log" id="eventLog">
-                    <div class="log-entry">🏁 Добре дошъл в <span class="gold">DragX</span>! Отборната система се отваря на Ниво 12.</div>
+                    <div class="log-entry">🏁 Добре дошъл в <span class="gold">DragX</span>! Посети банката в града, за да пазиш парите си.</div>
                 </div>
             </main>
 
-            <!-- 3. ДЯСНА КОЛОНА -->
+            <!-- ДЯСНА КОЛОНА -->
             <aside class="right-sidebar">
                 <div class="profile-card">
                     <div class="profile-header">
                         <div>
                             <div class="profile-name" id="sideUsername">Пилот</div>
-                            <div class="profile-status">● На линия / В гаража</div>
+                            <div class="profile-status">● На линия</div>
                         </div>
                         <span style="background: #27272a; padding: 2px 6px; border-radius: 3px; font-size: 11px; color: #facc15;">Ниво <b id="sideLevel">1</b></span>
                     </div>
@@ -536,7 +546,7 @@
                 </div>
 
                 <div class="car-slots-box">
-                    <div class="car-slots-title">Монтирани части (6 слота)</div>
+                    <div class="car-slots-title">Монтирани части</div>
                     <div class="slots-grid" id="slotsGrid">
                         <div class="part-slot">🌀<span>Турбо</span></div>
                         <div class="part-slot">💻<span>Чип</span></div>
@@ -547,16 +557,14 @@
                     </div>
                 </div>
             </aside>
-
         </div>
     </div>
 
-    <!-- МОДАЛЕН ПРОЗОРЕЦ ЗА ПУСКАНЕ НА ОБЯВА (ОБЯВИ ОТ ИГРАЧИ НА ЧЕРНИЯ ПАЗАР) -->
+    <!-- МОДАЛИ -->
     <div class="modal-overlay" id="adModal">
         <div class="modal-box">
-            <h3 style="color: #facc15; font-size: 16px;">📢 Пусни VIP Обява най-горе</h3>
-            <p style="font-size: 12px; color: #ccc;">Обявата ти ще се появи пред всички играчи! Цена: <b>5 Кредита</b>.</p>
-            <input type="text" id="adInputText" maxlength="75" placeholder="Напр: Продавам рядко Нитро +120 к.с.!">
+            <h3 style="color: #facc15; font-size: 16px;">📢 Пусни VIP Обява</h3>
+            <input type="text" id="adInputText" maxlength="75" placeholder="Текст на обявата...">
             <div style="display: flex; gap: 8px; justify-content: flex-end;">
                 <button class="btn btn-gray" onclick="closeAdModal()">Отказ</button>
                 <button class="btn btn-gold" onclick="publishPlayerAd()">Публикувай</button>
@@ -564,16 +572,14 @@
         </div>
     </div>
 
-    <!-- МОДАЛЕН ПРОЗОРЕЦ ЗА ПРОДАЖБА НА ЧАСТ НА ЧЕРНИЯ ПАЗАР -->
     <div class="modal-overlay" id="sellPartModal">
         <div class="modal-box">
-            <h3 style="color: #facc15; font-size: 16px;">🕶️ Пусни част на Черния пазар</h3>
-            <p style="font-size: 12px; color: #ccc;">Продай тунинг част или оборудване на друг играч.</p>
-            <input type="text" id="sellPartName" placeholder="Име на частта (напр. Хибридно Турбо)">
-            <input type="number" id="sellPartPrice" placeholder="Цена в лв. (напр. 1200)">
+            <h3 style="color: #facc15; font-size: 16px;">🕶️ Продай част</h3>
+            <input type="text" id="sellPartName" placeholder="Име на частта">
+            <input type="number" id="sellPartPrice" placeholder="Цена в лв.">
             <div style="display: flex; gap: 8px; justify-content: flex-end;">
                 <button class="btn btn-gray" onclick="closeSellModal()">Отказ</button>
-                <button class="btn btn-gold" onclick="confirmSellPart()">Публикувай обява</button>
+                <button class="btn btn-gold" onclick="confirmSellPart()">Публикувай</button>
             </div>
         </div>
     </div>
@@ -582,12 +588,14 @@
         let state = {
             username: 'УличенПилот',
             money: 2500,
+            bankMoney: 0,
             credits: 25,
             fuel: 100,
             xp: 10,
             level: 1,
             wins: 0,
-            myCrew: null, // Името на отбора, ако е влязъл
+            myCrew: null,
+            myRole: null, // Роля в отбора (напр. Пилот, Механик, Капитан)
             car: {
                 name: 'Volkswagen Golf 4 1.9 TDI',
                 hp: 115,
@@ -598,17 +606,12 @@
             isRacing: false
         };
 
-        // Черният пазар с обяви от самите играчи
         let playerMarketList = [
-            { id: 1, seller: 'TurboKing', itemName: 'Спортен филтър (+10 к.с.)', price: 300 },
-            { id: 2, seller: 'DriftMaster', itemName: 'Stage 1 Чип (+35 к.с.)', price: 750 },
-            { id: 3, seller: 'StreetLegend', itemName: 'Хибридно Турбо (+75 к.с.)', price: 1500 }
+            { id: 1, seller: 'TurboKing', itemName: 'Спортен филтър (+10 к.с.)', price: 300 }
         ];
 
-        // Списък с отбори в играта
         let crewsList = [
-            { id: 1, name: 'Street Kings', leader: 'TurboKing', members: 4, points: 1450 },
-            { id: 2, name: 'Night Racers', leader: 'DriftMaster', members: 3, points: 980 }
+            { id: 1, name: 'Street Kings F1', leader: 'TurboKing', members: 4, points: 1450 }
         ];
 
         const tuningParts = [
@@ -620,10 +623,10 @@
         ];
 
         const dealershipCars = [
-            { id: 1, name: 'Volkswagen Golf 4 1.9 TDI', hp: 115, weight: 1280, price: 0, image: 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=800&q=80' },
-            { id: 2, name: 'BMW E36 325i', hp: 192, weight: 1350, price: 2500, image: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=800&q=80' },
-            { id: 3, name: 'Audi S3 1.8T Quattro', hp: 240, weight: 1420, price: 5000, image: 'https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=800&q=80' },
-            { id: 4, name: 'Mercedes-Benz CLS 55 AMG', hp: 476, weight: 1850, price: 12000, image: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80' }
+            { id: 1, name: 'Volkswagen Golf 4 1.9 TDI', hp: 115, weight: 1280, price: 0, credits: 0, image: 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=800&q=80' },
+            { id: 2, name: 'BMW E36 325i', hp: 192, weight: 1350, price: 2500, credits: 15, image: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=800&q=80' },
+            { id: 3, name: 'Audi S3 1.8T Quattro', hp: 240, weight: 1420, price: 5000, credits: 30, image: 'https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=800&q=80' },
+            { id: 4, name: 'Mercedes-Benz CLS 55 AMG', hp: 476, weight: 1850, price: 12000, credits: 75, image: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80' }
         ];
 
         const tracks = [
@@ -636,10 +639,8 @@
         function enterGame() {
             const val = document.getElementById('usernameInput').value.trim();
             if (val) state.username = val;
-
             document.getElementById('loginScreen').style.display = 'none';
             document.getElementById('mainLayout').style.display = 'grid';
-
             updateAllUI();
             renderAllGrids();
             addLog(`Добре дошъл на улицата, <span class="gold">${state.username}</span>!`);
@@ -667,6 +668,7 @@
             document.getElementById('sideHp').innerText = state.car.hp + ' к.с.';
             document.getElementById('sideWins').innerText = state.wins;
             document.getElementById('vipCreditsBadge').innerText = state.credits + ' КР.';
+            document.getElementById('bankMoneyText').innerText = state.bankMoney + ' лв.';
 
             document.getElementById('fuelText').innerText = `${state.fuel}/100`;
             document.getElementById('fuelBar').style.width = `${state.fuel}%`;
@@ -717,9 +719,8 @@
                 `;
             }).join('');
 
-            // Рендиране на обявите от играчи на Черния пазар
             document.getElementById('playerMarketGrid').innerHTML = playerMarketList.length === 0 ? 
-                `<p style="color:#a1a1aa; font-size:13px;">Няма активни обяви от играчи в момента.</p>` :
+                `<p style="color:#a1a1aa; font-size:13px;">Няма активни обяви.</p>` :
                 playerMarketList.map(item => `
                     <div class="item-card black-market-card">
                         <h4>🔥 ${item.itemName}</h4>
@@ -728,6 +729,7 @@
                     </div>
                 `).join('');
 
+            // Автосалон с покупка с пари или кредити
             document.getElementById('dealershipGrid').innerHTML = dealershipCars.map(c => {
                 const isCur = state.car.name === c.name;
                 return `
@@ -735,9 +737,14 @@
                         <img src="${c.image}" alt="${c.name}">
                         <h4>${c.name}</h4>
                         <p>Мощност: <b>${c.hp} к.с.</b> | Тегло: <b>${c.weight} кг</b></p>
-                        <button class="btn ${isCur ? 'btn-gray' : 'btn-blue'}" ${isCur ? 'disabled' : ''} onclick="buyCar(${c.id})">
-                            ${isCur ? 'Активна кола' : `Купи (${c.price} лв.)`}
-                        </button>
+                        <div style="display: flex; gap: 4px; margin-top: 6px;">
+                            <button class="btn ${isCur ? 'btn-gray' : 'btn-blue'}" ${isCur ? 'disabled' : ''} onclick="buyCar(${c.id}, 'money')" style="flex:1;">
+                                ${isCur ? 'Активна' : `${c.price} лв.`}
+                            </button>
+                            <button class="btn ${isCur ? 'btn-gray' : 'btn-gold'}" ${isCur ? 'disabled' : ''} onclick="buyCar(${c.id}, 'credits')" style="flex:1;">
+                                ${c.credits} Кр.
+                            </button>
+                        </div>
                     </div>
                 `;
             }).join('');
@@ -752,46 +759,70 @@
             `).join('');
         }
 
-        // Логика за Черния пазар (покупка/продажба от играчи)
-        function openSellModal() { document.getElementById('sellPartModal').style.display = 'flex'; }
-        function closeSellModal() { document.getElementById('sellPartModal').style.display = 'none'; }
-
-        function confirmSellPart() {
-            const name = document.getElementById('sellPartName').value.trim();
-            const price = Number(document.getElementById('sellPartPrice').value);
-            if (!name || !price || price <= 0) return alert('Моля, въведи валидно име и цена!');
-
-            playerMarketList.push({ id: Date.now(), seller: state.username, itemName: name, price: price });
-            document.getElementById('sellPartName').value = '';
-            document.getElementById('sellPartPrice').value = '';
-            closeSellModal();
-            addLog(`Пусна обява на Черния пазар за <span class="gold">${name}</span> (${price} лв.)!`);
-            renderAllGrids();
-        }
-
-        function buyPlayerPart(id) {
-            const index = playerMarketList.findIndex(x => x.id === id);
-            if (index === -1) return;
-            const item = playerMarketList[index];
-
-            if (state.money < item.price) return alert('Нямаш достатъчно пари за тази част!');
-            state.money -= item.price;
-            state.car.hp += 20; // Бонус конски сили от купената част
-            playerMarketList.splice(index, 1);
-
-            addLog(`Купи от Черния пазар <span class="gold">${item.itemName}</span> от ${item.seller}! (+20 к.с.)`);
+        // Банка логика
+        function bankDeposit() {
+            const amt = Number(document.getElementById('bankAmount').value);
+            if (!amt || amt <= 0 || amt > state.money) return alert('Невалидна сума!');
+            state.money -= amt;
+            state.bankMoney += amt;
+            addLog(`Внесе <span class="green">${amt} лв.</span> в банката.`);
             updateAllUI();
-            renderAllGrids();
         }
 
-        // Логика за Отбори (От Ниво 12)
+        function bankWithdraw() {
+            const amt = Number(document.getElementById('bankAmount').value);
+            if (!amt || amt <= 0 || amt > state.bankMoney) return alert('Невалидна сума!');
+            state.bankMoney -= amt;
+            state.money += amt;
+            addLog(`Изтегли <span class="green">${amt} лв.</span> от банката.`);
+            updateAllUI();
+        }
+
+        function takeLoan() {
+            state.money += 5000;
+            addLog(`Взе банков заем от <span class="gold">5000 лв.</span>!`);
+            updateAllUI();
+        }
+
+        // Казино логика
+        function playDice() {
+            if (state.money < 300) return alert('Нямаш 300 лв. за залог!');
+            state.money -= 300;
+            const roll = Math.floor(Math.random() * 6) + 1;
+            if (roll > 3) {
+                state.money += 600;
+                addLog(`🎲 Казино (Зарове): Хвърли ${roll} и спечели <span class="green">+600 лв.</span>!`);
+                alert(`🎲 Печелиш! Хвърли ${roll}. Печелиш 600 лв.`);
+            } else {
+                addLog(`🎲 Казино (Зарове): Хвърли ${roll} и загуби 300 лв.`);
+                alert(`🎲 Загуба! Хвърли ${roll}.`);
+            }
+            updateAllUI();
+        }
+
+        function playRoulette(choice) {
+            if (state.money < 500) return alert('Нямаш 500 лв. за рулетка!');
+            state.money -= 500;
+            const win = Math.random() < 0.5;
+            if (win) {
+                state.money += 1000;
+                addLog(`🎰 Казино (Рулетка): Топката падна на печеливш цвят! <span class="green">+1000 лв.</span>`);
+                alert(`🎰 Печелиш на рулетката (+1000 лв.)!`);
+            } else {
+                addLog(`🎰 Казино (Рулетка): Топката падна на грешен цвят. Загуба 500 лв.`);
+                alert(`🎰 Загуби на рулетката.`);
+            }
+            updateAllUI();
+        }
+
+        // Отбори (Ф1 стил от Ниво 12)
         function renderCrewsUI() {
             const area = document.getElementById('crewContentArea');
             if (state.level < 12) {
                 area.innerHTML = `
                     <div style="background: #121216; border: 1px solid #32323c; border-radius: 6px; padding: 25px; text-align: center;">
                         <h3 style="color: #f87171; font-size: 18px; margin-bottom: 8px;">🔒 Отборите са заключени!</h3>
-                        <p style="color: #a1a1aa; font-size: 13px;">Трябва да достигнеш поне <b>Ниво 12</b>, за да участваш в отборни битки и клубове.</p>
+                        <p style="color: #a1a1aa; font-size: 13px;">Трябва да достигнеш поне <b>Ниво 12</b> за участие в отбори и Формула 1 клубове.</p>
                         <p style="color: #facc15; font-size: 12px; margin-top: 10px;">Текущо ниво: ${state.level} / 12</p>
                     </div>
                 `;
@@ -802,29 +833,28 @@
             if (!state.myCrew) {
                 crewHtml = `
                     <div style="background: #121216; border: 1px solid #32323c; border-radius: 6px; padding: 15px; margin-bottom: 15px;">
-                        <h4 style="color: #fff; margin-bottom: 8px;">🏰 Създай собствен отбор (Цена: 5000 лв.)</h4>
+                        <h4 style="color: #fff; margin-bottom: 8px;">🏰 Създай F1 Отбор (5000 лв.)</h4>
                         <div style="display: flex; gap: 8px;">
-                            <input type="text" id="newCrewName" placeholder="Име на отбора (напр. StreetLegends)" style="padding: 6px; background: #111; border: 1px solid #444; color: #fff; border-radius: 4px; flex: 1;">
+                            <input type="text" id="newCrewName" placeholder="Име на отбора" style="padding: 6px; background: #111; border: 1px solid #444; color: #fff; border-radius: 4px; flex: 1;">
                             <button class="btn btn-green" onclick="createCrew()">Създай</button>
                         </div>
                     </div>
-                    <h4 style="color: #fff; margin-bottom: 8px;">Списък с активни отбори:</h4>
                 `;
             } else {
                 crewHtml = `
                     <div style="background: #191922; border: 1px solid #4ade80; border-radius: 6px; padding: 15px; margin-bottom: 15px; text-align: center;">
                         <h3 style="color: #4ade80; font-size: 18px;">Твоят отбор: ${state.myCrew}</h3>
-                        <p style="color: #a1a1aa; font-size: 12px; margin-top: 4px;">Участвай в отборните битки срещу съперничещите клубове!</p>
-                        <button class="btn btn-red" style="margin-top: 10px;" onclick="startCrewWar()">⚔️ Започни отборна битка (+500 лв. за отбора)</button>
+                        <p style="color: #a1a1aa; font-size: 12px; margin-top: 4px;">Роля: <b>${state.myRole || 'Пилот'}</b></p>
+                        <button class="btn btn-red" style="margin-top: 10px;" onclick="startCrewWar()">⚔️ Отборна F1 Битка (+50 т.)</button>
                     </div>
                 `;
             }
 
             crewHtml += '<div class="cards-grid">' + crewsList.map(c => `
                 <div class="item-card">
-                    <h4>👥 ${c.name}</h4>
-                    <p>Лидер: <b>${c.leader}</b><br>Членове: ${c.members} | Точки: <span style="color:#facc15;">${c.points}</span></p>
-                    ${!state.myCrew ? `<button class="btn btn-blue" onclick="joinCrew('${c.name}')">Присъедини се</button>` : ''}
+                    <h4>🏎️ ${c.name}</h4>
+                    <p>Лидер: <b>${c.leader}</b><br>Точки: <span style="color:#facc15;">${c.points}</span></p>
+                    ${!state.myCrew ? `<button class="btn btn-blue" onclick="joinCrew('${c.name}')">Влез в отбора</button>` : ''}
                 </div>
             `).join('') + '</div>';
 
@@ -833,30 +863,43 @@
 
         function createCrew() {
             const name = document.getElementById('newCrewName').value.trim();
-            if (!name) return alert('Въведи име на отбора!');
-            if (state.money < 5000) return alert('Нямаш 5000 лв. за създаване на отбор!');
-
+            if (!name) return;
+            if (state.money < 5000) return alert('Нямаш 5000 лв.');
             state.money -= 5000;
             state.myCrew = name;
+            state.myRole = 'Капитан';
             crewsList.push({ id: Date.now(), name: name, leader: state.username, members: 1, points: 100 });
-            addLog(`Създаде успешен отбор <span class="green">${name}</span>!`);
             updateAllUI();
         }
 
         function joinCrew(name) {
             state.myCrew = name;
-            const crew = crewsList.find(x => x.name === name);
-            if (crew) crew.members += 1;
-            addLog(`Присъедини се към отбор <span class="green">${name}</span>!`);
+            state.myRole = 'Пилот';
             updateAllUI();
         }
 
         function startCrewWar() {
-            state.money += 300;
             const crew = crewsList.find(x => x.name === state.myCrew);
             if (crew) crew.points += 50;
-            addLog(`⚔️ Отборна битка спечелена! Клуб <span class="gold">${state.myCrew}</span> печели +50 точки!`);
+            addLog(`⚔️ Отборна F1 битка спечелена за клуб <span class="gold">${state.myCrew}</span>!`);
             updateAllUI();
+        }
+
+        // Покупка на коли с пари или кредити
+        function buyCar(id, type) {
+            const c = dealershipCars.find(x => x.id === id);
+            if (type === 'money') {
+                if (state.money < c.price) return alert('Нямаш достатъчно пари в брой!');
+                state.money -= c.price;
+            } else {
+                if (state.credits < c.credits) return alert('Нямаш достатъчно VIP Кредити!');
+                state.credits -= c.credits;
+            }
+            state.car = { name: c.name, hp: c.hp, weight: c.weight, image: c.image };
+            state.equippedSlots = {};
+            addLog(`Купи нов автомобил: <span class="green">${c.name}</span>!`);
+            updateAllUI();
+            renderAllGrids();
         }
 
         function buyTuning(id) {
@@ -866,18 +909,31 @@
             state.car.hp += p.hp;
             state.car.weight = Math.max(700, state.car.weight - p.weight);
             state.equippedSlots[p.slot] = { name: p.name, icon: p.icon };
-            addLog(`Монтира <span class="gold">${p.name}</span> (+${p.hp} к.с.)!`);
+            addLog(`Монтира <span class="gold">${p.name}</span>!`);
             updateAllUI();
             renderAllGrids();
         }
 
-        function buyCar(id) {
-            const c = dealershipCars.find(x => x.id === id);
-            if (state.money < c.price) return alert('Нямаш достатъчно пари!');
-            state.money -= c.price;
-            state.car = { name: c.name, hp: c.hp, weight: c.weight, image: c.image };
-            state.equippedSlots = {};
-            addLog(`Купи нов автомобил: <span class="green">${c.name}</span>!`);
+        function openSellModal() { document.getElementById('sellPartModal').style.display = 'flex'; }
+        function closeSellModal() { document.getElementById('sellPartModal').style.display = 'none'; }
+
+        function confirmSellPart() {
+            const name = document.getElementById('sellPartName').value.trim();
+            const price = Number(document.getElementById('sellPartPrice').value);
+            if (!name || !price) return;
+            playerMarketList.push({ id: Date.now(), seller: state.username, itemName: name, price: price });
+            closeSellModal();
+            renderAllGrids();
+        }
+
+        function buyPlayerPart(id) {
+            const idx = playerMarketList.findIndex(x => x.id === id);
+            if (idx === -1) return;
+            const item = playerMarketList[idx];
+            if (state.money < item.price) return alert('Нямаш пари!');
+            state.money -= item.price;
+            state.car.hp += 15;
+            playerMarketList.splice(idx, 1);
             updateAllUI();
             renderAllGrids();
         }
@@ -886,30 +942,26 @@
             state.money += 1000;
             state.car = { name: 'Volkswagen Golf 4 1.9 TDI', hp: 115, weight: 1280, image: 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=800&q=80' };
             state.equippedSlots = {};
-            addLog(`Продаде колата си за <span class="green">+1000 лв.</span>`);
             updateAllUI();
             renderAllGrids();
         }
 
         function refuelMoney() {
-            if (state.money < 200) return alert('Нямаш 200 лв.!');
+            if (state.money < 200) return alert('Нямаш 200 лв.');
             state.money -= 200;
             state.fuel = 100;
-            addLog(`Зареди резервоара на <span class="green">100/100</span>!`);
             updateAllUI();
         }
 
         function exchangeCredits() {
-            if (state.credits < 10) return alert('Нямаш 10 кредита!');
+            if (state.credits < 10) return alert('Нямаш 10 кредита.');
             state.credits -= 10;
             state.money += 5000;
-            addLog(`Обмени 10 кредита за <span class="green">+5000 лв.</span>!`);
             updateAllUI();
         }
 
         function buyCreditsDemo() {
             state.credits += 15;
-            addLog(`Зареди <span class="gold">+15 VIP Кредита</span>!`);
             updateAllUI();
         }
 
@@ -918,26 +970,16 @@
 
         function publishPlayerAd() {
             const text = document.getElementById('adInputText').value.trim();
-            if (!text) return alert('Напиши текст за обявата!');
-            if (state.credits < 5) return alert('Нямаш 5 кредита за обява!');
-
+            if (!text || state.credits < 5) return;
             state.credits -= 5;
-            document.getElementById('adSlot1').innerHTML = `
-                <div class="ad-avatar">😎</div>
-                <div class="ad-text">
-                    <strong>${state.username}</strong>
-                    <p>${text}</p>
-                </div>
-            `;
-            document.getElementById('adInputText').value = '';
+            document.getElementById('adSlot1').innerHTML = `<div class="ad-avatar">😎</div><div class="ad-text"><strong>${state.username}</strong><p>${text}</p></div>`;
             closeAdModal();
-            addLog(`Публикува VIP обява в горната лента за <span class="gold">5 Кредита</span>!`);
             updateAllUI();
         }
 
         function startRace(trackId) {
             if (state.isRacing) return;
-            if (state.fuel < 10) return alert('Нямаш гориво! Зареди от VIP Магазина.');
+            if (state.fuel < 10) return alert('Нямаш гориво!');
 
             const track = tracks.find(t => t.id === trackId);
             state.isRacing = true;
@@ -954,24 +996,17 @@
             document.getElementById('botLabel').innerText = `${track.opponent} (${track.botHp} к.с.)`;
             document.getElementById('botImg').src = track.botImage;
 
-            red.className = 'bulb red';
-            yellow.className = 'bulb yellow';
-            green.className = 'bulb green';
+            red.className = 'bulb red'; yellow.className = 'bulb yellow'; green.className = 'bulb green';
 
             setTimeout(() => red.classList.add('on'), 300);
             setTimeout(() => { red.classList.remove('on'); yellow.classList.add('on'); }, 900);
             setTimeout(() => {
-                yellow.classList.remove('on');
-                green.classList.add('on');
-                pBox.classList.add('revving');
-                bBox.classList.add('revving');
-                arena.classList.add('shaking');
+                yellow.classList.remove('on'); green.classList.add('on');
+                pBox.classList.add('revving'); bBox.classList.add('revving'); arena.classList.add('shaking');
             }, 1500);
 
             setTimeout(() => {
-                pBox.classList.remove('revving');
-                bBox.classList.remove('revving');
-                arena.classList.remove('shaking');
+                pBox.classList.remove('revving'); bBox.classList.remove('revving'); arena.classList.remove('shaking');
                 
                 const playerTime = calcQuarterMile(state.car.hp, state.car.weight);
                 const botTime = calcQuarterMile(track.botHp, track.botWeight) + (Math.random() * 0.2 - 0.1);
@@ -986,13 +1021,16 @@
                         state.level += 1;
                         state.xp -= 100;
                         state.credits += 5;
-                        addLog(`🎉 Вдигна <span class="gold">Ниво ${state.level}</span>! Бонус +5 Кредита!`);
+                        addLog(`🎉 Вдигна <span class="gold">Ниво ${state.level}</span>!`);
                     }
-                    addLog(`🏆 ПОБЕДА срещу ${track.opponent} (${playerTime} сек. vs ${botTime.toFixed(2)} сек.) -> <span class="green">+${track.reward} лв.</span>`);
-                    alert(`🏆 ПОБЕДА!\nТвое време: ${playerTime} сек.\nВреме на съперника: ${botTime.toFixed(2)} сек.\nПечелиш +${track.reward} лв.!`);
+                    addLog(`🏆 ПОБЕДА срещу ${track.opponent} -> <span class="green">+${track.reward} лв.</span>`);
+                    alert(`🏆 ПОБЕДА! Печелиш +${track.reward} лв.`);
                 } else {
-                    addLog(`❌ ЗАГУБА от ${track.opponent} (${playerTime} сек. vs ${botTime.toFixed(2)} сек.). Тунинговай колата!`);
-                    alert(`❌ ЗАГУБА!\nТвое време: ${playerTime} сек.\nВреме на съперника: ${botTime.toFixed(2)} сек.`);
+                    // Загуба: губи малка част от ресурсите, ако не са в банката
+                    let lostCash = Math.min(200, state.money);
+                    state.money -= lostCash;
+                    addLog(`❌ ЗАГУБА от ${track.opponent}. Загуби <span class="red">-${lostCash} лв.</span> респект и пари!`);
+                    alert(`❌ ЗАГУБА! Губиш ${lostCash} лв. Съвет: пази парите си в Банката в градския център!`);
                 }
                 updateAllUI();
             }, 2300);
@@ -1001,11 +1039,8 @@
         function switchTab(event, tabId) {
             document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
-
             document.getElementById(tabId).classList.add('active');
-            if (event && event.currentTarget) {
-                event.currentTarget.classList.add('active');
-            }
+            if (event && event.currentTarget) event.currentTarget.classList.add('active');
         }
     </script>
 </body>
