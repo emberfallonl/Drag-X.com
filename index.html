@@ -134,9 +134,13 @@
         .garage-car-img-box {
             width: 100%; height: 200px; background: #09090c; border-radius: 6px;
             overflow: hidden; border: 1px solid #333; margin-bottom: 12px; display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 0 15px rgba(255, 51, 0, 0.2);
+            box-shadow: 0 0 15px rgba(255, 51, 0, 0.2); position: relative;
         }
         .garage-car-img-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.3s; }
+
+        .car-color-overlay {
+            position: absolute; inset: 0; mix-blend-mode: hue; opacity: 0.35; pointer-events: none; transition: 0.3s;
+        }
 
         .event-log { background: #0d0d10; border-top: 2px solid #27272a; padding: 8px 12px; height: 95px; overflow-y: auto; font-size: 11px; display: flex; flex-direction: column; gap: 4px; }
         .log-entry { color: #d4d4d8; border-bottom: 1px dashed #222; padding-bottom: 2px; }
@@ -151,10 +155,18 @@
         .profile-status { font-size: 10px; color: #4ade80; }
 
         .avatar-bars-row { display: flex; gap: 10px; align-items: center; }
-        .driver-avatar { width: 54px; height: 62px; background: #27272f; border: 1px solid #52525b; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 32px; }
+        .driver-avatar { 
+            width: 54px; height: 62px; background: #27272f; border: 1px solid #52525b; border-radius: 4px; 
+            display: flex; align-items: center; justify-content: center; font-size: 32px; cursor: pointer; position: relative; transition: 0.2s;
+        }
+        .driver-avatar:hover { border-color: #facc15; transform: scale(1.03); }
+        .avatar-edit-hint { position: absolute; bottom: 0; right: 0; background: #ff3300; font-size: 8px; padding: 1px 3px; border-radius: 2px; color: #fff; }
 
         .bars-box { flex: 1; display: flex; flex-direction: column; gap: 6px; }
-        .bar-label { display: flex; justify-content: space-between; font-size: 10px; color: #a1a1aa; }
+        .bar-label { display: flex; justify-content: space-between; font-size: 10px; color: #a1a1aa; align-items: center; }
+        .quick-train-btn { cursor: pointer; font-size: 12px; transition: 0.15s; background: rgba(255,255,255,0.06); padding: 0 4px; border-radius: 3px; }
+        .quick-train-btn:hover { background: #ff3300; color: #fff; }
+
         .progress-bg { width: 100%; height: 8px; background: #09090b; border-radius: 3px; overflow: hidden; border: 1px solid #333; }
         .progress-fill-fuel { height: 100%; background: linear-gradient(90deg, #16a34a, #4ade80); width: 100%; transition: 0.3s; }
         .progress-fill-nitro { height: 100%; background: linear-gradient(90deg, #2563eb, #38bdf8); width: 100%; transition: 0.3s; }
@@ -250,7 +262,7 @@
 <body>
 
     <div class="top-ticker">
-        🔥 Добре дошъл в DRAGX! Академия за пилоти, валута "Връзки" от 15-то ниво, банка и казино! 🏎️💨
+        🔥 Добре дошъл в DRAGX! Смяна на аватари, бои за коли, стикери и учебен център! 🏎️💨
     </div>
 
     <div class="game-wrapper">
@@ -303,7 +315,7 @@
         <!-- ЕКРАН ЗА ВХОД -->
         <div class="login-screen" id="loginScreen">
             <h1 style="color: #ff3300; font-size: 32px; margin-bottom: 8px;">ВЛЕЗ НА УЛИЦАТА</h1>
-            <p style="color: #a1a1aa; margin-bottom: 20px; font-size: 14px;">Тренирай пилота си в Академията, трупай Връзки и доминирай!</p>
+            <p style="color: #a1a1aa; margin-bottom: 20px; font-size: 14px;">Персонализирай своя аватар, боядисай колата и стани №1!</p>
             
             <div class="login-box">
                 <input type="text" id="usernameInput" placeholder="Име на пилота (напр. StreetRacer)">
@@ -321,6 +333,7 @@
                 <button class="nav-item active" onclick="switchTab(event, 'tab-garage')"><span class="nav-icon">🏠</span> Моят Гараж</button>
                 <button class="nav-item" onclick="switchTab(event, 'tab-tracks')"><span class="nav-icon">🏁</span> Улицата & Гонки</button>
                 <button class="nav-item" onclick="switchTab(event, 'tab-tuning')"><span class="nav-icon">🔧</span> Тунинг Сервиз</button>
+                <button class="nav-item" onclick="switchTab(event, 'tab-painter')"><span class="nav-icon">🎨</span> Автобояджия & Стикери</button>
                 <button class="nav-item" onclick="switchTab(event, 'tab-dealership')"><span class="nav-icon">🏛️</span> Автосалон</button>
                 <button class="nav-item" onclick="switchTab(event, 'tab-blackmarket')"><span class="nav-icon">🕶️</span> Черен Пазар</button>
                 <button class="nav-item" onclick="switchTab(event, 'tab-academy')"><span class="nav-icon">📚</span> Учебен Център</button>
@@ -351,19 +364,21 @@
                         <div style="background: #121216; border: 1px solid #32323c; border-radius: 6px; padding: 18px; margin-bottom: 16px;">
                             <div class="garage-car-img-box">
                                 <img id="garageCarImg" src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=800&q=80" alt="Кола">
+                                <div class="car-color-overlay" id="carColorOverlay" style="background-color: transparent;"></div>
                             </div>
                             <span style="background: #ff3300; color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 3px; font-weight: bold;">АКТИВЕН АВТОМОБИЛ</span>
                             <h3 id="garageCarTitle" style="font-size: 22px; margin-top: 6px;">Volkswagen Golf 4 1.9 TDI</h3>
                             <p style="color: #a1a1aa; font-size: 13px; margin-top: 4px;">
                                 Мощност: <b style="color: #fff;" id="garageHp">115 к.с.</b> | 
-                                Тегло: <b style="color: #fff;" id="garageWeight">1280 кг</b>
+                                Тегло: <b style="color: #fff;" id="garageWeight">1280 кг</b> |
+                                Стикери: <b style="color: #facc15;" id="garageStickerText">Няма</b>
                             </p>
                         </div>
 
                         <h4 style="font-size: 13px; color: #a1a1aa; margin-bottom: 8px;">Бързи действия:</h4>
                         <div style="display: flex; gap: 10px;">
                             <button class="btn btn-green" onclick="switchTab(null, 'tab-tracks')">🏁 Излез на пистата</button>
-                            <button class="btn btn-blue" onclick="switchTab(null, 'tab-tuning')">🔧 Тунинг сервиз</button>
+                            <button class="btn btn-blue" onclick="switchTab(null, 'tab-painter')">🎨 Автобояджия</button>
                         </div>
                     </div>
 
@@ -405,6 +420,34 @@
                         <div class="cards-grid" id="tuningGrid"></div>
                     </div>
 
+                    <!-- АВТОБОЯДЖИЯ & СТИКЕРИ -->
+                    <div id="tab-painter" class="tab-pane">
+                        <div class="section-title"><span>🎨 Автобояджия & Стикери</span></div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
+                            <div style="background: #121216; border: 1px solid #32323c; border-radius: 6px; padding: 14px;">
+                                <h4 style="color: #facc15; margin-bottom: 8px;">🎨 Цвят на автомобила</h4>
+                                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                    <button class="btn btn-gray" onclick="paintCar('transparent', 'Фабричен')">Фабричен</button>
+                                    <button class="btn" style="background:#ef4444; color:#fff;" onclick="paintCar('#ef4444', 'Червено')">Червено</button>
+                                    <button class="btn" style="background:#3b82f6; color:#fff;" onclick="paintCar('#3b82f6', 'Синьо')">Синьо</button>
+                                    <button class="btn" style="background:#22c55e; color:#fff;" onclick="paintCar('#22c55e', 'Зелено')">Зелено</button>
+                                    <button class="btn" style="background:#a855f7; color:#fff;" onclick="paintCar('#a855f7', 'Лилаво')">Лилаво</button>
+                                    <button class="btn" style="background:#eab308; color:#000;" onclick="paintCar('#eab308', 'Златно')">Златно</button>
+                                </div>
+                            </div>
+
+                            <div style="background: #121216; border: 1px solid #32323c; border-radius: 6px; padding: 14px;">
+                                <h4 style="color: #38bdf8; margin-bottom: 8px;">🏷️ Стикери и Графики</h4>
+                                <div style="display: flex; flex-direction: column; gap: 6px; font-size: 13px;">
+                                    <button class="btn btn-gray" onclick="applySticker('Без стикери')">Няма стикери (Безплатно)</button>
+                                    <button class="btn btn-blue" onclick="applySticker('Flame Racing 🔥')">Flame Racing 🔥 (Безплатно)</button>
+                                    <button class="btn btn-gold" onclick="applySticker('Street King 👑 (5 Кредита)')">Street King 👑 (5 Кр.)</button>
+                                    <button class="btn btn-gold" onclick="applySticker('Carbon X-Racer ⚡ (10 Кредита)')">Carbon X-Racer ⚡ (10 Кр.)</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- АВТОСАЛОН -->
                     <div id="tab-dealership" class="tab-pane">
                         <div class="section-title"><span>🏛️ Автосалон (Купи с Лева или Кредити)</span></div>
@@ -424,9 +467,9 @@
                     <div id="tab-academy" class="tab-pane">
                         <div class="section-title"><span>📚 Учебен Център (Академия за Пилоти)</span></div>
                         
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;" id="academyContainer">
                             <!-- ИНТЕЛЕКТ (ВОДАЧА) -->
-                            <div style="background: #121216; border: 1px solid #32323c; border-radius: 6px; padding: 14px;">
+                            <div style="background: #121216; border: 1px solid #32323c; border-radius: 6px; padding: 14px;" id="intelBox">
                                 <h4 style="color: #38bdf8; margin-bottom: 6px;">🧠 Интелект (Пилот)</h4>
                                 <p style="font-size: 12px; color: #a1a1aa; margin-bottom: 8px;">Тренирай реакцията и стабилността си на пътя.</p>
                                 <p style="font-size: 12px; margin-bottom: 8px;">Ниво на умение: <b id="intelLevel" style="color:#fff;">1</b></p>
@@ -434,7 +477,7 @@
                             </div>
 
                             <!-- СИЛА (КОЛАТА) -->
-                            <div style="background: #121216; border: 1px solid #32323c; border-radius: 6px; padding: 14px;">
+                            <div style="background: #121216; border: 1px solid #32323c; border-radius: 6px; padding: 14px;" id="strengthBox">
                                 <h4 style="color: #ff5500; margin-bottom: 6px;">💪 Сила (Техника)</h4>
                                 <p style="font-size: 12px; color: #a1a1aa; margin-bottom: 8px;">Укрепи издръжливостта на автомобила си.</p>
                                 <p style="font-size: 12px; margin-bottom: 8px;">Ниво на умение: <b id="strengthLevel" style="color:#fff;">1</b></p>
@@ -498,11 +541,11 @@
                         <div class="section-title"><span>📰 Уличен Вестник & Обяви</span></div>
                         <div style="background: #121216; border: 1px solid #32323c; border-radius: 6px; padding: 14px; font-size: 13px; line-height: 1.5;">
                             <h4 style="color: #facc15; margin-bottom: 4px;">📰 Брой №1 на "Драг Хроники"</h4>
-                            <p style="color: #ccc; margin-bottom: 10px;">Новият Учебен център отвори врати! Пилотите вече тренират своите умения за по-добра издръжливост и стабилност.</p>
+                            <p style="color: #ccc; margin-bottom: 10px;">Новият Автобояджия и студиото за стикери отвориха врати. Пилотите вече могат да променят визията на бегачките си!</p>
                         </div>
                     </div>
 
-                    <!-- ОТБОРИ (ОТ НИВО 12) -->
+                    <!-- ОТБОРИ -->
                     <div id="tab-crews" class="tab-pane">
                         <div class="section-title"><span>👥 Отбори & Формула 1 Клубове (От Ниво 12)</span></div>
                         <div id="crewContentArea"></div>
@@ -540,7 +583,7 @@
 
                 <!-- ЛОГ -->
                 <div class="event-log" id="eventLog">
-                    <div class="log-entry">🏁 Добре дошъл в <span class="gold">DragX</span>! Посети новия Учебен център за тренировки.</div>
+                    <div class="log-entry">🏁 Добре дошъл в <span class="gold">DragX</span>! Цъкни на аватара си, за да го смениш.</div>
                 </div>
             </main>
 
@@ -556,14 +599,29 @@
                     </div>
 
                     <div class="avatar-bars-row">
-                        <div class="driver-avatar">😎</div>
+                        <div class="driver-avatar" id="playerAvatarBtn" onclick="openAvatarModal()" title="Смени аватар">
+                            <span id="playerAvatarEmoji">😎</span>
+                            <span class="avatar-edit-hint">смени</span>
+                        </div>
                         <div class="bars-box">
                             <div>
-                                <div class="bar-label"><span>⛽ Гориво</span><span id="fuelText">100/100</span></div>
+                                <div class="bar-label">
+                                    <span>⛽ Гориво</span>
+                                    <span style="display:flex; align-items:center; gap:4px;">
+                                        <span id="fuelText">100/100</span>
+                                        <span class="quick-train-btn" title="Към Учебния център (Сила)" onclick="quickGoAcademy('strength')">💪</span>
+                                    </span>
+                                </div>
                                 <div class="progress-bg"><div class="progress-fill-fuel" id="fuelBar"></div></div>
                             </div>
                             <div>
-                                <div class="bar-label"><span>🔥 Респект (XP)</span><span id="xpText">0/100</span></div>
+                                <div class="bar-label">
+                                    <span>🔥 Респект (XP)</span>
+                                    <span style="display:flex; align-items:center; gap:4px;">
+                                        <span id="xpText">0/100</span>
+                                        <span class="quick-train-btn" title="Към Учебния център (Интелект)" onclick="quickGoAcademy('intel')">🧠</span>
+                                    </span>
+                                </div>
                                 <div class="progress-bg"><div class="progress-fill-nitro" id="xpBar" style="width: 10%;"></div></div>
                             </div>
                         </div>
@@ -594,6 +652,22 @@
     </div>
 
     <!-- МОДАЛИ -->
+    <!-- МОДАЛ ЗА СМЯНА НА АВАТАР -->
+    <div class="modal-overlay" id="avatarModal">
+        <div class="modal-box" style="text-align: center;">
+            <h3 style="color: #facc15; font-size: 16px;">😎 Избери нов аватар</h3>
+            <p style="font-size: 11px; color: #aaa;">Виповете сменят безплатно, за обикновени пилоти струва 1 Кредит.</p>
+            <div style="display: flex; justify-content: center; gap: 10px; font-size: 28px; margin: 10px 0; cursor: pointer;">
+                <span onclick="setAvatar('😎')">😎</span>
+                <span onclick="setAvatar('🏎️')">🏎️</span>
+                <span onclick="setAvatar('💀')">💀</span>
+                <span onclick="setAvatar('🔥')">🔥</span>
+                <span onclick="setAvatar('👑')">👑</span>
+            </div>
+            <button class="btn btn-gray" onclick="closeAvatarModal()">Отказ</button>
+        </div>
+    </div>
+
     <div class="modal-overlay" id="adModal">
         <div class="modal-box">
             <h3 style="color: #facc15; font-size: 16px;">📢 Пусни VIP Обява</h3>
@@ -623,16 +697,20 @@
             money: 2500,
             bankMoney: 0,
             credits: 25,
-            connections: 0, // Трета валута: Връзки (от 15 ниво)
+            connections: 0,
             fuel: 100,
             xp: 10,
             level: 1,
             wins: 0,
+            isVip: true, // По подразбиране е VIP за тест на аватарите
+            avatar: '😎',
             intelLvl: 1,
             strengthLvl: 1,
             hasMechanic: false,
             hasCoach: false,
             myCrew: null,
+            carColor: 'transparent',
+            sticker: 'Няма',
             car: {
                 name: 'Volkswagen Golf 4 1.9 TDI',
                 hp: 115,
@@ -690,7 +768,7 @@
 
         function calcQuarterMile(hp, weight) {
             let baseTime = 5.825 * Math.cbrt(weight / hp);
-            if (state.hasCoach) baseTime *= 0.85; // Наставникът дава по-бързи времена
+            if (state.hasCoach) baseTime *= 0.85;
             return Number(baseTime.toFixed(2));
         }
 
@@ -704,6 +782,8 @@
             document.getElementById('sideWins').innerText = state.wins;
             document.getElementById('vipCreditsBadge').innerText = state.credits + ' КР.';
             document.getElementById('bankMoneyText').innerText = state.bankMoney + ' лв.';
+
+            document.getElementById('playerAvatarEmoji').innerText = state.avatar;
 
             document.getElementById('fuelText').innerText = `${state.fuel}/100`;
             document.getElementById('fuelBar').style.width = `${state.fuel}%`;
@@ -719,9 +799,11 @@
             document.getElementById('garageCarTitle').innerText = state.car.name;
             document.getElementById('garageHp').innerText = state.car.hp + ' к.с.';
             document.getElementById('garageWeight').innerText = state.car.weight + ' кг';
+            document.getElementById('garageStickerText').innerText = state.sticker;
             
             document.getElementById('garageCarImg').src = state.car.image;
             document.getElementById('playerImg').src = state.car.image;
+            document.getElementById('carColorOverlay').style.backgroundColor = state.carColor;
 
             document.getElementById('playerLabel').innerText = `${state.username} (${state.car.hp} к.с.)`;
             document.getElementById('rankMe').innerText = `3. ${state.username}`;
@@ -729,6 +811,52 @@
             document.getElementById('rankMyHp').innerText = state.car.hp;
 
             renderCrewsUI();
+        }
+
+        // Бърз преход от иконките до академията
+        function quickGoAcademy(type) {
+            switchTab(null, 'tab-academy');
+            if (type === 'strength') {
+                document.getElementById('strengthBox').style.borderColor = '#ff5500';
+                setTimeout(() => document.getElementById('strengthBox').style.borderColor = '#32323c', 1000);
+            } else {
+                document.getElementById('intelBox').style.borderColor = '#38bdf8';
+                setTimeout(() => document.getElementById('intelBox').style.borderColor = '#32323c', 1000);
+            }
+        }
+
+        // Смяна на аватар (Безплатно за VIP, иначе 1 кредит)
+        function openAvatarModal() { document.getElementById('avatarModal').style.display = 'flex'; }
+        function closeAvatarModal() { document.getElementById('avatarModal').style.display = 'none'; }
+
+        function setAvatar(emoji) {
+            if (!state.isVip) {
+                if (state.credits < 1) return alert('Нямаш 1 кредит за смяна на аватар!');
+                state.credits -= 1;
+            }
+            state.avatar = emoji;
+            closeAvatarModal();
+            addLog(`Смени аватара си на <span class="gold">${emoji}</span>!`);
+            updateAllUI();
+        }
+
+        // Боядисване на колата и стикери
+        function paintCar(color, name) {
+            state.carColor = color;
+            addLog(`Пребоядиса колата в цвят <span class="gold">${name}</span>!`);
+            updateAllUI();
+        }
+
+        function applySticker(stickerName) {
+            if (stickerName.includes('Кредита')) {
+                let cost = stickerName.includes('5') ? 5 : 10;
+                if (state.credits < cost) return alert(`Нямаш ${cost} кредита за този стикер!`);
+                state.credits -= cost;
+            }
+            state.sticker = stickerName;
+            state.car.hp += 5; // Малък бонус конски сили от тунинг визия
+            addLog(`Постави стикер <span class="gold">${stickerName}</span> на колата! (+5 к.с.)`);
+            updateAllUI();
         }
 
         // Академия тренировки
@@ -748,7 +876,6 @@
             updateAllUI();
         }
 
-        // Наемане на наставници с кредити
         function hireMentor(type) {
             if (type === 'mechanic') {
                 if (state.credits < 10) return alert('Нямаш 10 кредита!');
@@ -756,13 +883,13 @@
                 state.credits -= 10;
                 state.hasMechanic = true;
                 state.car.weight -= 20;
-                addLog(`👨‍🔧 Нае главен механик! Теглото падна с 20 кг.`);
+                addLog(`👨‍🔧 Нае главен механик!`);
             } else {
                 if (state.credits < 15) return alert('Нямаш 15 кредита!');
                 if (state.hasCoach) return alert('Вече имаш наставник!');
                 state.credits -= 15;
                 state.hasCoach = true;
-                addLog(`🏁 Нае опитен наставник! Времената ти на пистата са с 15% по-добри.`);
+                addLog(`🏁 Нае опитен наставник!`);
             }
             updateAllUI();
         }
@@ -814,7 +941,6 @@
             `).join('');
         }
 
-        // Банка
         function bankDeposit() {
             const amt = Number(document.getElementById('bankAmount').value);
             if (!amt || amt <= 0 || amt > state.money) return;
@@ -827,7 +953,6 @@
         }
         function takeLoan() { state.money += 5000; updateAllUI(); }
 
-        // Казино
         function playDice() {
             if (state.money < 300) return;
             state.money -= 300;
@@ -841,7 +966,6 @@
             updateAllUI();
         }
 
-        // Отбори (от 12 ниво) + валута Връзки (от 15 ниво)
         function renderCrewsUI() {
             const area = document.getElementById('crewContentArea');
             if (state.level < 12) {
