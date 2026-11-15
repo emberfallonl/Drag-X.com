@@ -83,7 +83,7 @@
             background: linear-gradient(180deg, #3f3f46, #27272a);
             border: 1px solid #52525b; color: #facc15; font-size: 11px; font-weight: bold;
             padding: 4px 8px; border-radius: 4px; cursor: pointer; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; text-align: center;
+            align-items: center; justify-content: center; text-align: center; transition: 0.2s;
         }
         .btn-post-ad:hover { border-color: #facc15; background: #32323a; }
 
@@ -142,8 +142,10 @@
         .garage-car-img-box {
             width: 100%; height: 200px; background: #09090c; border-radius: 6px;
             overflow: hidden; border: 1px solid #333; margin-bottom: 12px; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 0 15px rgba(255, 51, 0, 0.2);
         }
-        .garage-car-img-box img { width: 100%; height: 100%; object-fit: cover; }
+        .garage-car-img-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.3s; }
+        .garage-car-img-box:hover img { transform: scale(1.03); }
 
         /* ДОЛЕН ЛОГ СЪС СЪБИТИЯ */
         .event-log { background: #0d0d10; border-top: 2px solid #27272a; padding: 8px 12px; height: 95px; overflow-y: auto; font-size: 11px; display: flex; flex-direction: column; gap: 4px; }
@@ -182,13 +184,14 @@
         .part-slot {
             aspect-ratio: 1 / 1; background: #111115; border: 1px dashed #3f3f46; border-radius: 4px;
             display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 18px; color: #52525b; text-align: center; padding: 2px;
+            cursor: default; transition: 0.2s;
         }
-        .part-slot.equipped { border: 1px solid #ff3300; background: #231715; color: #fff; }
+        .part-slot.equipped { border: 1px solid #ff3300; background: #231715; color: #fff; box-shadow: inset 0 0 8px rgba(255, 51, 0, 0.4); }
         .part-slot span { font-size: 9px; margin-top: 2px; line-height: 1; }
 
         .btn { padding: 7px 12px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 12px; transition: 0.15s; }
-        .btn:hover { filter: brightness(1.15); }
-        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn:hover { filter: brightness(1.15); transform: translateY(-1px); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
         .btn-red { background: #dc2626; color: #fff; }
         .btn-green { background: #16a34a; color: #fff; }
         .btn-gold { background: #eab308; color: #000; }
@@ -198,13 +201,21 @@
         .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; }
         .item-card {
             background: #202027; border: 1px solid #32323e; border-radius: 6px; padding: 12px;
-            display: flex; flex-direction: column; justify-content: space-between; gap: 8px;
+            display: flex; flex-direction: column; justify-content: space-between; gap: 8px; transition: 0.2s;
         }
+        .item-card:hover { border-color: #ff3300; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
         .item-card img { width: 100%; height: 110px; object-fit: cover; border-radius: 4px; border: 1px solid #333; }
         .item-card h4 { font-size: 14px; color: #fff; }
         .item-card p { font-size: 12px; color: #a1a1aa; }
 
-        /* КЛАСИЧЕСКА АРЕНА ЗА ГОНКА (ДВЕ КОЛИ ЕДНА ДО ДРУГА КАТО НА СНИМКАТА ОТ xPr0) */
+        /* НЕОНОВ БЛЯСЪК ЗА ЧЕРНИЯ ПАЗАР */
+        .black-market-card {
+            border: 1px solid #eab308 !important;
+            background: linear-gradient(135deg, #201a11 0%, #202027 100%);
+            box-shadow: 0 0 10px rgba(234, 179, 8, 0.15);
+        }
+
+        /* АРЕНА ЗА ГОНКА С ЕФЕКТ НА ТРЕСЕНЕ (SCREEN SHAKE) */
         .xpr0-battle-arena {
             background: linear-gradient(180deg, #181822 0%, #0b0b0e 100%);
             border: 2px solid #ff3300;
@@ -216,14 +227,24 @@
             margin-bottom: 16px;
         }
 
+        @keyframes screenShake {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            20% { transform: translate(-3px, 2px) rotate(-0.5deg); }
+            40% { transform: translate(3px, -2px) rotate(0.5deg); }
+            60% { transform: translate(-2px, -1px) rotate(0deg); }
+            80% { transform: translate(2px, 2px) rotate(0.5deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+        .shaking { animation: screenShake 0.12s infinite; }
+
         .traffic-light {
             display: flex; justify-content: center; gap: 12px; background: #000; width: fit-content;
             margin: 0 auto 15px auto; padding: 6px 18px; border-radius: 20px; border: 1px solid #444;
         }
-        .bulb { width: 22px; height: 22px; border-radius: 50%; background: #27272a; }
-        .bulb.red.on { background: #ef4444; box-shadow: 0 0 15px #ef4444; }
-        .bulb.yellow.on { background: #eab308; box-shadow: 0 0 15px #eab308; }
-        .bulb.green.on { background: #22c55e; box-shadow: 0 0 15px #22c55e; }
+        .bulb { width: 22px; height: 22px; border-radius: 50%; background: #27272a; transition: 0.1s; }
+        .bulb.red.on { background: #ef4444; box-shadow: 0 0 18px #ef4444; }
+        .bulb.yellow.on { background: #eab308; box-shadow: 0 0 18px #eab308; }
+        .bulb.green.on { background: #22c55e; box-shadow: 0 0 18px #22c55e; }
 
         .battle-display {
             display: flex;
@@ -256,9 +277,9 @@
 
         @keyframes revEngine {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.03); filter: brightness(1.2); }
+            50% { transform: scale(1.04); filter: brightness(1.25); }
         }
-        .revving { animation: revEngine 0.15s infinite; }
+        .revving { animation: revEngine 0.12s infinite; }
 
         /* МОДАЛЕН ПРОЗОРЕЦ */
         .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 100; justify-content: center; align-items: center; }
@@ -269,7 +290,7 @@
 <body>
 
     <div class="top-ticker">
-        🔥 Добре дошъл в DRAGX! Легендарни драг битки една до друга точно като в xPr0! 🏎️💨
+        🔥 Добре дошъл в DRAGX! Улични драг гонки с реални анимации, тунинг и епични битки! 🏎️💨
     </div>
 
     <div class="game-wrapper">
@@ -322,7 +343,7 @@
         <!-- ЕКРАН ЗА ВХОД -->
         <div class="login-screen" id="loginScreen">
             <h1 style="color: #ff3300; font-size: 32px; margin-bottom: 8px;">ВЛЕЗ НА УЛИЦАТА</h1>
-            <p style="color: #a1a1aa; margin-bottom: 20px; font-size: 14px;">Класически улични битки една до друга пред публиката!</p>
+            <p style="color: #a1a1aa; margin-bottom: 20px; font-size: 14px;">Избери автомобил, тунинговай го до краен предел и доминирай на асфалта!</p>
             
             <div class="login-box">
                 <input type="text" id="usernameInput" placeholder="Име на пилота (напр. StreetRacer)">
@@ -381,14 +402,14 @@
                         </div>
                     </div>
 
-                    <!-- ТАБ: УЛИЦАТА И ГОНКИ (Класически изглед две коли една до друга като в xPr0) -->
+                    <!-- ТАБ: УЛИЦАТА И ГОНКИ -->
                     <div id="tab-tracks" class="tab-pane">
                         <div class="section-title">
                             <span>🏁 Улични Драг Битки (Една до друга)</span>
                             <span style="font-size: 12px; color: #a1a1aa;">Разход: 10 Гориво</span>
                         </div>
 
-                        <div class="xpr0-battle-arena">
+                        <div class="xpr0-battle-arena" id="battleArena">
                             <div class="traffic-light">
                                 <div class="bulb red" id="lightRed"></div>
                                 <div class="bulb yellow" id="lightYellow"></div>
@@ -396,7 +417,6 @@
                             </div>
 
                             <div class="battle-display">
-                                <!-- Твоята кола отляво -->
                                 <div class="fighter-box" id="playerBox">
                                     <span style="color: #facc15; font-weight: bold; font-size: 13px;" id="playerLabel">Ти (115 к.с.)</span>
                                     <img class="fighter-img" id="playerImg" src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=500&q=80" alt="Ти">
@@ -404,7 +424,6 @@
 
                                 <div style="font-size: 24px; font-weight: 900; color: #ff3300; text-shadow: 0 0 10px #ff3300;">VS</div>
 
-                                <!-- Колата на противника отдясно -->
                                 <div class="fighter-box" id="botBox">
                                     <span style="color: #f87171; font-weight: bold; font-size: 13px;" id="botLabel">Съперник</span>
                                     <img class="fighter-img" id="botImg" src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=500&q=80" alt="Бот">
@@ -647,7 +666,7 @@
             const slotsGrid = document.getElementById('slotsGrid');
             slotsGrid.innerHTML = defaultSlots.map((s, idx) => {
                 const eq = state.equippedSlots[idx];
-                if (eq) return `<div class="part-slot equipped" title="${eq.name}">${eq.icon}<span>${eq.name.split(' ')[0]}</span></div>`;
+                if (eq) return `<div class="part-slot equipped" title="Монтирано: ${eq.name}">${eq.icon}<span>${eq.name.split(' ')[0]}</span></div>`;
                 return `<div class="part-slot">${s.icon}<span>${s.label}</span></div>`;
             }).join('');
         }
@@ -669,7 +688,7 @@
             document.getElementById('blackMarketGrid').innerHTML = blackMarketItems.map(item => {
                 const owned = state.equippedSlots[item.slot]?.name === item.name;
                 return `
-                    <div class="item-card" style="border-color: #eab308;">
+                    <div class="item-card black-market-card">
                         <h4>${item.icon} ${item.name}</h4>
                         <p>${item.desc}</p>
                         <button class="btn ${owned ? 'btn-gray' : 'btn-gold'}" ${owned ? 'disabled' : ''} onclick="buyBlackMarket(${item.id})">
@@ -802,6 +821,7 @@
 
             const pBox = document.getElementById('playerBox');
             const bBox = document.getElementById('botBox');
+            const arena = document.getElementById('battleArena');
             const red = document.getElementById('lightRed');
             const yellow = document.getElementById('lightYellow');
             const green = document.getElementById('lightGreen');
@@ -813,20 +833,20 @@
             yellow.className = 'bulb yellow';
             green.className = 'bulb green';
 
-            // Светофар анимация
             setTimeout(() => red.classList.add('on'), 300);
             setTimeout(() => { red.classList.remove('on'); yellow.classList.add('on'); }, 900);
             setTimeout(() => {
                 yellow.classList.remove('on');
                 green.classList.add('on');
-                // Развъртане на мотора (рев) преди старта
                 pBox.classList.add('revving');
                 bBox.classList.add('revving');
+                arena.classList.add('shaking'); // Ефект на тресене при старт
             }, 1500);
 
             setTimeout(() => {
                 pBox.classList.remove('revving');
                 bBox.classList.remove('revving');
+                arena.classList.remove('shaking');
                 
                 const playerTime = calcQuarterMile(state.car.hp, state.car.weight);
                 const botTime = calcQuarterMile(track.botHp, track.botWeight) + (Math.random() * 0.2 - 0.1);
